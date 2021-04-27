@@ -4,7 +4,7 @@ import Layout from './components/layout/layout'
 
 // Import Pages
 import Main from './pages/main'
-import Coba from './pages/coba'
+import Dashboard from './pages/dashboard'
 
 function App() {
   return (
@@ -17,8 +17,7 @@ function App() {
         
         {/* Main Route */}
         <Layout>
-          <Route path="/coba" exact component={Coba}/>
-          {/* Dashboard */}
+          <Route path="/dashboard" exact component={Dashboard}/>
         </Layout>
         {/* End Main Route */}
       </Switch>

@@ -1,1 +1,94 @@
-// Page Login
+// Navbar
+.navbar {
+    // background-color: #343a40;
+    background-color: #fff;
+    .nav-link {
+        color: #000 !important;
+        &:hover {
+            color: #0f72be !important;
+            transition: .25s;
+        }
+    }
+    .navbar-brand {
+        color: #0f72be !important;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+    }
+}
+
+// Footer
+.footer {
+    width: 100%;
+    min-height: 100px;
+    background-color: #fff;
+    padding: 20px;
+    .footer-content {
+        margin: auto;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        h4 {
+            text-align: center !important;
+            color: #0f72be;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        span {
+            color: #000;
+            text-align: center;
+        }
+    }
+}
+
+// Banner
+.banner {
+    width: 70%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 12px;
+}
+
+// Dashboard
+// .dashboard {
+//     display: flex;
+//     flex-direction: row;
+// }
+
+// Content
+.content {
+    margin-top: 30px;
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 12px;
+    .program {
+        background-color: white;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        border-radius: 12px;
+        display: inline-block;
+        .program-picture {
+            img {
+                width: 100%;
+                height: 50%;
+                border-radius: 12px;
+            }
+        }
+        .program-content {
+            padding: 10px 20px;
+            .program-title {
+                color: #0f72be;
+                text-align: center;
+                font-size: 1.2rem;
+            }
+            .program-caption {
+                margin: 10px 0;
+                font-size: .8rem;
+            }
+        }
+    }
+}
