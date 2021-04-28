@@ -1,7 +1,7 @@
 // Navbar
 .navbar {
-    // background-color: #343a40;
     background-color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     .nav-link {
         color: #000 !important;
         &:hover {
@@ -22,6 +22,7 @@
     width: 100%;
     min-height: 100px;
     background-color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding: 20px;
     .footer-content {
         margin: auto;
@@ -44,50 +45,51 @@
 
 // Banner
 .banner {
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
-    background-color: white;
-    padding: 15px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 12px;
 }
 
 // Dashboard
-// .dashboard {
-//     display: flex;
-//     flex-direction: row;
-// }
+.dashboard {
+    background-color: #fff;
+}
 
 // Content
 .content {
     margin-top: 30px;
     width: 100%;
-    background-color: white;
     padding: 15px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 12px;
-    .program {
-        background-color: white;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        border-radius: 12px;
-        display: inline-block;
-        .program-picture {
-            img {
-                width: 100%;
-                height: 50%;
-                border-radius: 12px;
+    .content-title {
+        display: flex;
+        justify-content: space-between;
+        h4 {
+            text-align: center;
+        }
+        a {
+            color: #0f72be;
+            text-decoration: none;
+            &:hover {
+                color: #000;
+                transition: .25s;
             }
         }
-        .program-content {
-            padding: 10px 20px;
-            .program-title {
-                color: #0f72be;
-                text-align: center;
-                font-size: 1.2rem;
+    }
+    .content-donasi {
+        padding: 20px;
+        .content-donasi-image img{
+            width: 100%;
+            height: 100%;
+        }
+        .content-donasi-desc {
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            padding: 20px;
+            .donasi-1 {
+                height: 80%;
             }
-            .program-caption {
-                margin: 10px 0;
-                font-size: .8rem;
+            .donasi-2 {
+                height: 20%;
             }
         }
     }
