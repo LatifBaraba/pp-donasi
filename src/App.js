@@ -5,6 +5,7 @@ import Layout from './components/layout/layout'
 // Import Pages
 import Main from './pages/main'
 import Dashboard from './pages/dashboard'
+import Login from "./pages/Auth/";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Switch>
         {/* Auth Route */}
         <Route path="/" exact component={Main}/>
+        <Route path="/login" exact component={Login}/>
         {/* Loign */}
         {/* End Auth Route */}
         
