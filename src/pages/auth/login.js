@@ -3,7 +3,7 @@ import { Button, Card, Row, Container, Form } from "react-bootstrap";
 import LogoPP from "../../assets/images/pemudapeduli.png";
 import { useForm } from "react-hook-form";
 
-function Index() {
+const Login = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => console.log(data);
 
@@ -73,4 +73,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default Login

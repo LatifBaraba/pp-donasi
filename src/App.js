@@ -5,8 +5,9 @@ import Layout from './components/layout/layout'
 // Import Pages
 import Main from './pages/main'
 import Dashboard from './pages/dashboard'
-import Login from "./pages/Auth/";
-
+import Login from './pages/auth/login'
+import Order from './pages/order'
+import Checkout from './pages/checkout'
 function App() {
   return (
     <Router>
@@ -20,6 +21,8 @@ function App() {
         {/* Main Route */}
         <Layout>
           <Route path="/dashboard" exact component={Dashboard}/>
+          <Route path="/order" exact component={Order}/>
+          <Route path="/checkout" exact component={Checkout}/>
         </Layout>
         {/* End Main Route */}
       </Switch>

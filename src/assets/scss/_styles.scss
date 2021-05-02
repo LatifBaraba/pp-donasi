@@ -26,7 +26,6 @@
     padding: 20px;
     .footer-content {
         margin: auto;
-        width: 400px;
         display: flex;
         flex-direction: column;
         h4 {
@@ -90,6 +89,67 @@
             }
             .donasi-2 {
                 height: 20%;
+            }
+        }
+    }
+}
+
+.order {
+    background-color: #fff;
+    padding: 20px;
+    .donasi-amount {
+        input[type=text] {
+            border: 1px solid gray;
+            padding: 5px;
+            border-radius: 8px;
+            max-width: 350px !important;
+            margin-top: 5px;
+        }
+        .donasi-amount-content {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    
+    .form-check-inline {
+        border: 1px solid gray !important;
+        padding: 10px !important;
+        border-radius: 8px;
+
+    }
+}
+
+.checkout {
+    background-color: #fff;
+    padding: 20px;
+    .checkout-content {
+        span {
+            text-align: center;
+        }
+        .checkout-amount {
+            border: 1px solid #0f72be;
+            padding: 10px;
+            border-radius: 8px;
+            &:hover {
+                background-color: #f7f7f7;
+                border-color: #000;
+                transition: .25s;
+            }
+            h3 {
+                text-align: center;
+                padding: 10px;
+                margin: auto;
+            }
+        }
+        .checkout-copy-link {
+            color: gray;
+            cursor: pointer;
+            font-size: .7rem;
+            .icon {
+                margin-right: 5px;
+            }
+            &:hover {
+                color: #0f72be;
             }
         }
     }
