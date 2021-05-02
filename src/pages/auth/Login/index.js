@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, Card, Row, Container, Form } from "react-bootstrap";
-import LogoPP from "../../assets/images/pemudapeduli.png";
+import LogoPP from "../../../assets/images/pemudapeduli.png";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { fetchLogin } from "../../Redux/auth/login/actions";
+import { fetchLogin } from "../../../Redux/auth/login/actions";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();

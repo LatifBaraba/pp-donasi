@@ -5,9 +5,12 @@ import Layout from './components/layout/layout'
 // Import Pages
 import Main from './pages/main'
 import Dashboard from './pages/dashboard'
-import Login from './pages/auth/login'
 import Order from './pages/order'
 import Checkout from './pages/checkout'
+import Login from './pages/auth/login'
+import Register from './pages/auth/Register'
+import Forgot from './pages/auth/Forgot'
+
 function App() {
   return (
     <Router>
@@ -15,6 +18,8 @@ function App() {
         {/* Auth Route */}
         <Route path="/" exact component={Main}/>
         <Route path="/login" exact component={Login}/>
+        <Route path="/register" exact component={Register}/>
+        <Route path="/forgot" exact component={Forgot}/>
         {/* Loign */}
         {/* End Auth Route */}
         

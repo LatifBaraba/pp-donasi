@@ -1,13 +1,13 @@
 import React from "react";
 import { Button, Card, Row, Container, Form } from "react-bootstrap";
-import LogoPP from "../../assets/images/pemudapeduli.png";
+import LogoPP from "../../../assets/images/pemudapeduli.png";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { fetchLogin } from "../../Redux/auth/login/actions";
+import { fetchRegister } from "../../../Redux/auth/register/actions";
 
-const Login = () => {
+function Index() {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => fetchLogin(data);
+  const onSubmit = (data) => fetchRegister(data);
 
   return (
     <div>
@@ -19,6 +19,15 @@ const Login = () => {
             </Row>
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Control
+                    placeholder="Nama Lengkap"
+                    {...register("nama_lengkap", {
+                      required: true,
+                    })}
+                  />
+                </Form.Group>
+
                 <Form.Group controlId="formBasicEmail">
                   <Form.Control
                     type="email"
@@ -38,40 +47,27 @@ const Login = () => {
                     })}
                   />
                 </Form.Group>
-                <Form.Group controlId="formBasicCheckbox">
-                  {/* <Form.Check type="checkbox" label="Check me out" /> */}
+
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Control
+                    placeholder="No Handphone"
+                    type="number"
+                    {...register("no_hp", {
+                      required: true,
+                    })}
+                  />
                 </Form.Group>
-                <Form.Text>
-                   <Link to="/forgot">Lupa Passworrd ?</Link>
-                   <hr/>
-                </Form.Text>
+                <Form.Group controlId="formBasicCheckbox">
+                </Form.Group>
                 <Button variant="primary" type="submit" block>
-                  Login
+                  Daftar
                 </Button>
                 <hr />
                 <Form.Text>
-                  <center>
-                    Belum punya Akun ? <Link to="/register">Daftar</Link>
-                  </center>
+                  <center>Sudah punya Akun ? <Link to="/login"> Masuk</Link> </center>
                 </Form.Text>
                 <hr />
-              </Form>
-              <Button
-                variant="primary"
-                href="https://kitabisa.com"
-                target="_blank"
-                block
-              >
-                Donasi via KitaBisa.com
-              </Button>
-              <Button
-                variant="primary"
-                href="https://ayobantuin.com"
-                target="_blank"
-                block
-              >
-                Donasi via AyoBantuin.com
-              </Button>
+              </Form>             
             </Card.Body>
           </Card>
         </Row>
@@ -80,4 +76,4 @@ const Login = () => {
   );
 }
 
-export default Login
+export default Index;
