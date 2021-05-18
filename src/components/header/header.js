@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Nav, Navbar} from 'react-bootstrap'
+import { Nav, Navbar, Dropdown, DropdownButton} from 'react-bootstrap'
+import { LogOutOutline, PencilOutline } from 'react-ionicons'
 
 const header = () => {
     return (
@@ -11,6 +12,24 @@ const header = () => {
                     <Nav.Link href="#features">Contact</Nav.Link>
                     <Nav.Link href="#pricing">Legal</Nav.Link>
                     <Nav.Link href="#pricing">FAQ</Nav.Link>
+                    <Nav.Link>
+                        <DropdownButton
+                            menuAlign="right"
+                            title="Profile"
+                            id="dropdown-menu-align-right"
+                            className="btn-profile"
+                        >
+                            <Dropdown.Item eventKey="1">
+                                <PencilOutline color={'#00000'} height="15px" width="15px" />
+                                &nbsp; Edit Profile
+                                </Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item eventKey="4">
+                                <LogOutOutline color={'#00000'} height="15px" width="15px" />
+                                &nbsp; Log Out
+                            </Dropdown.Item>
+                        </DropdownButton>
+                    </Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

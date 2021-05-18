@@ -15,6 +15,19 @@
         font-weight: 700;
         letter-spacing: 2px;
     }
+    .btn-profile button {
+        padding: 0 5px !important;
+        // margin-top: 5px;
+        color: black !important;
+        background-color: transparent !important;
+        border: none !important;
+        font-size: 1rem;
+    }
+    .dropdown {
+        .dropdown-item {
+            font-size: .85rem;
+        }
+    }
 }
 
 // Footer
@@ -63,8 +76,16 @@
     .content-title {
         display: flex;
         justify-content: space-between;
-        h4 {
-            text-align: center;
+        .content-title-name {
+            display: flex;
+            h4 {
+                text-align: center;
+            }
+            h5 {
+                text-align: left;
+                margin-left: 5px;
+                color: #1072BE;
+            }
         }
         a {
             color: #0f72be;
@@ -90,6 +111,57 @@
             .donasi-2 {
                 height: 20%;
             }
+        }
+    }
+}
+
+// Content2
+.content2 {
+    margin-top: 30px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    .content-title {
+        display: flex;
+        justify-content: space-between;
+        .content-title-name {
+            display: flex;
+            h4 {
+                text-align: center;
+            }
+            h5 {
+                text-align: left;
+                margin-left: 5px;
+                color: #1072BE;
+            }
+        }
+        a {
+            color: #0f72be;
+            text-decoration: none;
+            &:hover {
+                color: #000;
+                transition: .25s;
+            }
+        }
+    }
+    .content-donasi {
+        padding: 20px;
+        .content-donasi-image{
+            // width: 100%;
+            // height: 100%;
+            width: 100px;
+            height: 100px;
+            background-color: #0f72be;
+        }
+        .content-donasi-desc {
+            // box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            // padding: 20px;
+            // .donasi-1 {
+            //     height: 80%;
+            // }
+            // .donasi-2 {
+            //     height: 20%;
+            // }
         }
     }
 }
@@ -152,5 +224,34 @@
                 color: #0f72be;
             }
         }
+    }
+}
+
+.list-program {
+    img {
+        width: 100%;
+        height: 100%;
+    }
+    .program-content {
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+}
+
+.detail-program {
+    background: #fff;
+    padding: 20px;
+}
+
+.list-donasi-dua {
+    background-color: white;
+    .carousel {
+        padding: 10px;
+    }
+    .button-donasi {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
     }
 }

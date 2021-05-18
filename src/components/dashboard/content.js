@@ -7,16 +7,16 @@ const content = () => {
     <div className="content">
       <Row className="p-2">
         <Col className="content-title">
-          <h4>Program Donasi</h4>
-          <a href="/">Lihat Lainnya</a>
+          <div className="content-title-name">
+            <h4>Program Donasi</h4>
+            <h5>#TiapHariBerbagi</h5>
+          </div>
+          <a href="/list-program">Lihat Lainnya</a>
         </Col>
       </Row>
       <Row className="content-donasi">
         <Col md={4} className="content-donasi-image">
-          <img
-            src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg"
-            alt=""
-          />
+          <img src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg" alt="" />
         </Col>
         <Col md={8} className="content-donasi-desc">
           <Row className="donasi-1">
