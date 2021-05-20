@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, Button, Card } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 const content2 = () => {
   return (
@@ -10,7 +11,7 @@ const content2 = () => {
                     <h4>Program Donasi</h4>
                     <h5>#CeritaDariJalanan</h5>
                 </div>
-                <a href="/list-program">Lihat Lainnya</a>
+                <Link to="/list-donasi-dua">Lihat lainnya</Link>
             </Col>
       </Row>
       <Row className="content-donasi">

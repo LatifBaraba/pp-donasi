@@ -42,7 +42,7 @@ const Login = () => {
                   {/* <Form.Check type="checkbox" label="Check me out" /> */}
                 </Form.Group>
                 <Form.Text>
-                   <Link to="/forgot">Lupa Passworrd ?</Link>
+                   <Link to="/forgot">Lupa Password ?</Link>
                    <hr/>
                 </Form.Text>
                 <Button variant="primary" type="submit" block>

@@ -1,11 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Nav, Navbar, Dropdown, DropdownButton} from 'react-bootstrap'
 import { LogOutOutline, PencilOutline } from 'react-ionicons'
+import { Link } from 'react-router-dom';
 
 const header = () => {
+
     return (
         <Navbar sticky="top" expand="lg">
-            <Navbar.Brand href="#home">Pemuda Peduli</Navbar.Brand>
+            <Navbar.Brand><Link to="/dashboard">Pemuda Peduli</Link></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">

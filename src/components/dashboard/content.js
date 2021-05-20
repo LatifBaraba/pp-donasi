@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Col, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 const content = () => {
   return (
@@ -11,7 +12,8 @@ const content = () => {
             <h4>Program Donasi</h4>
             <h5>#TiapHariBerbagi</h5>
           </div>
-          <a href="/list-program">Lihat Lainnya</a>
+          {/* <a href="/list-program">Lihat Lainnya</a> */}
+          <Link to="/list-donasi">Lihat lainnya</Link>
         </Col>
       </Row>
       <Row className="content-donasi">
