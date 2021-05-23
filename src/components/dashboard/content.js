@@ -30,39 +30,14 @@ const content = () => {
           </Row>
           <Row className="donasi-2">
             <Col className="daftar-sekarang">
-              <Button>Daftar Sekarang</Button>
+              <Button>Donasi Sekarang</Button>
             </Col>
           </Row>
         </Col>
       </Row>
       <Row className="content-donasi">
-        <Col md={8} className="content-donasi-desc">
-          <Row className="donasi-1">
-            <Col className="donasi-desc">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae,
-              possimus est! Unde, voluptate! Aperiam, doloribus architecto. Fuga
-              deleniti quod ea?
-            </Col>
-          </Row>
-          <Row className="donasi-2">
-            <Col className="daftar-sekarang">
-              <Button>Daftar Sekarang</Button>
-            </Col>
-          </Row>
-        </Col>
         <Col md={4} className="content-donasi-image">
-          <img
-            src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg"
-            alt=""
-          />
-        </Col>
-      </Row>
-      <Row className="content-donasi">
-        <Col md={4} className="content-donasi-image">
-          <img
-            src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg"
-            alt=""
-          />
+          <img src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg" alt="" />
         </Col>
         <Col md={8} className="content-donasi-desc">
           <Row className="donasi-1">
@@ -74,7 +49,26 @@ const content = () => {
           </Row>
           <Row className="donasi-2">
             <Col className="daftar-sekarang">
-              <Button>Daftar Sekarang</Button>
+              <Button>Donasi Sekarang</Button>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+      <Row className="content-donasi">
+        <Col md={4} className="content-donasi-image">
+          <img src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg" alt="" />
+        </Col>
+        <Col md={8} className="content-donasi-desc">
+          <Row className="donasi-1">
+            <Col className="donasi-desc">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae,
+              possimus est! Unde, voluptate! Aperiam, doloribus architecto. Fuga
+              deleniti quod ea?
+            </Col>
+          </Row>
+          <Row className="donasi-2">
+            <Col className="daftar-sekarang">
+              <Button>Donasi Sekarang</Button>
             </Col>
           </Row>
         </Col>

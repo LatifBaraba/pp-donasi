@@ -19,12 +19,12 @@ const content2 = () => {
             <Card>
                 <Card.Img variant="top" src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg" />
                 <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
+                    <Card.Title>Program Donasi</Card.Title>
                     <Card.Text>
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Button variant="primary">Donasi Sekarang</Button>
                 </Card.Body>
             </Card>
           </Col>
@@ -32,12 +32,12 @@ const content2 = () => {
             <Card>
                 <Card.Img variant="top" src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg" />
                 <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
+                    <Card.Title>Program Donasi</Card.Title>
                     <Card.Text>
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Button variant="primary">Donasi Sekarang</Button>
                 </Card.Body>
             </Card>
           </Col>
@@ -45,15 +45,16 @@ const content2 = () => {
             <Card>
                 <Card.Img variant="top" src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg" />
                 <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
+                    <Card.Title>Program Donasi</Card.Title>
                     <Card.Text>
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Button variant="primary">Donasi Sekarang</Button>
                 </Card.Body>
             </Card>
           </Col>
+          
       </Row>
     </div>
   );

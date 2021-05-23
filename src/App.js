@@ -12,6 +12,8 @@ import Register from './pages/auth/Register'
 import Forgot from './pages/auth/Forgot'
 import ListDonasiSatu from './pages/listdonasisatu'
 import ListDonasiDua from './pages/listdonasidua'
+import DonasiDetail from './pages/detaildonasi'
+
 function App() {
   return (
     <Router>
@@ -33,6 +35,7 @@ function App() {
           <Route path="/checkout" exact component={Checkout}/>
           <Route path="/list-donasi" exact component={ListDonasiSatu}/>
           <Route path="/list-donasi-dua" exact component={ListDonasiDua}/>
+          <Route path="/donasi-detail" exact component={DonasiDetail}/>
         </Layout>
         {/* End Main Route */}
       </Switch>
