@@ -24,7 +24,7 @@ const content2 = () => {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Button variant="primary">Donasi Sekarang</Button>
+                    <Link to="/donasi-detail"><Button>Donasi Sekarang</Button></Link>
                 </Card.Body>
             </Card>
           </Col>
@@ -37,7 +37,7 @@ const content2 = () => {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Button variant="primary">Donasi Sekarang</Button>
+                    <Link to="/donasi-detail"><Button>Donasi Sekarang</Button></Link>
                 </Card.Body>
             </Card>
           </Col>
@@ -50,7 +50,7 @@ const content2 = () => {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Button variant="primary">Donasi Sekarang</Button>
+                    <Link to="/donasi-detail"><Button>Donasi Sekarang</Button></Link>
                 </Card.Body>
             </Card>
           </Col>

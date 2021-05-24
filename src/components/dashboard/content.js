@@ -30,7 +30,7 @@ const content = () => {
           </Row>
           <Row className="donasi-2">
             <Col className="daftar-sekarang">
-              <Button>Donasi Sekarang</Button>
+              <Link to="/donasi-detail"><Button>Donasi Sekarang</Button></Link>
             </Col>
           </Row>
         </Col>
@@ -49,7 +49,7 @@ const content = () => {
           </Row>
           <Row className="donasi-2">
             <Col className="daftar-sekarang">
-              <Button>Donasi Sekarang</Button>
+              <Link to="/donasi-detail"><Button>Donasi Sekarang</Button></Link>
             </Col>
           </Row>
         </Col>
@@ -68,7 +68,7 @@ const content = () => {
           </Row>
           <Row className="donasi-2">
             <Col className="daftar-sekarang">
-              <Button>Donasi Sekarang</Button>
+              <Link to="/donasi-detail"><Button>Donasi Sekarang</Button></Link>
             </Col>
           </Row>
         </Col>
