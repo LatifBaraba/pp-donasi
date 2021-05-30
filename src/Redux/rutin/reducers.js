@@ -1,4 +1,4 @@
-import { CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAILURE } from "../actionTypes";
+import { INPUT_RUTIN, INPUT_RUTIN_SUCCESS, INPUT_RUTIN_FAILURE } from "../actionTypes";
 
 const initialState = {
   loading: false,
@@ -6,20 +6,20 @@ const initialState = {
   error: null,
 };
 
-const forgotReducer = (state = initialState, action) => {
+const rutinReducers = (state = initialState, action) => {
   switch (action.type) {
-    case CHANGE_PASSWORD:
+    case INPUT_RUTIN:
       return {
         ...state,
         loading: true,
       };
-    case CHANGE_PASSWORD_SUCCESS:
+    case INPUT_RUTIN_SUCCESS:
       return {
         ...state,
         loading: false,
         error: null,
       };
-    case CHANGE_PASSWORD_FAILURE:
+    case INPUT_RUTIN_FAILURE:
       return {
         ...state,
         loading: false,
@@ -30,4 +30,4 @@ const forgotReducer = (state = initialState, action) => {
   }
 };
 
-export default forgotReducer;
+export default rutinReducers;

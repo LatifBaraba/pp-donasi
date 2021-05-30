@@ -13,6 +13,7 @@ import Forgot from './pages/auth/Forgot'
 import ListDonasiSatu from './pages/listdonasisatu'
 import ListDonasiDua from './pages/listdonasidua'
 import DonasiDetail from './pages/detaildonasi'
+import Rutin from "./pages/rutin";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/list-donasi" exact component={ListDonasiSatu}/>
           <Route path="/list-donasi-dua" exact component={ListDonasiDua}/>
           <Route path="/donasi-detail" exact component={DonasiDetail}/>
+          <Route path="/rutin" exact component={Rutin}/>
         </Layout>
         {/* End Main Route */}
       </Switch>
