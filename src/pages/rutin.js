@@ -26,7 +26,7 @@ function Rutin() {
                       required: true                      
                     })}
                   />
-                </Form.Group>s                
+                </Form.Group>            
 
                 <Form.Group controlId="formBasicEmail">
                   <Form.Control
