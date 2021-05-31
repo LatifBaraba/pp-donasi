@@ -13,7 +13,11 @@ import Forgot from './pages/auth/Forgot'
 import ListDonasiSatu from './pages/listdonasisatu'
 import ListDonasiDua from './pages/listdonasidua'
 import DonasiDetail from './pages/detaildonasi'
+<<<<<<< HEAD
 import DonasiDetail2 from './pages/detaildonasi2'
+=======
+import Rutin from "./pages/rutin";
+>>>>>>> 2b0e00f12638560228c02d32e531dd8e95989d16
 
 function App() {
   return (
