@@ -39,6 +39,7 @@ function App() {
           <Route path="/list-donasi-dua" exact component={ListDonasiDua}/>
           <Route path="/donasi-detail" exact component={DonasiDetail}/>
           <Route path="/donasi-detail2" exact component={DonasiDetail2}/>
+          <Route path="/rutin" exact component={Rutin}/>
         </Layout>
         {/* End Main Route */}
       </Switch>
