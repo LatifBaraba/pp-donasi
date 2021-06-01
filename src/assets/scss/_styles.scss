@@ -248,6 +248,7 @@
     padding: 20px;
     .donasi-progressbar {
         margin: 5px;
+        display: relative;
     }
 }
 
@@ -260,5 +261,17 @@
         position: absolute;
         right: 10px;
         bottom: 10px;
+    }
+    .card {
+        .card-desc {
+            opacity: 0;
+            padding-top: 10px;
+            transition: 1s;
+            &:hover {
+                opacity: 1;
+                padding-top: 0;
+            }
+        }
+        
     }
 }

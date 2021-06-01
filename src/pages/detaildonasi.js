@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Row, Col, Carousel, ProgressBar, Button } from 'react-bootstrap'
 
 const DetailDonasi = () => {
+    const [now, setNow] = useState(45);
     return (
         <div className="container detail-program">
             <Row className="mt-3 p-2">
@@ -50,7 +51,8 @@ const DetailDonasi = () => {
             </Row>
             <Row className="mt-3 mx-2">
                 <Col md={8}>
-                    <ProgressBar now={60} className="donasi-progressbar"/>
+                    <ProgressBar animated now={now} label={`${now}%`} className="donasi-progressbar"/>
+                    <ProgressBar animated now={now} label={`${now}%`} srOnly className="donasi-progressbar"/>
                 </Col>
                 <Col md={4}>
                     21 Oktober - 30 Oktober
