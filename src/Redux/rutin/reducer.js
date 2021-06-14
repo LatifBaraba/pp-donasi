@@ -6,7 +6,7 @@ const initialState = {
   error: null,
 };
 
-const rutinReducers = (state = initialState, action) => {
+const rutinReducer = (state = initialState, action) => {
   switch (action.type) {
     case INPUT_RUTIN:
       return {
@@ -30,4 +30,4 @@ const rutinReducers = (state = initialState, action) => {
   }
 };
 
-export default rutinReducers;
+export default rutinReducer;

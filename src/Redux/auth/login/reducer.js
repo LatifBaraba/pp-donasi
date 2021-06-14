@@ -13,7 +13,7 @@ const initialState = {
   error: null,
 };
 
-const loginReducer = () => {
+const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
       return {

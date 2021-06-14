@@ -1,4 +1,4 @@
-import { CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAILURE } from "../actionTypes";
+import { CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAILURE } from "../../actionTypes";
 
 const initialState = {
   loading: false,
