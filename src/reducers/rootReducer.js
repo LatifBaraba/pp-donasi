@@ -8,6 +8,7 @@ import donasilistReducer from "../Redux/donasilist/reducer";
 import donasilist2Reducer from "../Redux/donasilist2/reducer";
 import pagedonasiReducer from "../Redux/pagelistdonasi/reducer";
 import pagedonasi2Reducer from "../Redux/pagelistdonasi2/reducer";
+import tokenReducer from "../Redux/token/reducer";
 
 const reducers = combineReducers({
     loginReducer,
@@ -18,7 +19,8 @@ const reducers = combineReducers({
     donasilistReducer,
     donasilist2Reducer,
     pagedonasiReducer,
-    pagedonasi2Reducer
+    pagedonasi2Reducer,
+    tokenReducer
 })
 
 export default reducers

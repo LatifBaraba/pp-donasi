@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, Row, Container, Form } from "react-bootstrap";
 import LogoPP from "../../../assets/images/pemudapeduli.png";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { fetchLogin } from "../../../Redux/auth/login/actions";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => fetchLogin(data);
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = setState("");
+
+  const onSubmit = (data) => {
+    let payload = [];
+    if (data === "") {
+      errors.showMessage();
+    } else {
+      payload = {
+        email: email,
+        password: password,
+      };
+      dispatch(fetchLogin(payload));
+    }
+  };
 
   return (
     <div>
@@ -26,6 +43,7 @@ const Login = () => {
                     {...register("email", {
                       required: true,
                     })}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </Form.Group>
 
@@ -36,14 +54,15 @@ const Login = () => {
                     {...register("password", {
                       required: true,
                     })}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox">
                   {/* <Form.Check type="checkbox" label="Check me out" /> */}
                 </Form.Group>
                 <Form.Text>
-                   <Link to="/forgot">Lupa Password ?</Link>
-                   <hr/>
+                  <Link to="/forgot">Lupa Password ?</Link>
+                  <hr />
                 </Form.Text>
                 <Button variant="primary" type="submit" block>
                   Login
@@ -78,6 +97,6 @@ const Login = () => {
       </Container>
     </div>
   );
-}
+};
 
-export default Login
+export default Login;

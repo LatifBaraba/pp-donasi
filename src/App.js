@@ -16,6 +16,7 @@ import DonasiDetail from './pages/detaildonasi'
 import DonasiDetail2 from './pages/detaildonasi2'
 import Rutin from "./pages/rutin";
 
+
 function App() {
   return (
     <Router>
