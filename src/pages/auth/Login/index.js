@@ -1,28 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Card, Row, Container, Form } from "react-bootstrap";
 import LogoPP from "../../../assets/images/pemudapeduli.png";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { fetchLogin } from "../../../Redux/auth/login/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchToken } from "../../../Redux/token/action";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = setState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    return () => {
+      dispatch(fetchToken());
+    };
+  }, []);
+
+
+  const token = useSelector((state) => state.tokenReducer.token.token);
   const onSubmit = (data) => {
     let payload = [];
     if (data === "") {
       errors.showMessage();
     } else {
       payload = {
-        email: email,
+        username: username,
         password: password,
       };
-      dispatch(fetchLogin(payload));
+      dispatch(fetchLogin(token, payload));
     }
   };
 
@@ -36,14 +48,14 @@ const Login = () => {
             </Row>
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group controlId="formBasicNoHp">
                   <Form.Control
-                    type="email"
-                    placeholder="Email"
-                    {...register("email", {
+                    type="text"
+                    placeholder="No. Hp"
+                    {...register("username", {
                       required: true,
                     })}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                 </Form.Group>
 
@@ -64,6 +76,7 @@ const Login = () => {
                   <Link to="/forgot">Lupa Password ?</Link>
                   <hr />
                 </Form.Text>
+                <ToastContainer autoClose={2000} />
                 <Button variant="primary" type="submit" block>
                   Login
                 </Button>

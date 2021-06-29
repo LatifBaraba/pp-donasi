@@ -62,9 +62,6 @@ function Index() {
                     })}
                     onChange={(e) => setNamaLengkap(e.target.value)}
                   />
-                  <Form.Control.Feedback type="invalid">
-                    Please provide a valid city.
-                  </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicNamaPanggilan">

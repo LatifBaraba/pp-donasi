@@ -30,7 +30,7 @@ export function fetchRegister(token, payload) {
     })
       .then((res) => {
         setTimeout(() => {
-          toast.success("Add Success !");
+          toast.success("Register Account is Succeesful !");
           dispatch(addUserSuccess(res));
           history.push("/login");
         }, 2000);
