@@ -18,13 +18,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    return () => {
-      dispatch(fetchToken());
-    };
+      dispatch(fetchToken())
   }, []);
 
-
   const token = useSelector((state) => state.tokenReducer.token.token);
+
   const onSubmit = (data) => {
     let payload = [];
     if (data === "") {
