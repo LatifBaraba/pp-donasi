@@ -4,16 +4,20 @@ import { GET_DONASI2,
         } from '../actionTypes';
 import axios from 'axios';
 
-const URL = `${process.env.REACT_APP_BASE_URL}/donasi/list2`;
+const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/list`;
 
 export function fetchDonasilist2(token) {
     return (dispatch) => {
         axios(URL, {
             method: 'POST',
             data: {
-                limit: "100",
-                offset: "0",
+                limit: "3",
+                offset: "1",
                 filters: [
+                    {
+                        field: "is_show",
+                        keyword: "true"
+                    },
                     {
                         field: "is_deleted",
                         keyword: "false"

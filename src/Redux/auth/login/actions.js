@@ -10,6 +10,7 @@ import axios from "axios";
 import history from "../../../history";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Refresh } from "react-ionicons";
 
 const LOGINURL = `${process.env.REACT_APP_BASE_URL}/auth/user/login`;
 const LOGOUTURL = `${process.env.REACT_APP_BASE_URL}/auth/user/logout`;
@@ -33,14 +34,13 @@ export function fetchLogin(token, payload) {
         toast.success("Login Success !")
         localStorage.setItem("token", token)
         history.push("/dashboard")
+        window.location.reload()
         console.log(res)
     })
     .catch(err => {
         if (err.response.status === 400) {
-            // alert("incorrect username or password !")
             toast.error("incorrect username or password !")
         } else if (err.response.status === 401) {
-            // alert("password not match !")
             toast.error("password not match !")
         }
         dispatch(loginFailure(err));

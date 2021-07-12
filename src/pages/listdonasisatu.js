@@ -1,7 +1,7 @@
 import {React, useEffect} from "react";
 import { Row, Col, Button } from "react-bootstrap";
 
-import { fetchPagedonasi } from "../Redux/pagelistdonasi/actions";
+import { fetchDonasilist } from "../Redux/donasilist/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const ListProgram = () => {
@@ -9,96 +9,40 @@ const ListProgram = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPagedonasi(token));
+    dispatch(fetchDonasilist(token));
   }, []);
-  const pagedonasiData = useSelector((state) => state.pagedonasiReducer.pagedonasi);
+  
+  const datas = useSelector((state) => state.donasilistReducer.donasilist);
 
   return (
     <div className="container list-program">
-      <Row className="mt-3">
-        <Col md={4}>
-          <img
-            src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg"
-            alt=""
-          />
-        </Col>
-        <Col md={8} className="program-content">
-          <Row>
-            <Col>
-              <h4 className="text-center">Program Donasi Title</h4>
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum,
-                officiis.
-              </p>
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col className="text-right">
-              <Button>Daftar Sekarang</Button>
-            </Col>
-          </Row>
-        </Col>
+      {datas.map((data, idx) => (
+        <Row className="mt-3" key={idx}>
+          <Col md={4}>
+            {/* <img src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg" alt=""/> */}
+            {data.thumbnail_image_url ? <img src={data.thumbnail_image_url} alt="" /> : <img src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg" alt="" />}
+          </Col>
+          <Col md={8} className="program-content">
+            <Row>
+              <Col>
+                <h4 className="text-center">{data.title}</h4>
+              </Col>
+            </Row>
+            <Row className="mt-3">
+              <Col>
+                <p>
+                  {data.description}
+                </p>
+              </Col>
+            </Row>
+            <Row className="mt-3">
+              <Col className="text-right">
+                <Button>Daftar Sekarang</Button>
+              </Col>
+            </Row>
+          </Col>
       </Row>
-      <Row className="mt-3">
-        <Col md={4}>
-          <img
-            src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg"
-            alt=""
-          />
-        </Col>
-        <Col md={8} className="program-content">
-          <Row>
-            <Col>
-              <h4 className="text-center">Program Donasi Title</h4>
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum,
-                officiis.
-              </p>
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col className="text-right">
-              <Button>Daftar Sekarang</Button>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-      <Row className="mt-3">
-        <Col md={4}>
-          <img
-            src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg"
-            alt=""
-          />
-        </Col>
-        <Col md={8} className="program-content">
-          <Row>
-            <Col>
-              <h4 className="text-center">Program Donasi Title</h4>
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum,
-                officiis.
-              </p>
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col className="text-right">
-              <Button>Daftar Sekarang</Button>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+      ))}
     </div>
   );
 };

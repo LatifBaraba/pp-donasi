@@ -2,7 +2,10 @@ import React from "react";
 import { Row, Col, Button, Card } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
-const content2 = () => {
+const content2 = (props) => {
+
+  const datas = props.data
+
   return (
     <div className="content2">
         <Row className="p-2">
@@ -14,47 +17,20 @@ const content2 = () => {
                 <Link to="/list-donasi-dua">Lihat lainnya</Link>
             </Col>
       </Row>
+        {/* {data.thumbnail_image_url ? <img src={data.thumbnail_image_url} alt="" /> : <img src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg" alt="" />} */}
       <Row className="content-donasi">
-          <Col md={4}>
+        {datas.map((data, idx) => (
+          <Col md={4} key={idx}>
             <Card>
-                <Card.Img variant="top" src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg" />
+                {data.thumbnail_image_url ? <Card.Img variant="top" src={data.thumbnail_image_url} /> : <Card.Img variant="top" src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg" alt="" />}
                 <Card.Body>
-                    <Card.Title>Program Donasi</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
+                    <Card.Title>{data.title}</Card.Title>
+                    <Card.Text>{data.description}</Card.Text>
                     <Link to="/donasi-detail"><Button>Donasi Sekarang</Button></Link>
                 </Card.Body>
             </Card>
           </Col>
-          <Col md={4}>
-            <Card>
-                <Card.Img variant="top" src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg" />
-                <Card.Body>
-                    <Card.Title>Program Donasi</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Link to="/donasi-detail"><Button>Donasi Sekarang</Button></Link>
-                </Card.Body>
-            </Card>
-          </Col>
-          <Col md={4}>
-            <Card>
-                <Card.Img variant="top" src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg" />
-                <Card.Body>
-                    <Card.Title>Program Donasi</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Link to="/donasi-detail"><Button>Donasi Sekarang</Button></Link>
-                </Card.Body>
-            </Card>
-          </Col>
-          
+        ))}
       </Row>
     </div>
   );
