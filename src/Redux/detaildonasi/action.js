@@ -9,7 +9,7 @@ import {
 import axios from 'axios';
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi/`;
-const URL_RUTIN = `${process.env.REACT_APP_BASE_URL}//program-donasi-rutin/`;
+const URL_RUTIN = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/`;
 
 export function fetchDetailDonasi(token, id) {
     return (dispatch) => {
@@ -31,7 +31,7 @@ export function fetchDetailDonasi(token, id) {
     };
 };
 
-export function fetchDonasilist(token, id) {
+export function fetchDetailDonasiRutin(token, id) {
     return (dispatch) => {
         axios(URL_RUTIN+`${id}`, {
             method: 'GET',
@@ -41,18 +41,18 @@ export function fetchDonasilist(token, id) {
             }
         })
         .then(res => {
-            dispatch(getDonasiDetailSuccess(res.data.data));
+            dispatch(getDetailDonasiRutinSuccess(res.data.data));
             console.log(res.data.data, 'donasi detail rutin')
         })
         .catch(err => {
-            dispatch(getDonasiDetailFailure(err));
+            dispatch(getDetailDonasiRutinFailure(err));
             console.log(err)
         });
     };
 };
 
 // Get Donasi List
-const fetchDetailDonasi = () => ({
+const getDetailDonasi = () => ({
     type: GET_DETAIL_DONASI
 });
 
@@ -65,15 +65,15 @@ const getDonasiDetailFailure = () => ({
     type: GET_DETAIL_DONASI_FAILURE
 });
 
-const fetchDetailDonasi = () => ({
+const getDetailDonasiRutin = () => ({
     type: GET_DETAIL_DONASI_RUTIN
 });
 
-const getDonasiDetailSuccess = (payload) => ({
+const getDetailDonasiRutinSuccess = (payload) => ({
     type: GET_DETAIL_DONASI_RUTIN_SUCCESS,
     payload
 });
 
-const getDonasiDetailFailure = () => ({
+const getDetailDonasiRutinFailure = () => ({
     type: GET_DETAIL_DONASI_RUTIN_FAILURE
 });

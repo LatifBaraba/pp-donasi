@@ -10,7 +10,6 @@ import axios from "axios";
 import history from "../../../history";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Refresh } from "react-ionicons";
 
 const LOGINURL = `${process.env.REACT_APP_BASE_URL}/auth/user/login`;
 const LOGOUTURL = `${process.env.REACT_APP_BASE_URL}/auth/user/logout`;
@@ -34,8 +33,6 @@ export function fetchLogin(token, payload) {
         toast.success("Login Success !")
         localStorage.setItem("token", token)
         history.push("/dashboard")
-        window.location.reload()
-        console.log(res)
     })
     .catch(err => {
         if (err.response.status === 400) {

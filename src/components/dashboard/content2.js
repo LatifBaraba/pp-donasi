@@ -26,7 +26,7 @@ const content2 = (props) => {
                 <Card.Body>
                     <Card.Title>{data.title}</Card.Title>
                     <Card.Text>{data.description}</Card.Text>
-                    <Link to="/donasi-detail"><Button>Donasi Sekarang</Button></Link>
+                    <Link to="/donasi-detail2"><Button>Donasi Sekarang</Button></Link>
                 </Card.Body>
             </Card>
           </Col>

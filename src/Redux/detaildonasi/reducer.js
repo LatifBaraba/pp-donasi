@@ -1,51 +1,50 @@
 import {
-    GET_DONASI_DETAIL,
-    GET_DONASI_DETAIL_SUCCESS,
-    GET_DONASI_DETAIL_FAILURE,
-    GET_DONASI_DETAIL_RUTIN,
-    GET_DONASI_DETAIL_RUTIN_SUCCESS,
-    GET_DONASI_DETAIL_RUTIN_FAILURE,
-    
+    GET_DETAIL_DONASI,
+    GET_DETAIL_DONASI_SUCCESS,
+    GET_DETAIL_DONASI_FAILURE,
+    GET_DETAIL_DONASI_RUTIN,
+    GET_DETAIL_DONASI_RUTIN_SUCCESS,
+    GET_DETAIL_DONASI_RUTIN_FAILURE,
 } from '../actionTypes';
 
 const initialState = {
     loading: false,
-    detail: [],
+    donasiDetail: [],
     error: null
 };
 
 export default function donasiDetailReducer(state = initialState, action) {
     switch (action.type) {
-        case GET_DONASI_DETAIL:
+        case GET_DETAIL_DONASI:
             return {
                 ...state,
                 loading: true
             };
-        case GET_DONASI_DETAIL_SUCCESS:
+        case GET_DETAIL_DONASI_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 error: null,
-                donasilist: action.payload
+                donasiDetail: action.payload
             };
-        case GET_DONASI_DETAIL_FAILURE:
+        case GET_DETAIL_DONASI_FAILURE:
             return {
                 ...state,
                 loading: false,
             };
-        case GET_DONASI_DETAIL_RUTIN:
+        case GET_DETAIL_DONASI_RUTIN:
             return {
                 ...state,
                 loading: true
             };
-        case GET_DONASI_DETAIL_RUTIN_SUCCESS:
+        case GET_DETAIL_DONASI_RUTIN_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 error: null,
-                donasilist: action.payload
+                donasiDetail: action.payload
             };
-        case GET_DONASI_DETAIL_RUTIN_FAILURE:
+        case GET_DETAIL_DONASI_RUTIN_FAILURE:
             return {
                 ...state,
                 loading: false,

@@ -4,9 +4,9 @@ import { GET_PAGEDONASI,
         } from '../actionTypes';
 import axios from 'axios';
 
-const URL = `${process.env.REACT_APP_BASE_URL}/pagedonasi/list`;
+const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi/list`;
 
-export function fetchPagedonasi(token) {
+export function fetchPageDonasi(token) {
     return (dispatch) => {
         axios(URL, {
             method: 'POST',
@@ -32,26 +32,26 @@ export function fetchPagedonasi(token) {
             }
         })
         .then(res => {
-            dispatch(getPagedonasiSuccess(res.data.data));
+            dispatch(getPageDonasiSuccess(res.data.data));
             console.log(res.data.data, 'pagedonasi')
         })
         .catch(err => {
-            dispatch(getPagedonasiFailure(err));
+            dispatch(getPageDonasiFailure(err));
             console.log(err)
         });
     };
 };
 
 // Get Donasi List
-const getPagedonasiSuccess = (payload) => ({
+const getPageDonasiSuccess = (payload) => ({
     type: GET_PAGEDONASI_SUCCESS,
     payload
 });
 
-const getPagedonasiFailure = () => ({
+const getPageDonasiFailure = () => ({
     type: GET_PAGEDONASI_FAILURE
 });
 
-const getPagedonasi = () => ({
+const getPageDonasi = () => ({
     type: GET_PAGEDONASI
 });

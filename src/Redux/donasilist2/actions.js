@@ -3,6 +3,7 @@ import { GET_DONASI2,
     GET_DONASI2_FAILURE,
         } from '../actionTypes';
 import axios from 'axios';
+import history from '../../history'
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/list`;
 
@@ -12,7 +13,7 @@ export function fetchDonasilist2(token) {
             method: 'POST',
             data: {
                 limit: "3",
-                offset: "1",
+                offset: "0",
                 filters: [
                     {
                         field: "is_show",
@@ -42,6 +43,7 @@ export function fetchDonasilist2(token) {
         .catch(err => {
             dispatch(getDonasilist2Failure(err));
             console.log(err)
+            history.push("/login")
         });
     };
 };

@@ -1,7 +1,6 @@
 import {React, useEffect} from "react";
 import { Row, Col, Button } from "react-bootstrap";
-
-import { fetchDonasilist } from "../Redux/donasilist/actions";
+import { fetchPageDonasi } from '../Redux/pagelistdonasi/actions'
 import { useDispatch, useSelector } from "react-redux";
 
 const ListProgram = () => {
@@ -9,10 +8,10 @@ const ListProgram = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchDonasilist(token));
+    dispatch(fetchPageDonasi(token));
   }, []);
   
-  const datas = useSelector((state) => state.donasilistReducer.donasilist);
+  const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
 
   return (
     <div className="container list-program">
@@ -31,7 +30,7 @@ const ListProgram = () => {
             <Row className="mt-3">
               <Col>
                 <p>
-                  {data.description}
+                  {data.sub_title}
                 </p>
               </Col>
             </Row>

@@ -32,12 +32,15 @@ const content = (props) => {
                 <h5>{data.title}</h5>
               </Col>
               <Col md={12}className="donasi-desc">
-                {data.description}
+                {data.sub_title}
               </Col>
             </Row>
             <Row className="donasi-2">
               <Col className="daftar-sekarang">
-                <Link to="/donasi-detail"><Button>Donasi Sekarang</Button></Link>
+                <Link to={{
+                  pathname: "/donasi-detail",
+                  state: { donasi: data }
+                }}><Button>Donasi Sekarang</Button></Link>
               </Col>
             </Row>
           </Col>

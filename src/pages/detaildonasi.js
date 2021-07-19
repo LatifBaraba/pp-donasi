@@ -1,20 +1,34 @@
-import React, {useState} from 'react'
-import { Row, Col, Carousel, ProgressBar, Button } from 'react-bootstrap'
+import React, {useState, useEffect} from 'react'
+import { Row, Col, ProgressBar, Button } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import {fetchDetailDonasi} from '../Redux/detaildonasi/action'
+import { Link } from 'react-router-dom'
 
-const DetailDonasi = () => {
+const DetailDonasi = (props) => {
     const [now, setNow] = useState(45);
 
+    const { donasi } = props.location.state;
+    console.log(donasi)
     
+    const dispatch = useDispatch();
+    useEffect(() => {
+        let token = localStorage.getItem('token');
+        dispatch(fetchDetailDonasi(token, donasi.id))
+    },[])
+    
+    
+    const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
+    console.log(data, 'datanyos')
     return (
         <div className="container detail-program">
             <Row className="mt-3 p-2">
                 <Col>
-                    <img src="https://wallpapercave.com/wp/wp2670840.jpg" alt="" style={{maxWidth: "100%"}}/>
+                    <img src={data.thumbnail_image_url} alt="" style={{maxWidth: "100%"}}/>
                 </Col>
             </Row>
             <Row className="mt-3 mx-2">
                 <Col md={4}>
-                    <h4>Judul Program</h4>
+                    <h4>{data.title}</h4>
                 </Col>
             </Row>
             <Row className="mt-3 mx-2">
@@ -23,31 +37,39 @@ const DetailDonasi = () => {
                     <ProgressBar animated now={now} label={`${now}%`} srOnly className="donasi-progressbar"/>
                 </Col>
                 <Col md={4}>
-                    21 Oktober - 30 Oktober
+                    {data.valid_from} - {data.valid_to}
                 </Col>
             </Row>
             <Row className="my-4 mx-2 text-justify">
                 <Col>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                    when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap 
-                    into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                    and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    {data.description}
                 </Col>
             </Row>
-            <Row className="my-2 mx-2 text-justify">
+            {/* <Row className="my-2 mx-2 text-justify">
                 <Col>
                     <h5>Ucapan Dan Doa</h5>
                 </Col>
-            </Row>
-            <Row className="my-2 mx-2 text-justify">
+            </Row> */}
+            {/* <Row className="my-2 mx-2 text-justify">
                 <Col>
                     Arief Ramdhani - "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                 </Col>
-            </Row>
+            </Row> */}
             <Row className="text-center justify-content-center">
-                <Col>
-                    <Button variant="primary">Donasi Sekarang</Button>
-                </Col>
+                {data.ayobantu_link !== "" &&
+                    <Col md={6}>
+                        <a href={data.ayobantu_link} target="_blank" rel="noopener noreferrer">
+                            <Button variant="primary">Ayo Bantu</Button>
+                        </a>
+                    </Col>
+                }
+                {data.kitabisa_link !== "" &&
+                    <Col md={6}>
+                        <a href={data.kitabisa_link} target="_blank" rel="noopener noreferrer">
+                            <Button variant="primary">Kita Bisa</Button>
+                        </a>
+                    </Col>
+                }
             </Row>
         </div>
     )

@@ -1,7 +1,7 @@
 import {React, useEffect} from "react";
 import { Row, Col, Card, Button, Carousel } from "react-bootstrap";
 
-import { fetchDonasilist2 } from "../Redux/donasilist2/actions";
+import { fetchPagedonasi2 } from "../Redux/pagelistdonasi2/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Listdonasidua = () => {
@@ -9,10 +9,10 @@ const Listdonasidua = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchDonasilist2(token));
+    dispatch(fetchPagedonasi2(token));
   }, []);
   
-  const datas = useSelector((state) => state.donasilist2Reducer.donasilist2);
+  const datas = useSelector((state) => state.pagedonasi2Reducer.pagedonasi2);
 
   return (
     <div className="container list-donasi-dua">

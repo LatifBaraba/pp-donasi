@@ -4,7 +4,7 @@ import { GET_PAGEDONASI2,
         } from '../actionTypes';
 import axios from 'axios';
 
-const URL = `${process.env.REACT_APP_BASE_URL}/pagedonasi/list2`;
+const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/list`;
 
 export function fetchPagedonasi2(token) {
     return (dispatch) => {

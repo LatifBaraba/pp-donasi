@@ -12,7 +12,7 @@ export function fetchDonasilist(token) {
             method: 'POST',
             data: {
                 limit: "3",
-                offset: "1",
+                offset: "0",
                 filters: [
                     {
                         field: "is_show",

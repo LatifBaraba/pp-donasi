@@ -1,8 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { Route, Switch} from 'react-router-dom'
-import { Router } from 'react-router'
-// import history from './history'
+import { Router, Route, Switch } from 'react-router-dom'
+import history from './history'
 import './App.scss';
 import { Redirect } from 'react-router-dom'
 import Layout from './components/layout/layout'
@@ -23,10 +22,6 @@ import DonasiDetail2 from './pages/detaildonasi2'
 import Rutin from "./pages/rutin";
 import thunk from 'redux-thunk'
 import reducers from './reducers/rootReducer'
-
-import { createBrowserHistory } from "history";
-
-const history = createBrowserHistory();
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
