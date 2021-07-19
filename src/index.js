@@ -15,6 +15,7 @@ import Checkout from './pages/checkout'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import Forgot from './pages/auth/Forgot'
+import Reset from './pages/auth/Reset'
 import ListDonasiSatu from './pages/listdonasisatu'
 import ListDonasiDua from './pages/listdonasidua'
 import DonasiDetail from './pages/detaildonasi'
@@ -36,11 +37,12 @@ ReactDOM.render(
           <Route path="/login" exact component={Login}/>
           <Route path="/register" exact component={Register}/>
           <Route path="/forgot" exact component={Forgot}/>
-          {/* Loign */}
+          <Route path="/reset/:id" exact component={Reset}/>
+          {/* Login */}
           {/* End Auth Route */}
           
           {/* Main Route */}
-          <Layout>
+          <Layout>            
             <Route path="/dashboard" exact component={Dashboard}/>
             <Route path="/order" exact component={Order}/>
             <Route path="/checkout" exact component={Checkout}/>

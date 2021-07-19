@@ -1,4 +1,8 @@
-import { CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAILURE } from "../../actionTypes";
+import {
+  FORGOT_PASSWORD,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAILURE,
+} from "../../actionTypes";
 
 const initialState = {
   loading: false,
@@ -8,18 +12,18 @@ const initialState = {
 
 const forgotReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CHANGE_PASSWORD:
+    case FORGOT_PASSWORD:
       return {
         ...state,
         loading: true,
       };
-    case CHANGE_PASSWORD_SUCCESS:
+    case FORGOT_PASSWORD_SUCCESS:
       return {
         ...state,
         loading: false,
         error: null,
       };
-    case CHANGE_PASSWORD_FAILURE:
+    case FORGOT_PASSWORD_FAILURE:
       return {
         ...state,
         loading: false,
