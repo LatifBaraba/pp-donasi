@@ -7,6 +7,7 @@ import {
     GET_DETAIL_DONASI_RUTIN_FAILURE,
     } from '../actionTypes';
 import axios from 'axios';
+import history from '../../history'
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi/`;
 const URL_RUTIN = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/`;
@@ -47,6 +48,10 @@ export function fetchDetailDonasiRutin(token, id) {
         .catch(err => {
             dispatch(getDetailDonasiRutinFailure(err));
             console.log(err)
+            if(err.response.status === 401){
+                localStorage.removeItem("token");
+                history.push('/login')
+            }
         });
     };
 };

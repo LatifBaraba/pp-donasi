@@ -3,7 +3,7 @@ import { GET_BANNER,
     GET_BANNER_FAILURE,
         } from '../actionTypes';
 import axios from 'axios';
-
+import history from '../../history'
 const URL = `${process.env.REACT_APP_BASE_URL}/banner/list`;
 
 export function fetchBanner(token) {
@@ -38,6 +38,10 @@ export function fetchBanner(token) {
         .catch(err => {
             dispatch(getBannerFailure(err));
             console.log(err)
+            if(err.response.status === 401){
+                localStorage.removeItem("token");
+                history.push('/login')
+            }
         });
     };
 };

@@ -3,6 +3,7 @@ import { GET_PAGEDONASI2,
     GET_PAGEDONASI2_FAILURE,
         } from '../actionTypes';
 import axios from 'axios';
+import history from '../../history'
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/list`;
 
@@ -38,6 +39,10 @@ export function fetchPagedonasi2(token) {
         .catch(err => {
             dispatch(getPagedonasi2Failure(err));
             console.log(err)
+            if(err.response.status === 401){
+                localStorage.removeItem("token");
+                history.push('/login')
+            }
         });
     };
 };

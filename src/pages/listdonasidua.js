@@ -1,6 +1,6 @@
 import {React, useEffect} from "react";
 import { Row, Col, Card, Button, Carousel } from "react-bootstrap";
-
+import { Link} from 'react-router-dom'
 import { fetchPagedonasi2 } from "../Redux/pagelistdonasi2/actions";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -43,9 +43,14 @@ const Listdonasidua = () => {
                   {data.description}
                 </Card.Text>
                 <Card.Text>Last updated 3 mins ago</Card.Text>
-                <Button variant="primary" className="button-donasi">
-                  Primary
-                </Button>
+                
+                <Link to={{
+                      pathname: "/donasi-detail2",
+                      state: { donasi: data }
+                    }}>
+                      <Button variant="primary" className="button-donasi">
+                    Donasi Sekarang
+                  </Button></Link>
               </Card.ImgOverlay>
             </Card>
           </Col>

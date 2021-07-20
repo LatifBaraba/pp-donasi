@@ -3,6 +3,7 @@ import { GET_DONASI,
     GET_DONASI_FAILURE,
         } from '../actionTypes';
 import axios from 'axios';
+import history from '../../history'
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi/list`;
 
@@ -42,6 +43,10 @@ export function fetchDonasilist(token) {
         .catch(err => {
             dispatch(getDonasilistFailure(err));
             console.log(err)
+            if(err.response.status === 401){
+                localStorage.removeItem("token");
+                history.push('/login')
+            }
         });
     };
 };

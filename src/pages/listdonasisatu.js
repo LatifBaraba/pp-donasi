@@ -1,5 +1,6 @@
 import {React, useEffect} from "react";
 import { Row, Col, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom'
 import { fetchPageDonasi } from '../Redux/pagelistdonasi/actions'
 import { useDispatch, useSelector } from "react-redux";
 
@@ -36,7 +37,11 @@ const ListProgram = () => {
             </Row>
             <Row className="mt-3">
               <Col className="text-right">
-                <Button>Daftar Sekarang</Button>
+                <Link to={{
+                  pathname: "/donasi-detail",
+                  state: { donasi: data }
+                }}><Button>Donasi Sekarang</Button></Link>
+                {/* <Button>Daftar Sekarang</Button> */}
               </Col>
             </Row>
           </Col>
