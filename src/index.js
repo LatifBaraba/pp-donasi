@@ -44,12 +44,12 @@ ReactDOM.render(
           {/* Main Route */}
           <Layout>            
             <Route path="/dashboard" exact component={Dashboard}/>
-            <Route path="/order" exact component={Order}/>
+            <Route path="/order/:id" exact component={Order}/>
             <Route path="/checkout" exact component={Checkout}/>
             <Route path="/list-donasi" exact component={ListDonasiSatu}/>
             <Route path="/list-donasi-dua" exact component={ListDonasiDua}/>
             <Route path="/donasi-detail" exact component={DonasiDetail}/>
-            <Route path="/donasi-detail2" exact component={DonasiDetail2}/>
+            <Route path="/donasi-detail2/:id" exact component={DonasiDetail2}/>
             <Route path="/rutin" exact component={Rutin}/>
           </Layout>
           {/* End Main Route */}

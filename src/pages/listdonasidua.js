@@ -48,7 +48,7 @@ const Listdonasidua = () => {
                 <Card.Text>Last updated 3 mins ago</Card.Text>
                 
                 <Link to={{
-                      pathname: "/donasi-detail2",
+                      pathname: "/donasi-detail2/" + data.id,
                       state: { donasi: data }
                     }}>
                       <Button variant="primary" className="button-donasi">

@@ -33,7 +33,7 @@ export function fetchDetailDonasi(token, id) {
 };
 
 export function fetchDetailDonasiRutin(token, id) {
-    return (dispatch) => {
+    return (dispatch) => {        
         axios(URL_RUTIN+`${id}`, {
             method: 'GET',
             headers: {
