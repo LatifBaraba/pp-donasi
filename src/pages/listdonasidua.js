@@ -1,7 +1,8 @@
 import {React, useEffect} from "react";
 import { Row, Col, Card, Button, Carousel } from "react-bootstrap";
 import { Link} from 'react-router-dom'
-import { fetchPagedonasi2 } from "../Redux/pagelistdonasi2/actions";
+// import { fetchPagedonasi2 } from "../Redux/pagelistdonasi2/actions";
+import { fetchPageDonasi } from '../Redux/pagelistdonasi/actions'
 import { useDispatch, useSelector } from "react-redux";
 
 const Listdonasidua = () => {
@@ -9,10 +10,12 @@ const Listdonasidua = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPagedonasi2(token));
+    // dispatch(fetchPagedonasi2(token));
+    dispatch(fetchPageDonasi(token));
   }, []);
   
-  const datas = useSelector((state) => state.pagedonasi2Reducer.pagedonasi2);
+  const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
+  // const datas = useSelector((state) => state.pagedonasi2Reducer.pagedonasi2);
 
   return (
     <div className="container list-donasi-dua">
@@ -40,7 +43,7 @@ const Listdonasidua = () => {
               <Card.ImgOverlay>
                 <Card.Title>{data.title}</Card.Title>
                 <Card.Text className="card-desc">
-                  {data.description}
+                  {data.sub_title}
                 </Card.Text>
                 <Card.Text>Last updated 3 mins ago</Card.Text>
                 

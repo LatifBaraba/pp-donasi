@@ -1,7 +1,8 @@
 import {React, useEffect} from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom'
-import { fetchPageDonasi } from '../Redux/pagelistdonasi/actions'
+// import { fetchPageDonasi } from '../Redux/pagelistdonasi/actions'
+import { fetchPagedonasi2 } from "../Redux/pagelistdonasi2/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const ListProgram = () => {
@@ -9,10 +10,12 @@ const ListProgram = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPageDonasi(token));
+    // dispatch(fetchPageDonasi(token));
+    dispatch(fetchPagedonasi2(token));
   }, []);
   
-  const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
+  // const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
+  const datas = useSelector((state) => state.pagedonasi2Reducer.pagedonasi2);
 
   return (
     <div className="container list-program">

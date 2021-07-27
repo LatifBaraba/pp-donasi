@@ -26,7 +26,7 @@ const content2 = (props) => {
                 {data.thumbnail_image_url ? <Card.Img variant="top" src={data.thumbnail_image_url} /> : <Card.Img variant="top" src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg" alt="" />}
                 <Card.Body>
                     <Card.Title>{data.title}</Card.Title>
-                    <Card.Text>{data.description}</Card.Text>
+                    {/* <Card.Text>{data.description}</Card.Text> */}
                     {/* <Link to="/donasi-detail2"><Button>Donasi Sekarang</Button></Link> */}
                     <Link to={{
                                 pathname: "/donasi-detail2",

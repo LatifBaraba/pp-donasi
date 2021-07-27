@@ -12,7 +12,7 @@ const banner = (props) => {
       <Carousel>
         {datas.map((data, idx) => (
           <Carousel.Item key={idx}>
-            {data.thumbnail_image_url ? <img className="d-block w-100" src={data.thumbnail_image_url} alt="First slide"/> : <img className="d-block w-100" src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg" alt="First slide"/>}
+            {data.thumbnail_image_url ? <img className="d-block" src={data.thumbnail_image_url} alt="First slide"/> : <img className="d-block w-100" src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg" alt="First slide"/>}
             <Carousel.Caption>
               <h3>{data.title}</h3>
               {/* <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}

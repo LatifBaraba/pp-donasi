@@ -28,11 +28,11 @@ const content = (props) => {
           </Col>
           <Col md={8} className="content-donasi-desc">
             <Row className="donasi-1">
-              <Col md={12} className="donasi-desc">
+              <Col md={12} className="donasi-title">
                 <h5>{data.title}</h5>
               </Col>
               <Col md={12}className="donasi-desc">
-                {data.sub_title}
+                {data.description}
               </Col>
             </Row>
             <Row className="donasi-2">

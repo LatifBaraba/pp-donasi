@@ -29,8 +29,8 @@ const Dashboard = () => {
         <Banner data={donasilistData}/>
       </Row>
       <Row>
-        <Content data={donasilistData}/>
-        <Content2 data={donasilist2Data}/>
+        <Content data={donasilist2Data}/>
+        <Content2 data={donasilistData}/>
       </Row>
     </div>
   );
