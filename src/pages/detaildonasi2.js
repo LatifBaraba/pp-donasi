@@ -65,21 +65,21 @@ const DetailDonasi2 = (props) => {
         </Col>
       </Row> */}
       {/* <div className="container detail-program"> */}
-      <Row className="mt-3 p-2">
+      <Row className="mt-4 text-center justify-content-center">
         <Col>
           <img
             src={data.thumbnail_image_url}
             alt=""
-            style={{ maxWidth: "100%" }}
+            style={{ width: "100%" }}
           />
         </Col>
       </Row>
-      <Row className="mt-3 mx-2">
-        <Col md={4}>
+      <Row className="mt-3 mx-2 text-center justify-content-center">
+        <Col md={12}>
           <h4>{data.title}</h4>
         </Col>
       </Row>
-      <Row className="mt-3 mx-2">
+      <Row className="mt-3 mx-2 text-center justify-content-center">
         <Col md={8}>
           Dana Terkumpul <h2>Rp. 10.430.000</h2>
           Periode Donasi dari{" "}
@@ -210,9 +210,7 @@ const DetailDonasi2 = (props) => {
                   />
                 )}
                 <Card.Body>
-                  <Card.Title>{data.title}</Card.Title>
-                  {/* <Card.Text>{data.description}</Card.Text> */}
-                  {/* <Link to="/donasi-detail2"><Button>Donasi Sekarang</Button></Link> */}
+                  <Card.Title>{data.title}</Card.Title>                  
                   <Card.Text>
                     <ProgressBar
                       animated
@@ -235,7 +233,7 @@ const DetailDonasi2 = (props) => {
                     }}
                   >
                     <Button onClick={refresh}>Donasi Sekarang</Button>
-                  </Link>
+                  </Link>                  
                 </Card.Body>
               </Card>
             </Col>
