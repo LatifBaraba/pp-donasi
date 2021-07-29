@@ -34,22 +34,6 @@ const Content = (props) => {
             )}
           </Col>
           <Col md={8}>
-            {/* <Row className="donasi-1">
-              <Col md={12} className="donasi-title">
-                <h5>{data.title}</h5>
-              </Col>
-              <Col md={12}className="donasi-desc">
-                {data.description}
-              </Col>
-            </Row>
-            <Row className="donasi-2">
-              <Col className="daftar-sekarang">
-                <Link to={{
-                  pathname: "/donasi-detail",
-                  state: { donasi: data }
-                }}><Button>Donasi Sekarang</Button></Link>
-              </Col>
-            </Row> */}
             <Card>
               <Card.Body>
                 <Card.Title>{data.title}</Card.Title>
