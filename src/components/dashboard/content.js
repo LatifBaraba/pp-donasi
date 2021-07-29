@@ -5,7 +5,7 @@ import { Row, Col, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import './dashboard.css'
 
-const content = (props) => {
+const Content = (props) => {
 
   const datas = props.data
 
@@ -85,4 +85,4 @@ Anak ke-3 mereka bernama Arsy. Umurnya sudah 1 tahun 7 bulan tapi belum bisa mer
   );
 };
 
-export default content;
+export default Content;
