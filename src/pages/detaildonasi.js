@@ -74,15 +74,15 @@ const DetailDonasi = (props) => {
             </b>
           </i>
         </Col>
-        <Col md={8}>
+        {/* <Col md={8}>
           <ProgressBar
             animated
             now={now}
             label={`${now}%`}
             className="donasi-progressbar"
           />
-        </Col>
-        <Col md={4}>
+        </Col> */}
+        {/* <Col md={4}>
           dari target{" "}
           <i>
             <b>
@@ -94,7 +94,7 @@ const DetailDonasi = (props) => {
               />
             </b>
           </i>{" "}
-        </Col>
+        </Col> */}
       </Row>
       <Row className="my-4 mx-2 text-justify">
         <Col>{data.description}</Col>
@@ -151,14 +151,14 @@ const DetailDonasi = (props) => {
                   )}
                   <Card.Body>
                     <Card.Title>{data.title}</Card.Title>
-                    <Card.Text>
+                    {/* <Card.Text>
                       <ProgressBar
                         animated
                         now={now}
                         label={`${now}%`}
                         className="donasi-progressbar"
                       />
-                    </Card.Text>
+                    </Card.Text> */}
                     <Card.Text>
                       <div className="dana-terkumpul">
                         Rp 3.170.000 terkumpul dari Rp 150.000.000

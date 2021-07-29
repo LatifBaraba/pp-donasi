@@ -79,14 +79,14 @@ const ListProgram = () => {
                   <Card.Title>{data.title}</Card.Title>
                   {/* <Card.Text>{data.description}</Card.Text> */}
                   {/* <Link to="/donasi-detail2"><Button>Donasi Sekarang</Button></Link> */}
-                  <Card.Text>
+                  {/* <Card.Text>
                     <ProgressBar
                       animated
                       now={now}
                       label={`${now}%`}
                       className="donasi-progressbar"
                     />
-                  </Card.Text>
+                  </Card.Text> */}
                   <Card.Text>
                     <div className="dana-terkumpul">
                       Rp 3.170.000 terkumpul dari Rp 150.000.000
