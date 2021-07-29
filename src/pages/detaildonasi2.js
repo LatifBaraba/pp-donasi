@@ -3,9 +3,11 @@ import { Row, Col, Carousel, ProgressBar, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailDonasi } from "../Redux/detaildonasi/action";
-import { fetchDonasilist } from "../Redux/donasilist/actions";
+import { fetchPageDonasi } from "../Redux/pagelistdonasi/actions";
 import Moment from "react-moment";
 import NumberFormat from "react-number-format";
+import CarouselCard from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const DetailDonasi2 = (props) => {
   const [now, setNow] = useState(45);
@@ -21,57 +23,35 @@ const DetailDonasi2 = (props) => {
   useEffect(() => {
     let token = localStorage.getItem("token");
     dispatch(fetchDetailDonasi(token, donasi.id));
-    dispatch(fetchDonasilist(token));
+    dispatch(fetchPageDonasi(token));
   }, []);
 
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
-  const donasilistData = useSelector(
-    (state) => state.donasilistReducer.donasilist
-  );
-  // console.log(data, "asup pron en");
-  // console.log(donasilistData, "asup ");
+  const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
 
   return (
     <div className="container detail-program">
-      {/* <Row className="mt-3 p-2">
-        <Carousel>
-          
-          <Carousel.Item>
-          
-            {data.thumbnail_image_url ? (
-              <Card.Img
-                variant="top"
-                src={data.thumbnail_image_url}
-                style={{ maxWidth: "100%" }}
-              />
-            ) : (
-              <Card.Img
-                variant="top"
-                src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg"
-                alt=""
-                style={{ maxWidth: "100%" }}
-              />
-            )}
-            <Carousel.Caption>
-              <h3>{data.title}</h3>
-            </Carousel.Caption>
-          </Carousel.Item>
-          
-        </Carousel>
-      </Row>
-      <Row className="mt-5 justify-content-center">
-        <Col md={8} className="text-justify">
-          {data.description}
-        </Col>
-      </Row> */}
-      {/* <div className="container detail-program"> */}
       <Row className="mt-4 text-center justify-content-center">
         <Col>
-          <img
-            src={data.thumbnail_image_url}
-            alt=""
-            style={{ width: "100%" }}
-          />
+          <img src={data.thumbnail_image_url} alt="" style={{ width: "50%" }} />
         </Col>
       </Row>
       <Row className="mt-3 mx-2 text-center justify-content-center">
@@ -102,13 +82,6 @@ const DetailDonasi2 = (props) => {
             label={`${now}%`}
             className="donasi-progressbar"
           />
-          {/* <ProgressBar
-              animated
-              now={now}
-              label={`${now}%`}
-              srOnly
-              className="donasi-progressbar"
-            /> */}
         </Col>
         <Col md={4}>
           dari target{" "}
@@ -127,34 +100,19 @@ const DetailDonasi2 = (props) => {
       <Row className="my-4 mx-2 text-justify">
         <Col>{data.description}</Col>
       </Row>
-      {/* <Row className="my-2 mx-2 text-justify">
-                <Col>
-                    <h5>Ucapan Dan Doa</h5>
-                </Col>
-            </Row> */}
-      {/* <Row className="my-2 mx-2 text-justify">
-                <Col>
-                    Arief Ramdhani - "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                </Col>
-            </Row> */}
-      {/* </div> */}
+
       <Row className="mt-4 text-center justify-content-center">
         <Col md={3}>
-          {/* <Button variant="primary">Donasi Sekarang</Button> */}
           <Link
             to={{
               pathname: "/order/" + data.id,
-              // state: { data: donasi.id },
+              state: { data: donasi },
             }}
             className="mr-2"
           >
             <Button variant="primary">Donasi Sekarang</Button>
-            {/* <Edit className="edit-berita" style={{ cursor: "pointer" }} /> */}
           </Link>
         </Col>
-        {/* <Col md={3}>
-          <Button variant="secondary">Donasi Bulan ini</Button>
-        </Col> */}
         {data.ayobantu_link !== "" && (
           <Col md={3}>
             <a
@@ -195,111 +153,55 @@ const DetailDonasi2 = (props) => {
           <h3>Kamu juga bisa berdonasi yang lain :</h3>
         </Col>
       </Row>
-      {donasilistData.map((data, idx) => (
-        <Row>
-          {data.id !== donasi.id ? (
-            <Col md={3} key={idx}>
-              <Card>
-                {data.thumbnail_image_url ? (
-                  <Card.Img variant="top" src={data.thumbnail_image_url} />
-                ) : (
-                  <Card.Img
-                    variant="top"
-                    src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg"
-                    alt=""
-                  />
-                )}
-                <Card.Body>
-                  <Card.Title>{data.title}</Card.Title>                  
-                  <Card.Text>
-                    <ProgressBar
-                      animated
-                      now={now}
-                      label={`${now}%`}
-                      className="donasi-progressbar"
+      <CarouselCard responsive={responsive}>
+        {datas.map((data, idx) => (
+          <div>
+            {data.id !== donasi.id ? (
+              <Col key={idx}>
+                <Card>
+                  {data.thumbnail_image_url ? (
+                    <Card.Img variant="top" src={data.thumbnail_image_url} />
+                  ) : (
+                    <Card.Img
+                      variant="top"
+                      src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg"
+                      alt=""
                     />
-                  </Card.Text>
-                  <Card.Text>
-                    <div className="dana-terkumpul">
-                      Rp 3.170.000 terkumpul dari Rp 150.000.000
-                    </div>
-                  </Card.Text>
-                  <Card.Text>Nama Penggalang Dana</Card.Text>
+                  )}
+                  <Card.Body>
+                    <Card.Title>{data.title}</Card.Title>
+                    <Card.Text>
+                      <ProgressBar
+                        animated
+                        now={now}
+                        label={`${now}%`}
+                        className="donasi-progressbar"
+                      />
+                    </Card.Text>
+                    <Card.Text>
+                      <div className="dana-terkumpul">
+                        Rp 3.170.000 terkumpul dari Rp 150.000.000
+                      </div>
+                    </Card.Text>
+                    <Card.Text>Nama Penggalang Dana</Card.Text>
 
-                  <Link
-                    to={{
-                      pathname: "/donasi-detail2/" + data.id,
-                      state: { donasi: data },
-                    }}
-                  >
-                    <Button onClick={refresh}>Donasi Sekarang</Button>
-                  </Link>                  
-                </Card.Body>
-              </Card>
-            </Col>
-          ) : (
-            <Col></Col>
-          )}
-        </Row>
-      ))}
-      {/* <Row className="mt-5">
-        <Col md={4}>
-          <Card className="bg-dark text-white">
-            <Card.Img
-              src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg"
-              alt="Card image"
-            />
-            <Card.ImgOverlay>
-              <Card.Title>Card title</Card.Title>
-              <Card.Text>
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </Card.Text>
-              <Card.Text>Last updated 3 mins ago</Card.Text>
-              <Button variant="primary" className="button-donasi">Primary</Button>
-            </Card.ImgOverlay>
-          </Card>
-        </Col>
-        <Col md={4}>
-          <Card className="bg-dark text-white">
-            <Card.Img
-              src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg"
-              alt="Card image"
-            />
-            <Card.ImgOverlay>
-              <Card.Title>Card title</Card.Title>
-              <Card.Text>
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </Card.Text>
-              <Card.Text>Last updated 3 mins ago</Card.Text>
-              <Button variant="primary" className="button-donasi">Primary</Button>
-            </Card.ImgOverlay>
-          </Card>
-        </Col>
-        <Col md={4}>
-          <Card className="bg-dark text-white">
-            <Card.Img
-              src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg"
-              alt="Card image"
-            />
-            <Card.ImgOverlay>
-              <Card.Title>Card title</Card.Title>
-              <Card.Text>
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </Card.Text>
-              <Card.Text>Last updated 3 mins ago</Card.Text>
-              <Button variant="primary" className="button-donasi">Primary</Button>
-            </Card.ImgOverlay>
-          </Card>
-        </Col>
-      </Row> */}
-
-      {/* <Row className="text-center justify-content-center"></Row> */}
+                    <Link
+                      to={{
+                        pathname: "/donasi-detail2/" + data.id,
+                        state: { donasi: data },
+                      }}
+                    >
+                      <Button onClick={refresh}>Donasi Sekarang</Button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ) : (
+              <Col></Col>
+            )}
+          </div>
+        ))}
+      </CarouselCard>
     </div>
   );
 };

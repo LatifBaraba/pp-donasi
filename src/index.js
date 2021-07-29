@@ -48,7 +48,7 @@ ReactDOM.render(
             <Route path="/checkout" exact component={Checkout}/>
             <Route path="/list-donasi" exact component={ListDonasiSatu}/>
             <Route path="/list-donasi-dua" exact component={ListDonasiDua}/>
-            <Route path="/donasi-detail" exact component={DonasiDetail}/>
+            <Route path="/donasi-detail/:id" exact component={DonasiDetail}/>
             <Route path="/donasi-detail2/:id" exact component={DonasiDetail2}/>
             <Route path="/rutin" exact component={Rutin}/>
           </Layout>

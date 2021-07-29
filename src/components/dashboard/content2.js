@@ -21,7 +21,7 @@ const Content2 = (props) => {
       {/* {data.thumbnail_image_url ? <img src={data.thumbnail_image_url} alt="" /> : <img src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg" alt="" />} */}
       <Row className="content-donasi">
         {datas.map((data, idx) => (
-          <Col md={4} key={idx}>
+          <Col md={3} key={idx}>
             <Card>
               {data.thumbnail_image_url ? (
                 <Card.Img variant="top" src={data.thumbnail_image_url} />

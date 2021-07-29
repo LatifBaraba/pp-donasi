@@ -32,6 +32,7 @@ export function fetchLogin(token, payload) {
         dispatch(loginSuccess(res));
         toast.success("Login Success !")
         localStorage.setItem("token", token)
+        localStorage.setItem("username", payload.username)
         history.push("/dashboard")
     })
     .catch(err => {

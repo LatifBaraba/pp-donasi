@@ -41,7 +41,7 @@ const ListProgram = () => {
             <Row className="mt-3">
               <Col className="text-right">
                 <Link to={{
-                  pathname: "/donasi-detail",
+                  pathname: "/donasi-detail/" + data.id,
                   state: { donasi: data }
                 }}><Button>Donasi Sekarang</Button></Link>
                 {/* <Button>Daftar Sekarang</Button> */}

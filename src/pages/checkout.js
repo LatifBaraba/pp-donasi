@@ -41,7 +41,7 @@ const Checkout = () => {
                     </span>
                 </Col>
             </Row>
-            <Row className="mt-5">
+            {/* <Row className="mt-5">
                 <Col><h5 className="text-center">Program Donasi Lainnya</h5></Col>
             </Row>
             <Row className="mt-3">
@@ -89,7 +89,7 @@ const Checkout = () => {
                         
                     </CardDeck>
                 </Col>
-            </Row>
+            </Row> */}
         </div>
     )
 }
