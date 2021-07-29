@@ -91,22 +91,25 @@ const Order = (props) => {
                 onChange={(e) => setNominal(e.target.value)}
               />
             </Form.Group>
-            <Form.Group controlId="formNominal">
+            <Form.Group controlId="formTipeBayar">
               <Form.Control
+                required
                 as="select"
-                custom
+                type="select"
                 onChange={(e) => setTipeBayar(e.target.value)}      
-                {...register("tipebayar", {
-                  required: true,
-                })}          
+                // {...register("tipebayar", {
+                //   required: true,
+                // })}          
+                
               >
                 <option value="">Pilih Pembayaran</option>
                 <option value="mandiri">Rekening Mandiri</option>
                 <option value="qris">QRIS</option>
               </Form.Control>
+              
             </Form.Group>
           </Col>
-        </Row>        
+        </Row>                
         {tipebayar === "mandiri" ? (
           <Row className=" mt-2 justify-content-center">
             <Col md={8}>
