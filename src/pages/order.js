@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import { Row, Col, Form, Button, Dropdown, MenuItem } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import { fetchDetailDonasi } from "../Redux/detaildonasi/action";
 import { Link } from "react-router-dom";
@@ -20,6 +20,7 @@ const Order = (props) => {
 
   const [nominal, setNominal] = useState("");
   const [ucapan, setUcapan] = useState("");
+  const [tipebayar, setTipeBayar] = useState("");
 
   const donasi = props.location.state.data;
   console.log(donasi);
@@ -50,6 +51,7 @@ const Order = (props) => {
         nominal: nominal,
         ucapan: ucapan,
         username: username,
+        tipebayar: tipebayar,
       };
       payload = Object.assign(data, datax);
       dispatch(fetchOrder(token, payload));
@@ -89,45 +91,45 @@ const Order = (props) => {
                 onChange={(e) => setNominal(e.target.value)}
               />
             </Form.Group>
+            <Form.Group controlId="formNominal">
+              <Form.Control
+                as="select"
+                custom
+                onChange={(e) => setTipeBayar(e.target.value)}      
+                {...register("tipebayar", {
+                  required: true,
+                })}          
+              >
+                <option value="">Pilih Pembayaran</option>
+                <option value="mandiri">Rekening Mandiri</option>
+                <option value="qris">QRIS</option>
+              </Form.Control>
+            </Form.Group>
           </Col>
-        </Row>
-        <Row className=" mt-5 justify-content-center">
-          <Col md={8}>
-            <b>Kirim Pembayaran ke</b>
-          </Col>
-        </Row>
-        <Row className=" mt-2 justify-content-center">
-          {/* <Col md={8}>
-          <Form.Check
-            inline
-            label="BNI"
-            name="group1"
-            type="radio"
-            id={`inline-type-1`}
-          />
-          <Form.Check
-            inline
-            label="BCA"
-            name="group1"
-            type="radio"
-            id={`inline-type-2`}
-          />
-        </Col> */}
-          <Col md={8} className="donasi-amount-content">
-            Rekening Mandiri Pemuda Peduli <br />
-            <b>132-00-1858989-6 </b>
-            <br />
-            Yayasan Pemuda Peduli
-          </Col>
-        </Row>
+        </Row>        
+        {tipebayar === "mandiri" ? (
+          <Row className=" mt-2 justify-content-center">
+            <Col md={8}>
+              <b>Silahkan Transfer Donasi ke</b>
+            </Col>
+            <Col md={8} className="donasi-amount-content">
+              Rekening Mandiri Pemuda Peduli <br />
+              <b>132-00-1858989-6 </b>
+              <br />
+              Yayasan Pemuda Peduli
+            </Col>
+          </Row>
+        ):(<Row></Row>)} 
+        {tipebayar === 'qris' ? (
+          <Row className=" mt-5 justify-content-center">
+            <Col md={8}>
+              <b>QRIS</b>
+            </Col>
+          </Row>
+        ): (<Row></Row>)}
+
         <Row className="mt-5 justify-content-center donasi-amount">
           <Col md={8} className="donasi-amount-content">
-            {/* <Form.Group controlId="formBasicEmail">
-              <Form.Label>
-                Tuliskan Ucapan dan Doa Untuk Penerima Manfaat
-              </Form.Label>
-              <Form.Control type="text" placeholder="Enter Text" />
-            </Form.Group> */}
             <Form.Group controlId="formUcapan">
               <Form.Label>
                 Tuliskan Ucapan dan Doa Untuk Penerima Manfaat

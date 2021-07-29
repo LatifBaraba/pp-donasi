@@ -12,6 +12,7 @@ import { createStore, applyMiddleware} from 'redux'
 import Dashboard from './pages/dashboard'
 import Order from './pages/order'
 import Checkout from './pages/checkout'
+import Confirm from './pages/confirm'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import Forgot from './pages/auth/Forgot'
@@ -51,6 +52,7 @@ ReactDOM.render(
             <Route path="/donasi-detail/:id" exact component={DonasiDetail}/>
             <Route path="/donasi-detail2/:id" exact component={DonasiDetail2}/>
             <Route path="/rutin" exact component={Rutin}/>
+            <Route path="/confirm" exact component={Confirm}/>
           </Layout>
           {/* End Main Route */}
         </Switch>

@@ -29,7 +29,7 @@ export function fetchOrder(token, payload) {
     //     dispatch(orderSuccess(res));
     //     toast.success("Order Success !")
     //     localStorage.setItem("token", token)
-    //     history.push("/checkout")
+        history.push("/confirm")
     // })
     // .catch(err => {
     //     if (err.response.status === 400) {
