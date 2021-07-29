@@ -35,7 +35,7 @@ const DetailDonasi = (props) => {
         </Col>
       </Row>
       <Row className="mt-3 mx-2">
-        <Col md={8}>
+        {/* <Col md={8}>
           <ProgressBar
             animated
             now={now}
@@ -49,7 +49,7 @@ const DetailDonasi = (props) => {
             srOnly
             className="donasi-progressbar"
           />
-        </Col>
+        </Col> */}
         <Col md={4}>
           {data.valid_from} - {data.valid_to}
         </Col>

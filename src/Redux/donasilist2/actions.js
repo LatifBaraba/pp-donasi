@@ -43,10 +43,10 @@ export function fetchDonasilist2(token) {
         .catch(err => {
             dispatch(getDonasilist2Failure(err));
             console.log(err)
-            if(err.response.status === 401){
-                localStorage.removeItem("token");
-                history.push('/login')
-            }
+            // if(err.response.status === 401){
+            //     localStorage.removeItem("token");
+            //     history.push('/login')
+            // }
         });
     };
 };

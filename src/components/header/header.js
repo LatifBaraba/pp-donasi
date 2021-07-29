@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Nav, Navbar, Dropdown, DropdownButton} from 'react-bootstrap'
+import { Nav, Navbar, Dropdown, DropdownButton } from 'react-bootstrap'
 import { LogOutOutline, PencilOutline } from 'react-ionicons'
 import { Link } from 'react-router-dom';
 
@@ -25,11 +25,19 @@ const header = () => {
                                 <PencilOutline color={'#00000'} height="15px" width="15px" />
                                 &nbsp; Edit Profile
                                 </Dropdown.Item>
+                            <Dropdown.Item eventKey="4">
+                                <Link to="/history">
+                                    <LogOutOutline color={'#00000'} height="15px" width="15px" />
+                                &nbsp; History
+                            </Link>
+                            </Dropdown.Item>
                             <Dropdown.Divider />
+                          
                             <Dropdown.Item eventKey="4">
                                 <LogOutOutline color={'#00000'} height="15px" width="15px" />
                                 &nbsp; Log Out
                             </Dropdown.Item>
+
                         </DropdownButton>
                     </Nav.Link>
                 </Nav>
