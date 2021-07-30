@@ -168,7 +168,7 @@ const DetailDonasi = (props) => {
 
                     <Link
                       to={{
-                        pathname: "/donasi-detail2/" + data.id,
+                        pathname: "/donasi-detail/" + data.id,
                         state: { donasi: data },
                       }}
                     >
