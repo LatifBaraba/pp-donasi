@@ -126,7 +126,7 @@ const Order = (props) => {
         {tipebayar === 'qris' ? (
           <Row className=" mt-5 justify-content-center">
             <Col md={8}>
-              <b>QRIS</b>
+            <img src={data.qris_image_url} alt="" style={{ width: "50%" }} />            
             </Col>
           </Row>
         ): (<Row></Row>)}
