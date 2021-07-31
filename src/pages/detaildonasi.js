@@ -159,16 +159,16 @@ const DetailDonasi = (props) => {
                         className="donasi-progressbar"
                       />
                     </Card.Text> */}
-                    <Card.Text>
+                    {/* <Card.Text>
                       <div className="dana-terkumpul">
                         Rp 3.170.000 terkumpul dari Rp 150.000.000
                       </div>
-                    </Card.Text>
+                    </Card.Text> */}
                     <Card.Text>Nama Penggalang Dana</Card.Text>
 
                     <Link
                       to={{
-                        pathname: "/donasi-detail2/" + data.id,
+                        pathname: "/donasi-detail/" + data.id,
                         state: { donasi: data },
                       }}
                     >
