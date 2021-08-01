@@ -10,6 +10,7 @@ import pagedonasiReducer from "../Redux/pagelistdonasi/reducer";
 import pagedonasi2Reducer from "../Redux/pagelistdonasi2/reducer";
 import tokenReducer from "../Redux/token/reducer";
 import orderReducer from "../Redux/order/reducer";
+import orderRutinReducer from "../Redux/order-rutin/reducer";
 import confirmReducer from "../Redux/confirm/reducer";
 import donasiDetailReducer from '../Redux/detaildonasi/reducer'
 import historyReducer from '../Redux/history/reducer'
@@ -26,6 +27,7 @@ const reducers = combineReducers({
     pagedonasi2Reducer,
     tokenReducer,
     orderReducer,
+    orderRutinReducer,
     confirmReducer,
     donasiDetailReducer,
     historyReducer

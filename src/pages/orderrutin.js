@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useForm } from "react-hook-form";
-import { fetchOrder } from "../Redux/order/actions";
+import { fetchOrderRutin } from "../Redux/order-rutin/actions";
 import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
 
 const Order = (props) => {
@@ -32,7 +32,7 @@ const Order = (props) => {
   }, []);
 
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
-  console.log(data)
+
   const onSubmit = (datas) => {
     let datax = [];    
     if (datas === "") {
@@ -41,13 +41,13 @@ const Order = (props) => {
       let username = localStorage.getItem("username");
 
       datax = {
-        is_rutin:false,
-        id_pp_cp_program_donasi: data.id,
-        id_pp_cp_program_donasi_rutin: "",
+        is_rutin:true,
+        id_pp_cp_program_donasi: "",
+        id_pp_cp_program_donasi_rutin: data.id,
         amount: parseInt(nominal),
         payment_method: tipebayar,
-      };      
-      dispatch(fetchOrder(token, datax));
+      };            
+      dispatch(fetchOrderRutin(token, datax));
     }
   };
 
@@ -55,9 +55,9 @@ const Order = (props) => {
     <div className="container order">
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Row className="mt-3 justify-content-center">
-          <Col md={8}>
-            <h2>Halo Kak Alwy</h2>
-          </Col>
+          {/* <Col md={8}>
+            <h2>Halo</h2>
+          </Col> */}
         </Row>
         <Row className="mt-5 justify-content-center">
           <Col md={8}>
@@ -118,8 +118,7 @@ const Order = (props) => {
         ):(<Row></Row>)} 
         {tipebayar === 'Qris' ? (
           <Row className=" mt-5 justify-content-center">
-            <Col md={8}>
-              {data}
+            <Col md={8}>              
             <img src={data.qris_image_url} alt="" style={{ width: "50%" }} />            
             </Col>
           </Row>
