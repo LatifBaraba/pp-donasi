@@ -1,7 +1,7 @@
 import {
-  LOGIN,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
+  ORDER,
+  ORDER_SUCCESS,
+  ORDER_FAILURE,
 } from "../actionTypes";
 
 const initialState = {
@@ -12,18 +12,18 @@ const initialState = {
 
 const orderReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN:
+    case ORDER:
       return {
         ...state,
         loading: true,
       };
-    case LOGIN_SUCCESS:
+    case ORDER_SUCCESS:
       return {
         ...state,
         loading: false,
         data: action.payload,
       };
-    case LOGIN_FAILURE:
+    case ORDER_FAILURE:
       return {
         ...state,
         loading: false,

@@ -59,6 +59,7 @@ ReactDOM.render(
           <Route path="/detail/:id" exact component={Detail} />
 
 
+          <Route path="/confirm" exact component={Confirm}/>
         </Layout>
         {/* End Main Route */}
       </Switch>

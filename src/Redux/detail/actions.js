@@ -8,7 +8,7 @@ import {
 import axios from 'axios';
 
 const URL = `${process.env.REACT_APP_BASE_URL}/transaction/`;
-const URL_DONASI = `${process.env.REACT_APP_BASE_URL}/program-donasi/`;
+const URL_DONASI = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/`;
 
 
 export function fetchDetail(token, id) {
@@ -21,9 +21,10 @@ export function fetchDetail(token, id) {
             }
         })
             .then(res => {
-                console.log(res.data)
                 dispatch(getDetailSuccess(res.data.data));
-                console.log(res.data.data, 'detail')
+                if (res.data.data.is_rutin === true) {
+                    dispatch(fetchDonationDetail(token, res.data.data.id_pp_cp_program_donasi_rutin))
+                }
             })
             .catch(err => {
                 console.log(err)
@@ -42,9 +43,7 @@ export function fetchDonationDetail(token, id) {
             }
         })
             .then(res => {
-                console.log(res.data)
                 dispatch(getDonationDetailSuccess(res.data.data));
-                console.log(res.data.data, 'detaildonasi_donasi')
             })
             .catch(err => {
                 console.log(err)

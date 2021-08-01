@@ -3,7 +3,7 @@ import { Button, Card, Row, Container, Form, Col } from "react-bootstrap";
 
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { fetchAddConfirm } from "../Redux/confirm/action";
+import { fetchAddConfirm, fetchConfirmList } from "../Redux/confirm/action";
 import { fetchToken } from "../Redux/token/action";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -22,18 +22,23 @@ const Confirm = () => {
   const [tanggalbayar, setTanggalBayar] = useState("");
   const [nominal, setNominal] = useState("");
   const [bukti, setBukti] = useState("");
+  const [idtransaction, setIdtransaction] = useState("");
 
   useEffect(() => {
-    dispatch(fetchToken());
+    let token = localStorage.getItem("token")        
+    dispatch(fetchConfirmList(token));
   }, []);
 
   const token = useSelector((state) => state.tokenReducer.token.token);
+  const confirmlist = useSelector((state) => state.confirmReducer.confirm);
+
   const onSubmit = (data) => {
 
+    let token = localStorage.getItem("token")    
     if (data !== '') {
         uploadImage(bukti).then(message => {
-            const newIcon = message.response.data.url;
-            dispatch(fetchAddConfirm(token, tipebayar, nama, norekening, tanggalbayar, nominal, newIcon))
+            const bukti = message.response.data.url;
+            dispatch(fetchAddConfirm(token, idtransaction, bukti))
         })
         .catch(error => {
             ToastContainer.error("Upload Image Failed !");
@@ -55,71 +60,24 @@ const Confirm = () => {
       <hr />
       <Row className="justify-content-md-center">
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Form.Group controlId="formNominal">
-            <Form.Control
-              as="select"
-              custom
-              onChange={(e) => setTipebayar(e.target.value)}
-              {...register("tipebayar", {
-                required: true,
-              })}
-            >
-              <option value="mandiri">Rekening Mandiri</option>
-              <option value="qris">QRIS</option>
-            </Form.Control>
-          </Form.Group>
+            <Form.Group controlId="formIdtransaction">
+              <Form.Label>Pilih Donasi</Form.Label>
+              <Form.Control
+                required
+                as="select"
+                type="select"
+                onChange={(e) => setIdtransaction(e.target.value)}      
+              
+              >
+               <option value="">Pilih Donasi</option>
+                {confirmlist.map((confirm, index) => (
+                    <option key={index} value={confirm.id}>{confirm.id + " -- " + confirm.donasi_title}</option>                    
+                ))}
+              </Form.Control>
+              
+            </Form.Group>
 
-          <Form.Group controlId="formBasicNama">
-            <Form.Control
-              placeholder="Nama"
-              {...register("nama", {
-                required: true,
-              })}
-              onChange={(e) => setNama(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicNoRekening">
-            <Form.Control
-              placeholder="No Rekening"
-              {...register("no_rekening", {
-                required: true,
-              })}
-              onChange={(e) => setNorekening(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicTangalBayar">
-            <Form.Control
-              placeholder="Tanggal Bayar"
-              {...register("tanggabayar", {
-                required: true,
-              })}
-              onChange={(e) => setTanggalBayar(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicNominal">
-            <Form.Control
-              type="number"
-              placeholder="Nominal"
-              {...register("nominal", {
-                required: true,               
-              })}
-              onChange={(e) => setNominal(e.target.value)}
-            />
-          </Form.Group>
-
-          {/* <Form.Group controlId="formBasicNoHandphone">
-            <Form.Control
-              placeholder="No Handphone"
-              type="number"
-              {...register("no_hp", {
-                required: true,
-              })}
-              onChange={(e) => setNoHp(e.target.value)}
-            />
-          </Form.Group> */}
+            <Form.Label>Upload Bukti Bayar</Form.Label>
           <input className="form-control" type="file" accept="image/*" onChange={(e) => setBukti(e.target.files[0])}/>
           <Form.Group controlId="formBasicCheckbox"></Form.Group>
           <ToastContainer autoClose={2000} />
