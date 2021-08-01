@@ -2,8 +2,17 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Nav, Navbar, Dropdown, DropdownButton } from 'react-bootstrap'
 import { LogOutOutline, PencilOutline } from 'react-ionicons'
 import { Link } from 'react-router-dom';
+import { fetchLogout } from "../../Redux/auth/login/actions";
+import { useDispatch } from 'react-redux';
 
-const header = () => {
+const Header = () => {
+    const dispatch = useDispatch();
+    const token = localStorage.getItem('token')
+    const logout = () => {
+        // history.push(`${process.env.PUBLIC_URL}/dashboard`);
+        // console.log(token)
+        dispatch(fetchLogout(token))
+    }
 
     return (
         <Navbar sticky="top" expand="lg">
@@ -35,7 +44,7 @@ const header = () => {
                           
                             <Dropdown.Item eventKey="4">
                                 <LogOutOutline color={'#00000'} height="15px" width="15px" />
-                                &nbsp; Log Out
+                                &nbsp; <a onClick={() => {logout()}}>Log out</a>
                             </Dropdown.Item>
 
                         </DropdownButton>
@@ -46,4 +55,4 @@ const header = () => {
     )
 }
 
-export default header
+export default Header

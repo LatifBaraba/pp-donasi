@@ -164,7 +164,7 @@ const DetailDonasi = (props) => {
                         Rp 3.170.000 terkumpul dari Rp 150.000.000
                       </div>
                     </Card.Text> */}
-                    <Card.Text>Nama Penggalang Dana</Card.Text>
+                    {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
 
                     <Link
                       to={{
