@@ -16,6 +16,10 @@ export function fetchPagedonasi2(token) {
                 offset: "0",
                 filters: [
                     {
+                        field: "is_show",
+                        keyword: "true"
+                    },
+                    {
                         field: "is_deleted",
                         keyword: "false"
                     }

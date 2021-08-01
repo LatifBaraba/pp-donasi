@@ -8,6 +8,7 @@ import Moment from "react-moment";
 import NumberFormat from "react-number-format";
 import CarouselCard from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import moment from 'moment/moment.js';
 
 const DetailDonasi2 = (props) => {
   const [now, setNow] = useState(45);
@@ -65,13 +66,13 @@ const DetailDonasi2 = (props) => {
           Periode Donasi dari{" "}
           <i>
             <b>
-              <Moment format="YYYY-MM-DD">{data.valid_from}</Moment>
+              <Moment format="YYYY-MM-DD hh:mm:ss">{moment(data.valid_from).format('YYYY-MM-DDTHH:mm:ss')}</Moment>
             </b>
           </i>{" "}
           -{" "}
           <i>
             <b>
-              <Moment format="YYYY-MM-DD">{data.valid_to}</Moment>
+              <Moment format="YYYY-MM-DD hh:mm:ss">{moment(data.valid_to).format('YYYY-MM-DDTHH:mm:ss')}</Moment>
             </b>
           </i>
         </Col>
@@ -141,13 +142,13 @@ const DetailDonasi2 = (props) => {
           <h5>Ucapan Dan Doa</h5>
         </Col>
       </Row>
-      <Row className="text-justify justify-content-center">
+      {/* <Row className="text-justify justify-content-center">
         <Col md={8}>
           Arief Ramdhani - "Contrary to popular belief, Lorem Ipsum is not
           simply random text. It has roots in a piece of classical Latin
           literature from 45 BC, making it over 2000 years old."
         </Col>
-      </Row>
+      </Row> */}
       <Row className="mt-5 text-justify">
         <Col md={8}>
           <h3>Kamu juga bisa berdonasi yang lain :</h3>
@@ -155,8 +156,6 @@ const DetailDonasi2 = (props) => {
       </Row>
       <CarouselCard responsive={responsive}>
         {datas.map((data, idx) => (
-          <div>
-            {data.id !== donasi.id ? (
               <Col key={idx}>
                 <Card>
                   {data.thumbnail_image_url ? (
@@ -196,10 +195,6 @@ const DetailDonasi2 = (props) => {
                   </Card.Body>
                 </Card>
               </Col>
-            ) : (
-              <Col></Col>
-            )}
-          </div>
         ))}
       </CarouselCard>
     </div>

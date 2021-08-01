@@ -9,6 +9,8 @@ import donasilist2Reducer from "../Redux/donasilist2/reducer";
 import pagedonasiReducer from "../Redux/pagelistdonasi/reducer";
 import pagedonasi2Reducer from "../Redux/pagelistdonasi2/reducer";
 import tokenReducer from "../Redux/token/reducer";
+import orderReducer from "../Redux/order/reducer";
+import confirmReducer from "../Redux/confirm/reducer";
 import donasiDetailReducer from '../Redux/detaildonasi/reducer'
 
 const reducers = combineReducers({
@@ -22,6 +24,8 @@ const reducers = combineReducers({
     pagedonasiReducer,
     pagedonasi2Reducer,
     tokenReducer,
+    orderReducer,
+    confirmReducer,
     donasiDetailReducer
 })
 

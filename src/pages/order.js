@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useForm } from "react-hook-form";
 import { fetchOrder } from "../Redux/order/actions";
-import { fetchToken } from "../Redux/token/action";
+import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
 
 const Order = (props) => {
   const { register, handleSubmit, errors } = useForm();
@@ -25,36 +25,29 @@ const Order = (props) => {
   const donasi = props.location.state.data;
   console.log(donasi);
 
+  let token = localStorage.getItem("token");    
   const dispatch = useDispatch();
   useEffect(() => {
-    let token = localStorage.getItem("token");
-    dispatch(fetchToken());
     dispatch(fetchDetailDonasi(token, donasi.id));
-    // dispatch(fetchDonasilist(token));
   }, []);
 
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
-  const token = useSelector((state) => state.tokenReducer.token.token);
-  // const donasilistData = useSelector(
-  //   (state) => state.donasilistReducer.donasilist
-  // );
-
+  
   const onSubmit = (datas) => {
-    let payload = [];
-    let datax = [];
+    let datax = [];    
     if (datas === "") {
       errors.showMessage();
     } else {
       let username = localStorage.getItem("username");
 
       datax = {
-        nominal: nominal,
-        ucapan: ucapan,
-        username: username,
-        tipebayar: tipebayar,
-      };
-      payload = Object.assign(data, datax);
-      dispatch(fetchOrder(token, payload));
+        is_rutin:false,
+        id_pp_cp_program_donasi: data.id,
+        id_pp_cp_program_donasi_rutin: "",
+        amount: parseInt(nominal),
+        payment_method: tipebayar,
+      };      
+      dispatch(fetchOrder(token, datax));
     }
   };
 
@@ -103,14 +96,14 @@ const Order = (props) => {
                 
               >
                 <option value="">Pilih Pembayaran</option>
-                <option value="mandiri">Rekening Mandiri</option>
-                <option value="qris">QRIS</option>
+                <option value="Manual">Rekening Mandiri</option>
+                <option value="Qris">QRIS</option>
               </Form.Control>
               
             </Form.Group>
           </Col>
         </Row>                
-        {tipebayar === "mandiri" ? (
+        {tipebayar === "Manual" ? (
           <Row className=" mt-2 justify-content-center">
             <Col md={8}>
               <b>Silahkan Transfer Donasi ke</b>
@@ -123,7 +116,7 @@ const Order = (props) => {
             </Col>
           </Row>
         ):(<Row></Row>)} 
-        {tipebayar === 'qris' ? (
+        {tipebayar === 'Qris' ? (
           <Row className=" mt-5 justify-content-center">
             <Col md={8}>
             <img src={data.qris_image_url} alt="" style={{ width: "50%" }} />            

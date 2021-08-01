@@ -118,13 +118,13 @@ const DetailDonasi = (props) => {
           <h5>Ucapan Dan Doa</h5>
         </Col>
       </Row>
-      <Row className="text-justify justify-content-center">
+      {/* <Row className="text-justify justify-content-center">
         <Col md={8}>
           Arief Ramdhani - "Contrary to popular belief, Lorem Ipsum is not
           simply random text. It has roots in a piece of classical Latin
           literature from 45 BC, making it over 2000 years old."
         </Col>
-      </Row>
+      </Row> */}
       <Row className="mt-5 text-justify">
         <Col md={8}>
           <h3>Kamu juga bisa berdonasi yang lain :</h3>
