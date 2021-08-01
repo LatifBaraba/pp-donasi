@@ -59,7 +59,7 @@ const DetailDonasi = (props) => {
         </Col>
       </Row>
       <Row className="mt-3 mx-2 text-center justify-content-center">
-        <Col md={8}>
+        {/* <Col md={8}>
           Dana Terkumpul <h2>Rp. 10.430.000</h2>
           Periode Donasi dari{" "}
           <i>
@@ -73,7 +73,7 @@ const DetailDonasi = (props) => {
               <Moment format="YYYY-MM-DD">{data.valid_to}</Moment>
             </b>
           </i>
-        </Col>
+        </Col> */}
         {/* <Col md={8}>
           <ProgressBar
             animated
@@ -104,7 +104,7 @@ const DetailDonasi = (props) => {
         <Col md={3}>
           <Link
             to={{
-              pathname: "/order/" + data.id,
+              pathname: "/order-rutin/" + data.id,
               state: { data: donasi },
             }}
             className="mr-2"
@@ -132,26 +132,24 @@ const DetailDonasi = (props) => {
       </Row>
       <Carousel responsive={responsive}>
         {datas.map((data, idx) => (
-          <div>            
-            {data.id !== donasi.id ? (
-              <Col key={idx}>
-                <Card>
-                  {data.thumbnail_image_url ? (
-                    <Card.Img
-                      variant="top"
-                      src={data.thumbnail_image_url}
-                      style={{ width: "50%" }}
-                    />
-                  ) : (
-                    <Card.Img
-                      variant="top"
-                      src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg"
-                      alt=""
-                    />
-                  )}
-                  <Card.Body>
-                    <Card.Title>{data.title}</Card.Title>
-                    {/* <Card.Text>
+          <Col key={idx}>
+            <Card>
+              {data.thumbnail_image_url ? (
+                <Card.Img
+                  variant="top"
+                  src={data.thumbnail_image_url}
+                  style={{ width: "50%" }}
+                />
+              ) : (
+                <Card.Img
+                  variant="top"
+                  src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg"
+                  alt=""
+                />
+              )}
+              <Card.Body>
+                <Card.Title>{data.title}</Card.Title>
+                {/* <Card.Text>
                       <ProgressBar
                         animated
                         now={now}
@@ -159,28 +157,24 @@ const DetailDonasi = (props) => {
                         className="donasi-progressbar"
                       />
                     </Card.Text> */}
-                    {/* <Card.Text>
+                {/* <Card.Text>
                       <div className="dana-terkumpul">
                         Rp 3.170.000 terkumpul dari Rp 150.000.000
                       </div>
                     </Card.Text> */}
-                    {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
+                {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
 
-                    <Link
-                      to={{
-                        pathname: "/donasi-detail/" + data.id,
-                        state: { donasi: data },
-                      }}
-                    >
-                      <Button onClick={refresh}>Donasi Sekarang</Button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ) : (
-              <div></div>
-            )}
-          </div>
+                <Link
+                  to={{
+                    pathname: "/donasi-detail/" + data.id,
+                    state: { donasi: data },
+                  }}
+                >
+                  <Button onClick={refresh}>Donasi Sekarang</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
       </Carousel>
     </div>
