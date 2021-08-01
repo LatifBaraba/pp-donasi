@@ -54,7 +54,7 @@ ReactDOM.render(
           <Route path="/donasi-detail2/:id" exact component={DonasiDetail2} />
           <Route path="/rutin" exact component={Rutin} />
           <Route path="/history" exact component={History} />
-
+          <Route path="/confirm" exact component={Confirm}/>
         </Layout>
         {/* End Main Route */}
       </Switch>
