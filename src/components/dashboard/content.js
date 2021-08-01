@@ -63,11 +63,7 @@ const Content = (props) => {
               </h5>
               <div className="cardStyle__CardItemContent-sc-1rj3uct-2 iUjNAO"
                 style={{ lineHeight: '1.5', display: '-webkit-box', WebkitLineClamp: '3', WebkitBoxOrient: 'vertical', overflow: 'hidden', }}>
-                {/* {data.description} */}
-                kdjsKDJVsKDJVsVsoF FvsoFOfoif fiof ifhiofhvosihfifhifhvoishfvoish fhfoh fhfoh foh ovu siouvgsivgslvj wgjw;r wivhwlvhwpvw vpwivhW VOPWHOIHoigw
-                GEKRJVHWR WROIWRHOI OGHORIeari rioirghaeoighoa gioaehgoiaewhgoiaer aw
-                rgoahea rgouahr  oawrhwighoa gar
-                gaeiruaorgh aeoraewri airghoaerghab
+                {data.description}
               </div>
                 <Link to="#" title="Read More" className="link-btn"><a><p>read more <i className="fa fa-arrow-right"></i></p></a></Link>
               <div className="style__ListCount-sc-1sl4ulh-5 gXlqqS">
@@ -81,7 +77,7 @@ const Content = (props) => {
               </div>
             </div>
           </div>
-          <hr></hr>
+          <hr style={{marginLeft:'30px'}}></hr>
         </>
       ))}
     </div>
