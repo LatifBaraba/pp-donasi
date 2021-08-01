@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const Content2 = (props) => {
   const [now, setNow] = useState(45);
   const datas = props.data;
-  console.log(datas);
 
   return (
     <div className="content2">
