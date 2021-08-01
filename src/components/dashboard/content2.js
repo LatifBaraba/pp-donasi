@@ -42,6 +42,7 @@ const Content2 = (props) => {
                     now={now}
                     label={`${now}%`}
                     className="donasi-progressbar"
+                    style={{height:'10px', backgroundImage:'blue'}}
                   />
                 </Card.Text>
                 <Card.Text>

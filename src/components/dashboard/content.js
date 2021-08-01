@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Row, Col, Button, Card, ProgressBar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Row, Col, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
+import './dashboard.css'
 
 const Content = (props) => {
-  const [now, setNow] = useState(45);
-  const datas = props.data;
 
-  console.log(datas, "data list donasi 1");
+  const datas = props.data
 
+  console.log(datas, 'data list donasi 1')
   return (
     <div className="content">
       <Row className="p-2">
@@ -22,50 +23,66 @@ const Content = (props) => {
         </Col>
       </Row>
       {datas.map((data, idx) => (
-        <Row className="content-donasi" key={idx}>
-          <Col md={4} className="content-donasi-image">
-            {data.thumbnail_image_url ? (
-              <img src={data.thumbnail_image_url} alt="" />
-            ) : (
-              <img
-                src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg"
-                alt=""
-              />
-            )}
-          </Col>
-          <Col md={8}>
-            <Card>
-              <Card.Body>
-                <Card.Title>{data.title}</Card.Title>
-                {/* <Card.Text>{data.description}</Card.Text> */}
-                {/* <Link to="/donasi-detail2"><Button>Donasi Sekarang</Button></Link> */}
-                {/* <Card.Text>
-                  <ProgressBar
-                    animated
-                    now={now}
-                    label={`${now}%`}
-                    className="donasi-progressbar"
-                  />
-                </Card.Text> */}
-                {/* <Card.Text>
-                  <div className="dana-terkumpul">
-                    Rp 3.170.000 terkumpul dari Rp 150.000.000
-                  </div>
-                </Card.Text> */}
-                <Card.Text>Nama Penggalang Dana</Card.Text>
 
-                <Link
-                  to={{
-                    pathname: "/donasi-detail/" + data.id,
-                    state: { donasi: data },
-                  }}
-                >
-                  <Button>Donasi Sekarang</Button>
-                </Link>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+        // <Row className="content-donasi" key={idx}>
+        //   <Col md={4} className="content-donasi-image">
+        //     {data.thumbnail_image_url ? <img src={data.thumbnail_image_url} alt="" /> : <img src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg" alt="" />}
+        //   </Col>
+        //   <Col md={8} className="content-donasi-desc">
+        //     <Row className="donasi-1">
+        //       <Col md={12} className="donasi-title">
+        //         <h5>{data.title}</h5>
+        //       </Col>
+        //       <Col md={12}className="donasi-desc">
+        //         {data.description}
+        //       </Col>
+        //     </Row>
+        //     <Row className="donasi-2">
+        //       <Col className="daftar-sekarang">
+        //         <Link to={{
+        //           pathname: "/donasi-detail",
+        //           state: { donasi: data }
+        //         }}><Button>Donasi Sekarang</Button></Link>
+        //       </Col>
+        //     </Row>
+        //   </Col>
+        // </Row>
+        // <a className="eGpFQV">
+        <>
+          <div className="gWRIil" key={idx}>
+            <div className="col-5">
+              <figure className="style__ListFigureCanvas-sc-1sl4ulh-1 jXwsPV">
+                {data.thumbnail_image_url ? <img src={data.thumbnail_image_url} alt="" className="kpMTjO" /> : <img src="https://imgix.kitabisa.com/a8526eda-a1db-4479-8c77-33ac65e7cd3a.jpg?ar=16:9&amp;w=214&amp;auto=format,compress" alt="" className="kpMTjO" />}
+
+                {/* <img alt="Bantu selesaikan masjid pondok quran 2 yg tertunda" src="https://imgix.kitabisa.com/a8526eda-a1db-4479-8c77-33ac65e7cd3a.jpg?ar=16:9&amp;w=214&amp;auto=format,compress" className="style__ListImageCanvas-sc-1sl4ulh-3 kpMTjO" /> */}
+              </figure>
+            </div>
+
+            <div className="style__ListContent-sc-1sl4ulh-4 cHbJUf col-7">
+              <h5>{data.title}
+              </h5>
+              <div className="cardStyle__CardItemContent-sc-1rj3uct-2 iUjNAO"
+                style={{ lineHeight: '1.5', display: '-webkit-box', WebkitLineClamp: '3', WebkitBoxOrient: 'vertical', overflow: 'hidden', }}>
+                {/* {data.description} */}
+                kdjsKDJVsKDJVsVsoF FvsoFOfoif fiof ifhiofhvosihfifhifhvoishfvoish fhfoh fhfoh foh ovu siouvgsivgslvj wgjw;r wivhwlvhwpvw vpwivhW VOPWHOIHoigw
+                GEKRJVHWR WROIWRHOI OGHORIeari rioirghaeoighoa gioaehgoiaewhgoiaer aw
+                rgoahea rgouahr  oawrhwighoa gar
+                gaeiruaorgh aeoraewri airghoaerghab
+              </div>
+                <Link to="#" title="Read More" className="link-btn"><a><p>read more <i className="fa fa-arrow-right"></i></p></a></Link>
+              <div className="style__ListCount-sc-1sl4ulh-5 gXlqqS">
+                <div type="dayLeft" className="style__ListCountItem-sc-1sl4ulh-6 ioWrdr">
+                  <Link to={{
+                    pathname: "/donasi-detail",
+                    state: { donasi: data }
+                  }}><Button>Donasi Sekarang</Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr></hr>
+        </>
       ))}
     </div>
   );

@@ -12,6 +12,7 @@ import tokenReducer from "../Redux/token/reducer";
 import orderReducer from "../Redux/order/reducer";
 import confirmReducer from "../Redux/confirm/reducer";
 import donasiDetailReducer from '../Redux/detaildonasi/reducer'
+import historyReducer from '../Redux/history/reducer'
 
 const reducers = combineReducers({
     loginReducer,
@@ -26,7 +27,8 @@ const reducers = combineReducers({
     tokenReducer,
     orderReducer,
     confirmReducer,
-    donasiDetailReducer
+    donasiDetailReducer,
+    historyReducer
 })
 
 export default reducers
