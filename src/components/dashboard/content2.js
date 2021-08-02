@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Card, ProgressBar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import NumberFormat from "react-number-format";
+import { fetchDetailDonasi } from "../../Redux/detaildonasi/action";
+import { useDispatch, useSelector } from "react-redux";
 
 const Content2 = (props) => {
-  const [now, setNow] = useState(45);
+  const [now, setNow] = useState(0);
   const datas = props.data;
+  
+  const dispatch = useDispatch();
+  useEffect(() => {
+    let token = localStorage.getItem("token");   
+    dispatch(fetchDetailDonasi(token, datas.id));
+  }, []);
+  const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);  
 
   return (
     <div className="content2">
@@ -38,16 +48,28 @@ const Content2 = (props) => {
                 <Card.Text>
                   <ProgressBar
                     animated
-                    now={now}
-                    label={`${now}%`}
+                    now={localStorage.getItem("percent"+data.id)}
+                    label={`${localStorage.getItem("percent"+data.id)}%`}
                     className="donasi-progressbar"
-                    style={{height:'10px', backgroundImage:'blue'}}
+                    style={{ height: "10px", backgroundImage: "blue" }}
                   />
                 </Card.Text>
                 <Card.Text>
-                <div className="dana-terkumpul">
-                  Rp 3.170.000 terkumpul dari Rp 150.000.000
-                </div>
+                  <div className="dana-terkumpul">
+                    <NumberFormat
+                      value={data.donation_collect}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"Rp. "}
+                    />{" "}
+                    terkumpul dari
+                    <NumberFormat
+                      value={data.target}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={" Rp. "}
+                    />
+                  </div>
                 </Card.Text>
                 {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
 

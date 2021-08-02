@@ -8,23 +8,25 @@ import Moment from "react-moment";
 import NumberFormat from "react-number-format";
 import CarouselCard from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import moment from 'moment/moment.js';
+import moment from "moment/moment.js";
 
 const DetailDonasi2 = (props) => {
-  const [now, setNow] = useState(45);
+  const [now, setNow] = useState(0);
   const refresh = () => {
     setInterval(() => {
       window.location.reload();
     }, 100);
   };
   const { donasi } = props.location.state;
-  console.log(donasi);
+  // console.log(donasi);
 
   const dispatch = useDispatch();
   useEffect(() => {
     let token = localStorage.getItem("token");
+    let percent = localStorage.getItem("percent");
     dispatch(fetchDetailDonasi(token, donasi.id));
-    dispatch(fetchPageDonasi(token));
+    dispatch(fetchPageDonasi(token));    
+    
   }, []);
 
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
@@ -47,6 +49,7 @@ const DetailDonasi2 = (props) => {
       items: 1,
     },
   };
+  console.log(data);
 
   return (
     <div className="container detail-program">
@@ -62,25 +65,37 @@ const DetailDonasi2 = (props) => {
       </Row>
       <Row className="mt-3 mx-2 text-center justify-content-center">
         <Col md={8}>
-          Dana Terkumpul <h2>Rp. 10.430.000</h2>
+          Dana Terkumpul{" "}
+          <h2>
+            <NumberFormat
+              value={data.donation_collect}
+              displayType={"text"}
+              thousandSeparator={true}
+              prefix={"Rp. "}
+            />
+          </h2>
           Periode Donasi dari{" "}
           <i>
             <b>
-              <Moment format="YYYY-MM-DD hh:mm:ss">{moment(data.valid_from).format('YYYY-MM-DDTHH:mm:ss')}</Moment>
+              <Moment format="YYYY-MM-DD hh:mm:ss">
+                {moment(data.valid_from).format("YYYY-MM-DDTHH:mm:ss")}
+              </Moment>
             </b>
           </i>{" "}
           -{" "}
           <i>
             <b>
-              <Moment format="YYYY-MM-DD hh:mm:ss">{moment(data.valid_to).format('YYYY-MM-DDTHH:mm:ss')}</Moment>
+              <Moment format="YYYY-MM-DD hh:mm:ss">
+                {moment(data.valid_to).format("YYYY-MM-DDTHH:mm:ss")}
+              </Moment>
             </b>
           </i>
         </Col>
         <Col md={8}>
           <ProgressBar
-            animated
-            now={now}
-            label={`${now}%`}
+            animated            
+            now={localStorage.getItem("percent"+data.id)}
+            label={`${localStorage.getItem("percent"+data.id)}%`}
             className="donasi-progressbar"
           />
         </Col>
@@ -156,45 +171,58 @@ const DetailDonasi2 = (props) => {
       </Row>
       <CarouselCard responsive={responsive}>
         {datas.map((data, idx) => (
-              <Col key={idx}>
-                <Card>
-                  {data.thumbnail_image_url ? (
-                    <Card.Img variant="top" src={data.thumbnail_image_url} />
-                  ) : (
-                    <Card.Img
-                      variant="top"
-                      src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg"
-                      alt=""
+          <Col key={idx}>
+            <Card>
+              {data.thumbnail_image_url ? (
+                <Card.Img variant="top" src={data.thumbnail_image_url} />
+              ) : (
+                <Card.Img
+                  variant="top"
+                  src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg"
+                  alt=""
+                />
+              )}
+              <Card.Body>
+                <Card.Title>{data.title}</Card.Title>
+                <Card.Text>
+                <ProgressBar
+                    animated
+                    now={localStorage.getItem("percent"+data.id)}
+                    label={`${localStorage.getItem("percent"+data.id)}%`}
+                    className="donasi-progressbar"
+                    style={{ height: "10px", backgroundImage: "blue" }}
+                  />
+                </Card.Text>
+                <Card.Text>
+                  <div className="dana-terkumpul">
+                    <NumberFormat
+                      value={data.donation_collect}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"Rp. "}
+                    />{" "}
+                    terkumpul dari
+                    <NumberFormat
+                      value={data.target}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={" Rp. "}
                     />
-                  )}
-                  <Card.Body>
-                    <Card.Title>{data.title}</Card.Title>
-                    <Card.Text>
-                      <ProgressBar
-                        animated
-                        now={now}
-                        label={`${now}%`}
-                        className="donasi-progressbar"
-                      />
-                    </Card.Text>
-                    <Card.Text>
-                      <div className="dana-terkumpul">
-                        Rp 3.170.000 terkumpul dari Rp 150.000.000
-                      </div>
-                    </Card.Text>
-                    {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
+                  </div>
+                </Card.Text>
+                {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
 
-                    <Link
-                      to={{
-                        pathname: "/donasi-detail2/" + data.id,
-                        state: { donasi: data },
-                      }}
-                    >
-                      <Button onClick={refresh}>Donasi Sekarang</Button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </Col>
+                <Link
+                  to={{
+                    pathname: "/donasi-detail2/" + data.id,
+                    state: { donasi: data },
+                  }}
+                >
+                  <Button onClick={refresh}>Donasi Sekarang</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
       </CarouselCard>
     </div>

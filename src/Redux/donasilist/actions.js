@@ -37,6 +37,11 @@ export function fetchDonasilist(token) {
             }
         })
         .then(res => {
+            dispatch(getDonasilistSuccess(res.data.data));                        
+            res.data.data.forEach(element => {                
+                let percent = parseInt((element.donation_collect / element.target) * 100) > 100 ? 100 : parseInt((element.donation_collect / element.target) * 100)                
+                localStorage.setItem("percent"+ element.id,percent);  
+            });                        
             dispatch(getDonasilistSuccess(res.data.data));
         })
         .catch(err => {
