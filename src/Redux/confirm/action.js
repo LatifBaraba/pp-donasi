@@ -80,7 +80,6 @@ export function fetchConfirmList(token) {
         })
         .then(res => {
             dispatch(getConfirmListSuccess(res.data.data));
-            console.log(res.data.data, 'list confirm')
         })
         .catch(err => {
             dispatch(getConfirmListFailure(err));

@@ -38,7 +38,6 @@ export function fetchDonasilist2(token) {
         })
         .then(res => {
             dispatch(getDonasilist2Success(res.data.data));
-            console.log(res.data.data, 'donasilist2')
         })
         .catch(err => {
             dispatch(getDonasilist2Failure(err));

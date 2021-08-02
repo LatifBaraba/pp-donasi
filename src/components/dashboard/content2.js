@@ -15,6 +15,7 @@ const Content2 = (props) => {
     dispatch(fetchDetailDonasi(token, datas.id));
   }, []);
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);  
+
   return (
     <div className="content2">
       <Row className="p-2">

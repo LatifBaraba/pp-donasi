@@ -33,7 +33,6 @@ export function fetchBanner(token) {
         })
         .then(res => {
             dispatch(getBannerSuccess(res.data.data));
-            console.log(res.data.data, 'banner')
         })
         .catch(err => {
             dispatch(getBannerFailure(err));

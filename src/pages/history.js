@@ -10,8 +10,6 @@ const History = () => {
     const dispatch = useDispatch()
     const stateHistory = useSelector((state) => state.historyReducer.history)
 
-    console.log(stateHistory, 'history')
-
     useEffect(() => {
         dispatch(fetchHistory(token, username))
     }, [token, username])

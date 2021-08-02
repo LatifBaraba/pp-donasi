@@ -9,7 +9,6 @@ const Content = (props) => {
 
   const datas = props.data
 
-  console.log(datas, 'data list donasi 1')
   return (
     <div className="content">
       <Row className="p-2">
@@ -23,31 +22,6 @@ const Content = (props) => {
         </Col>
       </Row>
       {datas.map((data, idx) => (
-
-        // <Row className="content-donasi" key={idx}>
-        //   <Col md={4} className="content-donasi-image">
-        //     {data.thumbnail_image_url ? <img src={data.thumbnail_image_url} alt="" /> : <img src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg" alt="" />}
-        //   </Col>
-        //   <Col md={8} className="content-donasi-desc">
-        //     <Row className="donasi-1">
-        //       <Col md={12} className="donasi-title">
-        //         <h5>{data.title}</h5>
-        //       </Col>
-        //       <Col md={12}className="donasi-desc">
-        //         {data.description}
-        //       </Col>
-        //     </Row>
-        //     <Row className="donasi-2">
-        //       <Col className="daftar-sekarang">
-        //         <Link to={{
-        //           pathname: "/donasi-detail",
-        //           state: { donasi: data }
-        //         }}><Button>Donasi Sekarang</Button></Link>
-        //       </Col>
-        //     </Row>
-        //   </Col>
-        // </Row>
-        // <a className="eGpFQV">
         <>
           <div className="gWRIil" key={idx}>
             <div className="col-5">
@@ -63,11 +37,7 @@ const Content = (props) => {
               </h5>
               <div className="cardStyle__CardItemContent-sc-1rj3uct-2 iUjNAO"
                 style={{ lineHeight: '1.5', display: '-webkit-box', WebkitLineClamp: '3', WebkitBoxOrient: 'vertical', overflow: 'hidden', }}>
-                {/* {data.description} */}
-                kdjsKDJVsKDJVsVsoF FvsoFOfoif fiof ifhiofhvosihfifhifhvoishfvoish fhfoh fhfoh foh ovu siouvgsivgslvj wgjw;r wivhwlvhwpvw vpwivhW VOPWHOIHoigw
-                GEKRJVHWR WROIWRHOI OGHORIeari rioirghaeoighoa gioaehgoiaewhgoiaer aw
-                rgoahea rgouahr  oawrhwighoa gar
-                gaeiruaorgh aeoraewri airghoaerghab
+                {data.description}
               </div>
                 <Link to="#" title="Read More" className="link-btn"><a><p>read more <i className="fa fa-arrow-right"></i></p></a></Link>
               <div className="style__ListCount-sc-1sl4ulh-5 gXlqqS">
@@ -81,7 +51,7 @@ const Content = (props) => {
               </div>
             </div>
           </div>
-          <hr></hr>
+          <hr style={{marginLeft:'30px'}}></hr>
         </>
       ))}
     </div>

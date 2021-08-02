@@ -33,9 +33,7 @@ export function fetchHistory(token) {
             }
         })
             .then(res => {
-                console.log(res.data)
                 dispatch(getHistorySuccess(res.data.data));
-                console.log(res.data.data, 'kategori')
             })
             .catch(err => {
                 console.log(err)

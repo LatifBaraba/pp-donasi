@@ -24,6 +24,8 @@ import DonasiDetail from './pages/detaildonasi'
 import DonasiDetail2 from './pages/detaildonasi2'
 import History from './pages/history'
 import Rutin from "./pages/rutin";
+import Detail from "./pages/detail";
+
 import thunk from 'redux-thunk'
 import reducers from './reducers/rootReducer'
 
@@ -56,6 +58,9 @@ ReactDOM.render(
           <Route path="/donasi-detail2/:id" exact component={DonasiDetail2} />
           <Route path="/rutin" exact component={Rutin} />
           <Route path="/history" exact component={History} />
+          <Route path="/detail/:id" exact component={Detail} />
+
+
           <Route path="/confirm" exact component={Confirm}/>
         </Layout>
         {/* End Main Route */}
