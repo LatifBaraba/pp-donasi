@@ -123,9 +123,10 @@ const DetailDonasi = (props) => {
             </div>
           </Button>
           <Collapse in={isOpen}>
-            <Card style={{ boxShadow: '5px 5px 10px grey', }}>
+            <Card >
               <div id="example-collapse-text" className="text-left mr-2 ml-2">
                 {data.benefit}
+                Desc donasi rutin 1 baru panyaaaaaaaang dooooooooong aaaaaaaah . itu kan gaya kamu ??? subur ???
               </div>
             </Card>
           </Collapse>
