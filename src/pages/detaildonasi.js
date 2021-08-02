@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, ProgressBar, Card, Button } from "react-bootstrap";
+import { Row, Col, ProgressBar, Card, Button, Collapse } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailDonasiRutin } from "../Redux/detaildonasi/action";
 import { fetchPagedonasi2 } from "../Redux/pagelistdonasi2/actions";
@@ -27,6 +27,7 @@ const DetailDonasi = (props) => {
   }, []);
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
   const datas = useSelector((state) => state.pagedonasi2Reducer.pagedonasi2);
+  console.log(data, 'data')
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -46,6 +47,11 @@ const DetailDonasi = (props) => {
     },
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  // const toggle = () => {
+  //   setIsOpen(!isOpen);
+  // }
   return (
     <div className="container detail-program">
       <Row className="mt-4 text-center justify-content-center">
@@ -99,6 +105,35 @@ const DetailDonasi = (props) => {
       <Row className="my-4 mx-2 text-justify">
         <Col>{data.description}</Col>
       </Row>
+      <Row className="mt-4 justify-content-center">
+        <Col md={5}>
+          <Button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-controls="example-collapse-text"
+            aria-expanded={isOpen}
+            style={{ cursor: 'pointer', width: '100%', marginBottom: '5px' }}
+          >
+            <div style={{ display: 'flex' }}>
+              <div>
+                Lihat benefit 
+              </div>
+              <div style={{marginLeft: 'auto'}}>
+                <ion-icon name="chevron-down-outline"></ion-icon>
+              </div>
+            </div>
+          </Button>
+          <Collapse in={isOpen}>
+            <Card style={{ boxShadow: '5px 5px 10px grey', }}>
+              <div id="example-collapse-text" className="text-left mr-2 ml-2">
+                {data.benefit}
+              </div>
+            </Card>
+          </Collapse>
+        </Col>
+      </Row>
+
+
+
 
       <Row className="mt-4 text-center justify-content-center">
         <Col md={3}>
@@ -177,7 +212,7 @@ const DetailDonasi = (props) => {
           </Col>
         ))}
       </Carousel>
-    </div>
+    </div >
   );
 };
 
