@@ -126,7 +126,6 @@ const DetailDonasi = (props) => {
             <Card >
               <div id="example-collapse-text" className="text-left mr-2 ml-2">
                 {data.benefit}
-                Desc donasi rutin 1 baru panyaaaaaaaang dooooooooong aaaaaaaah . itu kan gaya kamu ??? subur ???
               </div>
             </Card>
           </Collapse>
