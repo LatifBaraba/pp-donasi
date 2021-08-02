@@ -54,11 +54,11 @@ const Order = (props) => {
   return (
     <div className="container order">
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Row className="mt-3 justify-content-center">
-          {/* <Col md={8}>
+        {/* <Row className="mt-3 justify-content-center">
+          <Col md={8}>
             <h2>Halo</h2>
-          </Col> */}
-        </Row>
+          </Col>
+        </Row> */}
         <Row className="mt-5 justify-content-center">
           <Col md={8}>
             <h4>Silahkan Melakukan Pembayaran Donasi </h4>

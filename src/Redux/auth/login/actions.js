@@ -59,12 +59,14 @@ export function fetchLogout(token) {
       .then(res => {
           dispatch(logoutSuccess(res));
           localStorage.removeItem("token");
+          localStorage.clear();
           history.push("/login")
           console.log(res)
       })
       .catch(err => {
           console.log(err)
           localStorage.removeItem("token");
+          localStorage.clear();
           history.push("/login")
           dispatch(logoutFailure(err));
       });
