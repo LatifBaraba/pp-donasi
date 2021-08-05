@@ -10,43 +10,41 @@ import { fetchOrderRutin } from "../Redux/order-rutin/actions";
 import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
 
 const Order = (props) => {
-  const { register, handleSubmit, errors } = useForm();
-  //   const [now, setNow] = useState(45);
-  //   const refresh = () => {
-  //     setInterval(() => {
-  //       window.location.reload();
-  //     }, 100);
-  //   };
+  const { register, handleSubmit, errors } = useForm();  
+    const refresh = () => {
+      setInterval(() => {
+        window.location.reload();
+      }, 100);
+    };
 
   const [nominal, setNominal] = useState("");
   const [ucapan, setUcapan] = useState("");
   const [tipebayar, setTipeBayar] = useState("");
+  const [isrutin, setIsRutin] = useState(true);
 
   const donasi = props.location.state.data;
-  // console.log(donasi);
 
-  let token = localStorage.getItem("token");    
+  let token = localStorage.getItem("token");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchDetailDonasiRutin(token, donasi.id));
   }, []);
 
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
-
   const onSubmit = (datas) => {
-    let datax = [];    
+    let datax = [];
     if (datas === "") {
       errors.showMessage();
     } else {
       let username = localStorage.getItem("username");
 
       datax = {
-        is_rutin:true,
+        is_rutin: true,
         id_pp_cp_program_donasi: "",
         id_pp_cp_program_donasi_rutin: data.id,
         amount: parseInt(nominal),
         payment_method: tipebayar,
-      };            
+      };
       dispatch(fetchOrderRutin(token, datax));
     }
   };
@@ -89,20 +87,18 @@ const Order = (props) => {
                 required
                 as="select"
                 type="select"
-                onChange={(e) => setTipeBayar(e.target.value)}      
+                onChange={(e) => setTipeBayar(e.target.value)}
                 // {...register("tipebayar", {
                 //   required: true,
-                // })}          
-                
+                // })}
               >
                 <option value="">Pilih Pembayaran</option>
                 <option value="Manual">Rekening Mandiri</option>
                 <option value="Qris">QRIS</option>
               </Form.Control>
-              
             </Form.Group>
           </Col>
-        </Row>                
+        </Row>
         {tipebayar === "Manual" ? (
           <Row className=" mt-2 justify-content-center">
             <Col md={8}>
@@ -115,14 +111,18 @@ const Order = (props) => {
               Yayasan Pemuda Peduli
             </Col>
           </Row>
-        ):(<Row></Row>)} 
-        {tipebayar === 'Qris' ? (
+        ) : (
+          <Row></Row>
+        )}
+        {tipebayar === "Qris" ? (
           <Row className=" mt-5 justify-content-center">
-            <Col md={8}>              
-            <img src={data.qris_image_url} alt="" style={{ width: "50%" }} />            
+            <Col md={8}>
+              <img src={data.qris_image_url} alt="" style={{ width: "50%" }} />
             </Col>
           </Row>
-        ): (<Row></Row>)}
+        ) : (
+          <Row></Row>
+        )}
 
         <Row className="mt-5 justify-content-center donasi-amount">
           <Col md={8} className="donasi-amount-content">
@@ -151,9 +151,18 @@ const Order = (props) => {
             >
               <Button>Konfirmasi Pembayaran</Button>
             </Link> */}
-            <Button variant="primary" type="submit" block>
+            {/* <Button variant="primary" type="submit" block>
               Checkout
-            </Button>
+            </Button> */}
+            <Link
+              to={{
+                pathname: "/invoice/" + data.id,
+                state: { donasi: [data, nominal, tipebayar, isrutin] },
+              }}
+              className="mr-2"
+            >
+              <Button onClick={refresh}>Donasi Sekarang</Button>
+            </Link>
           </Col>
         </Row>
       </Form>
