@@ -26,6 +26,7 @@ import History from './pages/history'
 import Rutin from "./pages/rutin";
 import Detail from "./pages/detail";
 import Invoice from "./pages/invoice";
+import Thankyou from "./pages/thankyou";
 
 import thunk from 'redux-thunk'
 import reducers from './reducers/rootReducer'
@@ -61,6 +62,7 @@ ReactDOM.render(
           <Route path="/history" exact component={History} />
           <Route path="/detail/:id" exact component={Detail} />
           <Route path="/invoice/:id" exact component={Invoice} />
+          <Route path="/thankyou" exact component={Thankyou} />
 
 
           <Route path="/confirm" exact component={Confirm}/>
