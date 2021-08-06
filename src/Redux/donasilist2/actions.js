@@ -8,7 +8,8 @@ import history from '../../history'
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/list`;
 
 export function fetchDonasilist2(token) {
-    return (dispatch) => {
+    return (dispatch) => {        
+        console.log(token)
         axios(URL, {
             method: 'POST',
             data: {

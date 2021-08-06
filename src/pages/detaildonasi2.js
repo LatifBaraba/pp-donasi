@@ -12,6 +12,7 @@ import moment from "moment/moment.js";
 
 const DetailDonasi2 = (props) => {
   const [now, setNow] = useState(0);
+  const username = localStorage.getItem('username')
   const refresh = () => {
     setInterval(() => {
       window.location.reload();
@@ -118,16 +119,27 @@ const DetailDonasi2 = (props) => {
       </Row>
 
       <Row className="mt-4 text-center justify-content-center">
-        <Col md={3}>
+        <Col md={3}>          
+          { username ? 
           <Link
             to={{
-              pathname: "/order/" + data.id,
+              pathname: "/order/" + data.id,              
               state: { data: donasi },
             }}
             className="mr-2"
           >
             <Button variant="primary">Donasi Sekarang</Button>
           </Link>
+          : 
+          <Link
+            to={{
+              pathname: "/login",
+            }}
+            className="mr-2"
+          >
+            <Button variant="primary">Donasi Sekarang</Button>
+          </Link>
+          }
         </Col>
         {data.ayobantu_link !== "" && (
           <Col md={3}>

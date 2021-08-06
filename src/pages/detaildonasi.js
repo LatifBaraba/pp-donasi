@@ -11,13 +11,14 @@ import "react-multi-carousel/lib/styles.css";
 
 const DetailDonasi = (props) => {
   const [now, setNow] = useState(45);
+  const username = localStorage.getItem('username')
   const refresh = () => {
     setInterval(() => {
       window.location.reload();
     }, 100);
   };
   const { donasi } = props.location.state;
-  console.log(donasi);
+  // console.log(donasi);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -137,15 +138,26 @@ const DetailDonasi = (props) => {
 
       <Row className="mt-4 text-center justify-content-center">
         <Col md={3}>
+          { username ? 
           <Link
             to={{
-              pathname: "/order-rutin/" + data.id,
+              pathname: "/order-rutin/" + data.id,              
               state: { data: donasi },
             }}
             className="mr-2"
           >
             <Button variant="primary">Donasi Sekarang</Button>
           </Link>
+          : 
+          <Link
+            to={{
+              pathname: "/login",
+            }}
+            className="mr-2"
+          >
+            <Button variant="primary">Donasi Sekarang</Button>
+          </Link>
+          }
         </Col>
       </Row>
       <Row className="mt-4 text-justify justify-content-center">

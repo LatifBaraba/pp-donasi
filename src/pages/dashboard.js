@@ -8,21 +8,47 @@ import { Row } from "react-bootstrap";
 import { fetchDonasilist } from "../Redux/donasilist/actions";
 import { fetchDonasilist2 } from "../Redux/donasilist2/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchToken } from "../Redux/token/action";
 
 const Dashboard = () => {
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
   const dispatch = useDispatch()
-  
+
+  const setToken = () => (new Promise((resolve,reject) => {
+    setTimeout(() => { resolve(dispatch(fetchToken()))}, 1000)
+  })) 
+
+  const getToken = () => (new Promise((resolve,reject) => {
+    setTimeout(() => { resolve(localStorage.getItem("token"))}, 1000)
+  })) 
+
   useEffect(() => {
     // dispatch(fetchBanner(token));
-    dispatch(fetchDonasilist(token));
-    dispatch(fetchDonasilist2(token));
-  }, []);
+    async function fetchTokenAsync() {
+      
+      if (!localStorage.getItem("token")) {
+        let a = await setToken()
+        let token = await getToken()
+        
+        dispatch(fetchDonasilist(token));
+        dispatch(fetchDonasilist2(token));  
+      } else {
+        let token = await getToken()
 
+        dispatch(fetchDonasilist(token));
+        dispatch(fetchDonasilist2(token));          
+      }
+
+    }
+
+    fetchTokenAsync()
+    
+  }, []);
   // const bannerData = useSelector((state) => state.bannerReducer.banner);
   const donasilistData = useSelector((state) => state.donasilistReducer.donasilist);
   const donasilist2Data = useSelector((state) => state.donasilist2Reducer.donasilist2);
-
+    
+  
   return (
     <div className="container dashboard">
       <Row>

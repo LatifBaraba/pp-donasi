@@ -18,7 +18,7 @@ const Order = (props) => {
 
   let token = localStorage.getItem("token");
   const dispatch = useDispatch();
-
+  console.log(donasi)
   const onSubmit = (datas) => {
     let datax = [];
     if (datas === "") {

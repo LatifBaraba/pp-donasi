@@ -6,15 +6,15 @@ import { fetchDetailDonasi } from "../../Redux/detaildonasi/action";
 import { useDispatch, useSelector } from "react-redux";
 
 const Content2 = (props) => {
-  const [now, setNow] = useState(0);
+  // const [now, setNow] = useState(0);
   const datas = props.data;
   
-  const dispatch = useDispatch();
-  useEffect(() => {
-    let token = localStorage.getItem("token");   
-    dispatch(fetchDetailDonasi(token, datas.id));
-  }, []);
-  const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);  
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   let token = localStorage.getItem("token");   
+  //   dispatch(fetchDetailDonasi(token, datas.id));
+  // }, []);
+  // const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);  
 
   return (
     <div className="content2">
