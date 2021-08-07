@@ -80,9 +80,12 @@ const DetailDonasi2 = (props) => {
             </div>
             <div>
               {isReadMore ? data.description && data.description.slice(0, 150) : data.description}
-              <span onClick={toggleReadMore} className="read-or-hide">
-                {isReadMore ? "...read more" : " show less"}
-              </span>
+              {data.description && data.description.length < 150 ? "" : (
+                <span onClick={toggleReadMore} className="read-or-hide">
+                  {isReadMore ? "...read more" : " show less"}
+                </span>
+              )}
+             
             </div>
              {/* Periode Donasi dari{" "}
             <i>
