@@ -30,7 +30,9 @@ export function fetchToken() {
         })
         .then(res => {
             dispatch(getTokenSuccess(res.data.data));
-            // localStorage.setItem("token", res.data.data.token);
+            // console.log(res.data.data.token)
+            localStorage.setItem("token", res.data.data.token);
+            // console.log(res)
         })
         .catch(err => {
             console.log(err)
@@ -49,8 +51,9 @@ export function fetchRefreshToken(token) {
             }
         })
         .then(res => {
-            dispatch(getTokenSuccess(res.data.data));
             localStorage.setItem("token", res.data.data.token);
+            dispatch(getTokenSuccess(res.data.data));
+            // console.log(res)
         })
         .catch(err => {
             console.log(err)

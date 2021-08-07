@@ -37,7 +37,7 @@ export function fetchAddConfirm(token, transaction_id, bukti) {
             setTimeout(() => {
                 toast.success("Konfirmasi Pembayaran Success !");
                 dispatch(addConfirmSuccess(res));
-                history.push("/dashboard");
+                history.push("/thankyou");
             }, 1000);
         })
         .catch(err => {

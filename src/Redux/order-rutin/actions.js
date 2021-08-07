@@ -13,6 +13,8 @@ const ORDERURL = `${process.env.REACT_APP_BASE_URL}/transaction/create`;
 
 export function fetchOrderRutin(token, payload) {
   return (dispatch) => {
+    // console.log(token)
+    // console.log(payload)
     axios(ORDERURL, {
         method: 'POST',
         data: {
@@ -35,9 +37,9 @@ export function fetchOrderRutin(token, payload) {
     })
     .catch(err => {
         if (err.response.status === 400) {
-            toast.error("Order unsuccessful")
+            toast.error("Please Login First")
         } else if (err.response.status === 401) {
-            toast.error("Order unsuccessful !")
+            toast.error("Please Login First")
         }
         dispatch(orderRutinFailure(err));
     });

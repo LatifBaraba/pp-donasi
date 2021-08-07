@@ -10,20 +10,19 @@ import { fetchOrder } from "../Redux/order/actions";
 import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
 
 const Order = (props) => {
+  const refresh = () => {
+    setInterval(() => {
+      window.location.reload();
+    }, 500);
+  };
   const { register, handleSubmit, errors } = useForm();
-  //   const [now, setNow] = useState(45);
-  //   const refresh = () => {
-  //     setInterval(() => {
-  //       window.location.reload();
-  //     }, 100);
-  //   };
 
   const [nominal, setNominal] = useState("");
   const [ucapan, setUcapan] = useState("");
   const [tipebayar, setTipeBayar] = useState("");
+  const [isrutin, setIsRutin] = useState(false);
 
   const donasi = props.location.state.data;
-  console.log(donasi);
 
   let token = localStorage.getItem("token");    
   const dispatch = useDispatch();
@@ -47,7 +46,7 @@ const Order = (props) => {
         amount: parseInt(nominal),
         payment_method: tipebayar,
       };      
-      dispatch(fetchOrder(token, datax));
+      dispatch(fetchOrder(token, datax));      
     }
   };
 
@@ -151,9 +150,19 @@ const Order = (props) => {
             >
               <Button>Konfirmasi Pembayaran</Button>
             </Link> */}
-            <Button variant="primary" type="submit" block>
+            {/* <Button variant="primary" type="submit" block>
               Checkout
-            </Button>
+            </Button> */}
+            <Link
+            to={{
+              pathname: "/invoice/" + data.id,
+              state: { donasi: [data,nominal,tipebayar, isrutin] },
+            }}
+            className="mr-2"
+          >
+            <Button onClick={refresh}>Donasi Sekarang</Button>
+          </Link>
+            {/* <Button onClick={refresh} type="submit">Donasi Sekarang</Button> */}
           </Col>
         </Row>
       </Form>

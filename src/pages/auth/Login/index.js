@@ -17,14 +17,16 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-      dispatch(fetchToken())
-  }, []);
+  // useEffect(() => {
+  //     dispatch(fetchToken())
+  // }, []);
   
   // user : 085721128354
   // pass : 12345678
   
-  const token = useSelector((state) => state.tokenReducer.token.token);
+  // const token = useSelector((state) => state.tokenReducer.token.token);
+
+  let token = localStorage.getItem("token")
 
   const onSubmit = (data) => {
     let payload = [];

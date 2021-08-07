@@ -15,6 +15,7 @@ import confirmReducer from "../Redux/confirm/reducer";
 import donasiDetailReducer from '../Redux/detaildonasi/reducer'
 import historyReducer from '../Redux/history/reducer'
 import detailReducer from '../Redux/detail/reducers'
+import invoiceReducer from '../Redux/invoice/reducer'
 
 
 const reducers = combineReducers({
@@ -33,7 +34,8 @@ const reducers = combineReducers({
     confirmReducer,
     donasiDetailReducer,
     historyReducer,
-    detailReducer
+    detailReducer,
+    invoiceReducer
 })
 
 export default reducers

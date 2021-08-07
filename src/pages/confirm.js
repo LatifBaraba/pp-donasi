@@ -82,7 +82,7 @@ const Confirm = () => {
           <Form.Group controlId="formBasicCheckbox"></Form.Group>
           <ToastContainer autoClose={2000} />
           <Button variant="primary" type="submit" block>
-            Konfirmasi Pembayaran
+            Konfirmasi
           </Button>
           <hr />
         </Form>

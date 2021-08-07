@@ -15,6 +15,7 @@ const LOGINURL = `${process.env.REACT_APP_BASE_URL}/auth/user/login`;
 const LOGOUTURL = `${process.env.REACT_APP_BASE_URL}/auth/user/logout`;
 
 export function fetchLogin(token, payload) {
+  console.log(token)
   console.log(payload)
   return (dispatch) => {
     axios(LOGINURL, {
@@ -31,7 +32,7 @@ export function fetchLogin(token, payload) {
     .then(res => {
         dispatch(loginSuccess(res));
         toast.success("Login Success !")
-        localStorage.setItem("token", token)
+        // localStorage.setItem("token", token)
         localStorage.setItem("username", payload.username)
         history.push("/dashboard")
     })
@@ -58,16 +59,16 @@ export function fetchLogout(token) {
       })
       .then(res => {
           dispatch(logoutSuccess(res));
-          localStorage.removeItem("token");
-          localStorage.clear();
-          history.push("/login")
+          // localStorage.removeItem("token");
+          localStorage.removeItem("username");
+          history.push("/dashboard")
           console.log(res)
       })
       .catch(err => {
           console.log(err)
-          localStorage.removeItem("token");
-          localStorage.clear();
-          history.push("/login")
+          // localStorage.removeItem("token");
+          localStorage.removeItem("username");
+          history.push("/dashboard")
           dispatch(logoutFailure(err));
       });
   };

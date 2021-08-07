@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 const Header = () => {
     const dispatch = useDispatch();
     const token = localStorage.getItem('token')
+    const username = localStorage.getItem('username')
     const logout = () => {
         // history.push(`${process.env.PUBLIC_URL}/dashboard`);
         // console.log(token)
@@ -23,6 +24,7 @@ const Header = () => {
                     <Nav.Link href="#features">Contact</Nav.Link>
                     <Nav.Link href="#pricing">Legal</Nav.Link>
                     <Nav.Link href="#pricing">FAQ</Nav.Link>
+                    { username ?                     
                     <Nav.Link>
                         <DropdownButton
                             menuAlign="right"
@@ -49,6 +51,8 @@ const Header = () => {
 
                         </DropdownButton>
                     </Nav.Link>
+                    : <Nav.Link href="/login">Login</Nav.Link>
+                    }
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

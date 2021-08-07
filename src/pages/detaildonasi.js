@@ -11,6 +11,7 @@ import "react-multi-carousel/lib/styles.css";
 
 const DetailDonasi = (props) => {
   const [now, setNow] = useState(45);
+  const username = localStorage.getItem('username')
   const refresh = () => {
     setInterval(() => {
       window.location.reload();
