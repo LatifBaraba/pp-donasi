@@ -38,7 +38,6 @@ export function fetchPageDonasi(token) {
         })
         .then(res => {
             dispatch(getPageDonasiSuccess(res.data.data));
-            console.log(res.data.data, 'pagedonasi')
         })
         .catch(err => {
             dispatch(getPageDonasiFailure(err));

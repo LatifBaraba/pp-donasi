@@ -6,7 +6,7 @@ import { fetchPagedonasi2 } from "../Redux/pagelistdonasi2/actions";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import NumberFormat from "react-number-format";
-import Carousel from "react-multi-carousel";
+import CarouselCard from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const DetailDonasi = (props) => {
@@ -17,7 +17,6 @@ const DetailDonasi = (props) => {
     }, 100);
   };
   const { donasi } = props.location.state;
-  console.log(donasi);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -27,7 +26,6 @@ const DetailDonasi = (props) => {
   }, []);
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
   const datas = useSelector((state) => state.pagedonasi2Reducer.pagedonasi2);
-  console.log(data, 'data')
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -47,110 +45,117 @@ const DetailDonasi = (props) => {
     },
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [isReadMore, setIsReadMore] = useState(true);
+  const toggleReadMore = () => {
+    setIsReadMore(!isReadMore);
+  };
   // const toggle = () => {
   //   setIsOpen(!isOpen);
   // }
   return (
     <div className="container detail-program">
-      <Row className="mt-4 text-center justify-content-center">
-        <Col>
-          <img src={data.thumbnail_image_url} alt="" style={{ width: "50%" }} />
-        </Col>
-      </Row>
-      <Row className="mt-3 mx-2 text-center justify-content-center">
-        <Col md={12}>
-          <h4>{data.title}</h4>
-        </Col>
-      </Row>
-      <Row className="mt-3 mx-2 text-center justify-content-center">
-        {/* <Col md={8}>
-          Dana Terkumpul <h2>Rp. 10.430.000</h2>
-          Periode Donasi dari{" "}
-          <i>
-            <b>
-              <Moment format="YYYY-MM-DD">{data.valid_from}</Moment>
-            </b>
-          </i>{" "}
-          -{" "}
-          <i>
-            <b>
-              <Moment format="YYYY-MM-DD">{data.valid_to}</Moment>
-            </b>
-          </i>
-        </Col> */}
-        {/* <Col md={8}>
-          <ProgressBar
-            animated
-            now={now}
-            label={`${now}%`}
-            className="donasi-progressbar"
-          />
-        </Col> */}
-        {/* <Col md={4}>
-          dari target{" "}
-          <i>
-            <b>
-              <NumberFormat
-                value={data.target}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"Rp. "}
-              />
-            </b>
-          </i>{" "}
-        </Col> */}
-      </Row>
-      <Row className="my-4 mx-2 text-justify">
-        <Col>{data.description}</Col>
-      </Row>
-      <Row className="mt-4 justify-content-center">
-        <Col md={5}>
-          <Button
-            onClick={() => setIsOpen(!isOpen)}
-            aria-controls="example-collapse-text"
-            aria-expanded={isOpen}
-            style={{ cursor: 'pointer', width: '100%', marginBottom: '5px' }}
-          >
-            <div style={{ display: 'flex' }}>
-              <div>
-                Lihat benefit 
-              </div>
-              <div style={{marginLeft: 'auto'}}>
-                <ion-icon name="chevron-down-outline"></ion-icon>
+      <div className="row row-mb-5" style={{ display: 'flex' }}>
+        <div className="col-md-6" style={{ width: '50%' }}>
+          <div className="article-content">
+            <div className="article-media">
+              <img src={data.thumbnail_image_url} className="article-image img-1" alt="" />
+            </div>
+            <div className="article-summary">
+              <p className="os-12 txt-600">
+                {data.title}
+              </p>
+            </div>
+            <div className="article-action">
+            </div>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="article-detail">
+            <div className="article-heading">
+              <h2 className="article-title">
+                {data.title}
+              </h2>
+            </div>
+            <div>
+              {isReadMore ? data.description && data.description.slice(0, 150) : data.description}
+              <span onClick={toggleReadMore} className="read-or-hide">
+                {isReadMore ? "...read more" : " show less"}
+              </span>
+            </div>
+            <div className="article-status">
+              <span className="os-13 txt-600 text-terkumpul">
+                Target 									</span>
+              <div className="article-number campaign-donate">
+                <h2>
+                  <NumberFormat
+                    className="mr-2"
+                    value={data.donation_collect}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"Rp. "}
+                  />
+                  </h2>
               </div>
             </div>
-          </Button>
-          <Collapse in={isOpen}>
-            <Card >
-              <div id="example-collapse-text" className="text-left mr-2 ml-2">
-                {data.benefit}
+            <div className="article-button my-4" style={{ display: 'flex' }}>
+              <Col md={4}>
+                <Link
+                  to={{
+                    pathname: "/order/" + data.id,
+                    state: { data: donasi },
+                  }}
+                  className="mr-2"
+                >
+                  <Button variant="primary">Donasi Sekarang</Button>
+                </Link>
+              </Col>
+              {data.ayobantu_link !== "" && (
+                <Col md={4}>
+                  <a
+                    href={data.ayobantu_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mr-2"
+                  >
+                    <Button variant="primary">Donasi di ayobantu.com</Button>
+                  </a>
+                </Col>
+              )}
+              {data.kitabisa_link !== "" && (
+                <Col md={4}>
+                  <a
+                    href={data.kitabisa_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ marginLeft: 'auto' }}
+                  >
+                    <Button variant="primary">Donasi di kitabisa.com</Button>
+                  </a>
+                </Col>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      <Row className="mt-4 text-justify justify-content-center" style={{ marginLeft: '10%', marginRight: '10%' }}>
+        <Col md={12} style={{ border: '4px' }}>
+          <Card>
+            <div className="container">
+              <div className="mb-3">
+                <h2><strong>{data.title}</strong></h2>
               </div>
-            </Card>
-          </Collapse>
+              <div dangerouslySetInnerHTML={{ __html: data.content }} />
+            </div>
+          </Card>
         </Col>
+        <hr></hr>
       </Row>
+      <Row>
+        <Col md={12} className="mt-5">
+          <h3 style={{ fontSize: 'font-size: 1.75rem' }}>Ucapan dan Doa :</h3>
+          <div>
 
-
-
-
-      <Row className="mt-4 text-center justify-content-center">
-        <Col md={3}>
-          <Link
-            to={{
-              pathname: "/order-rutin/" + data.id,
-              state: { data: donasi },
-            }}
-            className="mr-2"
-          >
-            <Button variant="primary">Donasi Sekarang</Button>
-          </Link>
-        </Col>
-      </Row>
-      <Row className="mt-4 text-justify justify-content-center">
-        <Col md={8}>
-          <h5>Ucapan Dan Doa</h5>
+          </div>
         </Col>
       </Row>
       {/* <Row className="text-justify justify-content-center">
@@ -165,16 +170,12 @@ const DetailDonasi = (props) => {
           <h3>Kamu juga bisa berdonasi yang lain :</h3>
         </Col>
       </Row>
-      <Carousel responsive={responsive}>
+      <CarouselCard responsive={responsive}>
         {datas.map((data, idx) => (
           <Col key={idx}>
             <Card>
               {data.thumbnail_image_url ? (
-                <Card.Img
-                  variant="top"
-                  src={data.thumbnail_image_url}
-                  style={{ width: "50%" }}
-                />
+                <Card.Img variant="top" src={data.thumbnail_image_url} />
               ) : (
                 <Card.Img
                   variant="top"
@@ -184,19 +185,6 @@ const DetailDonasi = (props) => {
               )}
               <Card.Body>
                 <Card.Title>{data.title}</Card.Title>
-                {/* <Card.Text>
-                      <ProgressBar
-                        animated
-                        now={now}
-                        label={`${now}%`}
-                        className="donasi-progressbar"
-                      />
-                    </Card.Text> */}
-                {/* <Card.Text>
-                      <div className="dana-terkumpul">
-                        Rp 3.170.000 terkumpul dari Rp 150.000.000
-                      </div>
-                    </Card.Text> */}
                 {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
 
                 <Link
@@ -211,8 +199,8 @@ const DetailDonasi = (props) => {
             </Card>
           </Col>
         ))}
-      </Carousel>
-    </div >
+      </CarouselCard>
+    </div>
   );
 };
 

@@ -111,3 +111,7 @@ a {
     transition: all .35s ease;
     background-color: transparent;
 }
+.read-or-hide{
+  color: rgb(10,121,251);
+  cursor: pointer;
+}

@@ -12,7 +12,6 @@ import "react-toastify/dist/ReactToastify.css";
 const FORGOTURL = `${process.env.REACT_APP_BASE_URL}/auth/user/login`;
 
 export function fetchForgot(token, payload) {
-  console.log(payload);
   return (dispatch) => {
     // axios(FORGOTURL, {
     //   method: "POST",

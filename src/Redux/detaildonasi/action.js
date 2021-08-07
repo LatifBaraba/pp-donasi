@@ -23,7 +23,6 @@ export function fetchDetailDonasi(token, id) {
         })
         .then(res => {
             dispatch(getDonasiDetailSuccess(res.data.data));
-            console.log(res.data.data, 'donasi detail')
         })
         .catch(err => {
             dispatch(getDonasiDetailFailure(err));
@@ -43,7 +42,6 @@ export function fetchDetailDonasiRutin(token, id) {
         })
         .then(res => {
             dispatch(getDetailDonasiRutinSuccess(res.data.data));
-            console.log(res.data.data, 'donasi detail rutin')
         })
         .catch(err => {
             dispatch(getDetailDonasiRutinFailure(err));

@@ -1,5 +1,5 @@
 
-import React from "react";
+import {useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Col, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
@@ -8,7 +8,10 @@ import './dashboard.css'
 const Content = (props) => {
 
   const datas = props.data
-
+  const [isReadMore, setIsReadMore] = useState(true);
+  const toggleReadMore = () => {
+    setIsReadMore(!isReadMore);
+  };
   return (
     <div className="content">
       <Row className="p-2">
@@ -35,11 +38,13 @@ const Content = (props) => {
             <div className="style__ListContent-sc-1sl4ulh-4 cHbJUf col-7">
               <h5>{data.title}
               </h5>
-              <div className="cardStyle__CardItemContent-sc-1rj3uct-2 iUjNAO"
-                style={{ lineHeight: '1.5', display: '-webkit-box', WebkitLineClamp: '3', WebkitBoxOrient: 'vertical', overflow: 'hidden', }}>
-                {data.description}
+              <div className="cardStyle__CardItemContent-sc-1rj3uct-2 iUjNAO">
+                {isReadMore ? data.description && data.description.slice(0, 250) : data.description}
+                {data.description.length < 250 ? "" : (<span onClick={toggleReadMore} className="read-or-hide">
+                  {isReadMore ? "...read more" : " show less"}
+                </span>)}
+                
               </div>
-                <Link to="#" title="Read More" className="link-btn"><a><p>read more <i className="fa fa-arrow-right"></i></p></a></Link>
               <div className="style__ListCount-sc-1sl4ulh-5 gXlqqS">
                 <div type="dayLeft" className="style__ListCountItem-sc-1sl4ulh-6 ioWrdr">
                   <Link to={{

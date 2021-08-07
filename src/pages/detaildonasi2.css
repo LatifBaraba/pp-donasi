@@ -1,0 +1,49 @@
+.article-content {
+    padding: 10px;
+    border-radius: 30px;
+}
+.article-media {
+    position: relative;
+}
+.article-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.article-image {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+.article-detail {
+    padding: 0 0 0 50px;
+}
+.article-title {
+    font-size: 30px;
+    font-family: Manrope,Arial;
+    font-weight: 800;
+    line-height: 39px;
+    margin-bottom: 21px;
+}
+.article-number {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.article-number h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2a2a2a;
+    margin-top: 5px;
+}
+.my-4 {
+    margin-top: 1.5rem!important;
+    margin-bottom: 1.5rem!important;
+}
+
+.read-or-hide{
+  color: rgb(10,121,251);
+  cursor: pointer;
+}
