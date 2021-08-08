@@ -91,7 +91,7 @@ const Login = () => {
                 </Form.Text>
                 <hr />
               </Form>
-              <Button
+              {/* <Button
                 variant="primary"
                 href="https://kitabisa.com"
                 target="_blank"
@@ -106,7 +106,7 @@ const Login = () => {
                 block
               >
                 Donasi via AyoBantuin.com
-              </Button>
+              </Button> */}
             </Card.Body>
           </Card>
         </Row>

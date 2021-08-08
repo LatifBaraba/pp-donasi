@@ -124,31 +124,7 @@ const DetailDonasi = (props) => {
                     <Button variant="primary">Donasi Sekarang</Button>
                   </Link>
                 )}
-              </Col>
-              {data.ayobantu_link !== "" && (
-                <Col md={4}>
-                  <a
-                    href={data.ayobantu_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mr-2"
-                  >
-                    <Button variant="primary">Donasi di ayobantu.com</Button>
-                  </a>
-                </Col>
-              )}
-              {data.kitabisa_link !== "" && (
-                <Col md={4}>
-                  <a
-                    href={data.kitabisa_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ marginLeft: "auto" }}
-                  >
-                    <Button variant="primary">Donasi di kitabisa.com</Button>
-                  </a>
-                </Col>
-              )}
+              </Col>              
             </div>
           </div>
         </div>
