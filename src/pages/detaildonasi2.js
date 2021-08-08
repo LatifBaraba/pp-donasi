@@ -8,10 +8,10 @@ import NumberFormat from "react-number-format";
 import CarouselCard from "react-multi-carousel";
 import Moment from "react-moment";
 import "react-multi-carousel/lib/styles.css";
-import './detaildonasi2.css'
+import "./detaildonasi2.css";
 const DetailDonasi2 = (props) => {
   const [now, setNow] = useState(0);
-  const username = localStorage.getItem('username')
+  const username = localStorage.getItem("username");
   const refresh = () => {
     setInterval(() => {
       window.location.reload();
@@ -25,7 +25,6 @@ const DetailDonasi2 = (props) => {
     let percent = localStorage.getItem("percent");
     dispatch(fetchDetailDonasi(token, donasi.id));
     dispatch(fetchPageDonasi(token));
-
   }, []);
 
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
@@ -56,38 +55,40 @@ const DetailDonasi2 = (props) => {
 
   return (
     <div className="container detail-program">
-      <div className="row row-mb-5" style={{ display: 'flex' }}>
-        <div className="col-md-6" style={{ width: '50%' }}>
+      <div className="row row-mb-5" style={{ display: "flex" }}>
+        <div className="col-md-6" style={{ width: "50%" }}>
           <div className="article-content">
             <div className="article-media">
-              <img src={data.thumbnail_image_url} className="article-image img-1" alt="" />
+              <img
+                src={data.thumbnail_image_url}
+                className="article-image img-1"
+                alt=""
+              />
             </div>
             <div className="article-summary">
-              <p className="os-12 txt-600">
-                {data.title}
-              </p>
+              <p className="os-12 txt-600">{data.title}</p>
             </div>
-            <div className="article-action">
-            </div>
+            <div className="article-action"></div>
           </div>
         </div>
         <div className="col-md-6">
           <div className="article-detail">
             <div className="article-heading">
-              <h2 className="article-title">
-                {data.title}
-              </h2>
+              <h2 className="article-title">{data.title}</h2>
             </div>
             <div>
-              {isReadMore ? data.description && data.description.slice(0, 150) : data.description}
-              {data.description && data.description.length < 150 ? "" : (
+              {isReadMore
+                ? data.description && data.description.slice(0, 150)
+                : data.description}
+              {data.description && data.description.length < 150 ? (
+                ""
+              ) : (
                 <span onClick={toggleReadMore} className="read-or-hide">
                   {isReadMore ? "...read more" : " show less"}
                 </span>
               )}
-             
             </div>
-             {/* Periode Donasi dari{" "}
+            {/* Periode Donasi dari{" "}
             <i>
               <b>
                 <Moment format="YYYY-MM-DD hh:mm:ss">
@@ -104,8 +105,7 @@ const DetailDonasi2 = (props) => {
               </b>
             </i> */}
             <div className="article-status">
-              <span className="os-13 txt-600 text-terkumpul">
-                Target 									</span>
+              <span className="os-13 txt-600 text-terkumpul">Target </span>
               <div className="article-number campaign-donate">
                 <h2>
                   <NumberFormat
@@ -115,7 +115,13 @@ const DetailDonasi2 = (props) => {
                     thousandSeparator={true}
                     prefix={"Rp. "}
                   />
-                  <span style={{ color: ' #828282', marginLeft: '3px', fontSize: '16px' }}>
+                  <span
+                    style={{
+                      color: " #828282",
+                      marginLeft: "3px",
+                      fontSize: "16px",
+                    }}
+                  >
                     Dari
                     <NumberFormat
                       className="ml-2"
@@ -123,7 +129,9 @@ const DetailDonasi2 = (props) => {
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"Rp. "}
-                    /></span></h2>
+                    />
+                  </span>
+                </h2>
               </div>
               <div className="cardbox-stat mb-2 progressbar">
                 <ProgressBar
@@ -140,17 +148,28 @@ const DetailDonasi2 = (props) => {
                 </span>
               </div> */}
             </div>
-            <div className="article-button my-4" style={{ display: 'flex' }}>
+            <div className="article-button my-4" style={{ display: "flex" }}>
               <Col md={4}>
-                <Link
-                  to={{
-                    pathname: "/order/" + data.id,
-                    state: { data: donasi },
-                  }}
-                  className="mr-2"
-                >
-                  <Button variant="primary">Donasi Sekarang</Button>
-                </Link>
+                {username ? (
+                  <Link
+                    to={{
+                      pathname: "/order/" + data.id,
+                      state: { data: donasi },
+                    }}
+                    className="mr-2"
+                  >
+                    <Button variant="primary">Donasi Sekarang</Button>
+                  </Link>
+                ) : (
+                  <Link
+                    to={{
+                      pathname: "/login",
+                    }}
+                    className="mr-2"
+                  >
+                    <Button variant="primary">Donasi Sekarang</Button>
+                  </Link>
+                )}
               </Col>
               {data.ayobantu_link !== "" && (
                 <Col md={4}>
@@ -170,7 +189,7 @@ const DetailDonasi2 = (props) => {
                     href={data.kitabisa_link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ marginLeft: 'auto' }}
+                    style={{ marginLeft: "auto" }}
                   >
                     <Button variant="primary">Donasi di kitabisa.com</Button>
                   </a>
@@ -180,12 +199,17 @@ const DetailDonasi2 = (props) => {
           </div>
         </div>
       </div>
-      <Row className="mt-4 text-justify justify-content-center" style={{ marginLeft: '10%', marginRight: '10%' }}>
-        <Col md={12} style={{ border: '4px' }}>
+      <Row
+        className="mt-4 text-justify justify-content-center"
+        style={{ marginLeft: "10%", marginRight: "10%" }}
+      >
+        <Col md={12} style={{ border: "4px" }}>
           <Card>
             <div className="container">
               <div className="mb-3">
-                <h2><strong>{data.title}</strong></h2>
+                <h2>
+                  <strong>{data.title}</strong>
+                </h2>
               </div>
               <div dangerouslySetInnerHTML={{ __html: data.content }} />
             </div>
@@ -195,10 +219,8 @@ const DetailDonasi2 = (props) => {
       </Row>
       <Row>
         <Col md={12} className="mt-5">
-          <h3 style={{ fontSize: 'font-size: 1.75rem' }}>Ucapan dan Doa :</h3>
-          <div>
-
-          </div>
+          <h3 style={{ fontSize: "font-size: 1.75rem" }}>Ucapan dan Doa :</h3>
+          <div></div>
         </Col>
       </Row>
       {/* <Row className="text-justify justify-content-center">
