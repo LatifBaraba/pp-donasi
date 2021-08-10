@@ -23,6 +23,7 @@ import ListDonasiDua from './pages/listdonasidua'
 import DonasiDetail from './pages/detaildonasi'
 import DonasiDetail2 from './pages/detaildonasi2'
 import History from './pages/history'
+import HistoryDonate from './pages/historydonasi'
 import Rutin from "./pages/rutin";
 import Detail from "./pages/detail";
 import Invoice from "./pages/invoice";
@@ -63,6 +64,7 @@ ReactDOM.render(
           <Route path="/detail/:id" exact component={Detail} />
           <Route path="/invoice/:id" exact component={Invoice} />
           <Route path="/thankyou" exact component={Thankyou} />
+          <Route path="/history-donate" exact component={HistoryDonate} />
 
 
           <Route path="/confirm" exact component={Confirm}/>

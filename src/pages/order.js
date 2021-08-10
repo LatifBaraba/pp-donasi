@@ -61,7 +61,7 @@ const Order = (props) => {
     const arr1 = e.target.innerHTML.split(" ")[1].split(".")[0]
     const arr2 = e.target.innerHTML.split(" ")[1].split(".")[1]
     const arr3 = e.target.innerHTML.split(" ")[1].split(".")[2] ? e.target.innerHTML.split(" ")[1].split(".")[2] : ""
-    const arr4 = arr1.concat(arr2).concat(arr3)    
+    const arr4 = arr1.concat(arr2).concat(arr3)        
     setNominal(parseInt(arr4))
   }
 
@@ -101,6 +101,7 @@ const Order = (props) => {
               <Form.Label>Nominal Donasi</Form.Label>
               <Form.Control
                 type="number"
+                defaultValue={`${nominal}`}
                 // placeholder="No. Hp"
                 {...register("nominal", {
                   required: true,

@@ -53,6 +53,25 @@ const DetailDonasi2 = (props) => {
     },
   };
 
+  const ucapandoaCarousel = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+
   return (
     <div className="container detail-program">
       <div className="row row-mb-5" style={{ display: "flex" }}>
@@ -218,11 +237,45 @@ const DetailDonasi2 = (props) => {
         <hr></hr>
       </Row>
       <Row>
-        <Col md={12} className="mt-5">
+        <Col md={10} className="mt-5">
           <h3 style={{ fontSize: "font-size: 1.75rem" }}>Ucapan dan Doa :</h3>
           <div></div>
         </Col>
+        <Col md={2} className="mt-5">
+          <h6 style={{ fontSize: "font-size: 1.75rem" }}>Lihat Lainnya</h6>
+          <div></div>
+        </Col>
       </Row>
+      <CarouselCard responsive={ucapandoaCarousel}>
+        {datas.map((data, idx) => (
+          <Col key={idx}>
+            <Card>              
+              <Card.Body>
+                {/* <Card.Title>{data.title}</Card.Title>      */}
+                <h6 style={{ fontSize: "font-size: 1.75rem" }}>Ucapan dan Doa :</h6>           
+                <Card.Text>
+                  <div className="dana-terkumpul">
+                    <NumberFormat
+                      value={data.donation_collect}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"Rp. "}
+                    />{" "}
+                    terkumpul dari
+                    <NumberFormat
+                      value={data.target}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={" Rp. "}
+                    />
+                  </div>
+                </Card.Text>                
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </CarouselCard>
+      
       {/* <Row className="text-justify justify-content-center">
         <Col md={8}>
           Arief Ramdhani - "Contrary to popular belief, Lorem Ipsum is not
@@ -286,6 +339,43 @@ const DetailDonasi2 = (props) => {
                 >
                   <Button onClick={refresh}>Donasi Sekarang</Button>
                 </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </CarouselCard>
+      <Row>
+        <Col md={10} className="mt-5">
+          <h3 style={{ fontSize: "font-size: 1.75rem" }}>Donasi </h3>
+          <div></div>
+        </Col>
+        <Col md={2} className="mt-5">
+          <h6 style={{ fontSize: "font-size: 1.75rem" }}><Link to="/history-donate">Lihat lainnya</Link></h6>
+          <div></div>
+          
+        </Col>
+      </Row>
+      <CarouselCard responsive={ucapandoaCarousel} arrows={false}>
+        {datas.map((data, idx) => (
+          <Col key={idx}>
+            <Card>              
+              <Card.Body>
+                {/* <Card.Title>{data.title}</Card.Title>      */}
+                <h6 style={{ fontSize: "font-size: 1.75rem" }}>Anonim</h6>           
+                <Card.Text>
+                  <div className="dana-terkumpul">
+                    
+                    Berdonasi sebesar
+                    <NumberFormat
+                      value={data.target}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={" Rp. "}
+                    />
+                  </div>
+                </Card.Text>   
+                <div className="dana-terkumpul"><Moment fromNow>2021-08-06 12:40-00</Moment> </div>             
+                
               </Card.Body>
             </Card>
           </Col>

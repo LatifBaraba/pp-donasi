@@ -15,11 +15,11 @@ const Dashboard = () => {
   const dispatch = useDispatch()
 
   const setToken = () => (new Promise((resolve,reject) => {
-    setTimeout(() => { resolve(dispatch(fetchToken()))}, 1000)
+    setTimeout(() => { resolve(dispatch(fetchToken()))}, 250)
   })) 
 
   const getToken = () => (new Promise((resolve,reject) => {
-    setTimeout(() => { resolve(localStorage.getItem("token"))}, 1000)
+    setTimeout(() => { resolve(localStorage.getItem("token"))}, 250)
   })) 
 
   useEffect(() => {
