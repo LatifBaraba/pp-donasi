@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Carousel, ProgressBar, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDetailDonasi } from "../Redux/detaildonasi/action";
+import { fetchDetailDonasi, fetchHistoryDonation } from "../Redux/detaildonasi/action";
 import { fetchPageDonasi } from "../Redux/pagelistdonasi/actions";
 import NumberFormat from "react-number-format";
 import CarouselCard from "react-multi-carousel";
@@ -19,16 +19,20 @@ const DetailDonasi2 = (props) => {
   };
   const { donasi } = props.location.state;
 
+  // console.log(donasi, "donasi yeuh")
   const dispatch = useDispatch();
   useEffect(() => {
     let token = localStorage.getItem("token");
     let percent = localStorage.getItem("percent");
     dispatch(fetchDetailDonasi(token, donasi.id));
+    dispatch(fetchHistoryDonation(token, donasi.id));
     dispatch(fetchPageDonasi(token));
   }, []);
 
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
   const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
+  const historydata = useSelector((state) => state.donasiDetailReducer.historydata);
+
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
@@ -356,29 +360,32 @@ const DetailDonasi2 = (props) => {
         </Col>
       </Row>
       <CarouselCard responsive={ucapandoaCarousel} arrows={false}>
-        {datas.map((data, idx) => (
+        {historydata.map((data, idx) => (
+          <div>
+            
           <Col key={idx}>
             <Card>              
               <Card.Body>
                 {/* <Card.Title>{data.title}</Card.Title>      */}
-                <h6 style={{ fontSize: "font-size: 1.75rem" }}>Anonim</h6>           
+                <h6 style={{ fontSize: "font-size: 1.75rem" }}>{data.username}</h6>           
                 <Card.Text>
                   <div className="dana-terkumpul">
                     
                     Berdonasi sebesar
                     <NumberFormat
-                      value={data.target}
+                      value={data.amount}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={" Rp. "}
                     />
                   </div>
-                </Card.Text>   
-                <div className="dana-terkumpul"><Moment fromNow>2021-08-06 12:40-00</Moment> </div>             
+                </Card.Text>  
+                <div className="dana-terkumpul"><Moment fromNow>{data.paid_at}</Moment> </div>             
                 
               </Card.Body>
             </Card>
           </Col>
+            </div>
         ))}
       </CarouselCard>
     </div>

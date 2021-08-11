@@ -5,11 +5,15 @@ import {
     GET_DETAIL_DONASI_RUTIN,
     GET_DETAIL_DONASI_RUTIN_SUCCESS,
     GET_DETAIL_DONASI_RUTIN_FAILURE,
+    GET_HISTORY_DONATION,
+    GET_HISTORY_DONATION_SUCCESS,
+    GET_HISTORY_DONATION_FAILURE,  
 } from '../actionTypes';
 
 const initialState = {
     loading: false,
     donasiDetail: [],
+    historydata: [],
     error: null
 };
 
@@ -49,6 +53,23 @@ export default function donasiDetailReducer(state = initialState, action) {
                 ...state,
                 loading: false,
             };
+            case GET_HISTORY_DONATION:
+                return {
+                    ...state,
+                    loading: false
+                };
+            case GET_HISTORY_DONATION_SUCCESS:
+                return {
+                    ...state,
+                    loading: false,
+                    error: null,
+                    historydata: action.payload
+                };
+            case GET_HISTORY_DONATION_FAILURE:
+                return {
+                    ...state,
+                    loading: false,
+                };
         default:
             return state;
     }
