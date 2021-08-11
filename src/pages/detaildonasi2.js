@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Carousel, ProgressBar, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDetailDonasi, fetchHistoryDonation } from "../Redux/detaildonasi/action";
+import {
+  fetchDetailDonasi,
+  fetchHistoryDonation,
+  fetchAllHistoryDonation
+} from "../Redux/detaildonasi/action";
 import { fetchPageDonasi } from "../Redux/pagelistdonasi/actions";
 import NumberFormat from "react-number-format";
 import CarouselCard from "react-multi-carousel";
@@ -26,12 +30,18 @@ const DetailDonasi2 = (props) => {
     let percent = localStorage.getItem("percent");
     dispatch(fetchDetailDonasi(token, donasi.id));
     dispatch(fetchHistoryDonation(token, donasi.id));
+    dispatch(fetchAllHistoryDonation(token));
     dispatch(fetchPageDonasi(token));
   }, []);
 
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
   const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
-  const historydata = useSelector((state) => state.donasiDetailReducer.historydata);
+  const historydata = useSelector(
+    (state) => state.donasiDetailReducer.historydata
+  );
+  const allhistorydata = useSelector(
+    (state) => state.donasiDetailReducer.allhistorydata
+  );
 
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
@@ -241,45 +251,95 @@ const DetailDonasi2 = (props) => {
         <hr></hr>
       </Row>
       <Row>
-        <Col md={10} className="mt-5">
-          <h3 style={{ fontSize: "font-size: 1.75rem" }}>Ucapan dan Doa :</h3>
+        <Col md={6} className="mt-5">
+          <h3 style={{ fontSize: "font-size: 1.75rem" }}>Ucapan dan Doa </h3>
           <div></div>
+          {datas.slice(0, 3).map((data, idx) => (
+            <div>
+              <Card>
+                <Card.Header>Anonim</Card.Header>
+                <Card.Body>
+                  <blockquote className="blockquote mb-0">
+                    <h6>
+                      {" "}
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Integer posuere erat a ante.{" "}
+                    </h6>
+                    <h6>
+                      <footer className="blockquote-footer">
+                        <cite title="Source Title">4 mins ago</cite>
+                      </footer>
+                    </h6>
+                  </blockquote>
+                </Card.Body>
+              </Card>
+              <br />
+            </div>
+          ))}
+          <Row className="mt-4 text-justify justify-content-center">
+            <Link to="/history-donate">
+              <Button>Lihat lainnya</Button>
+            </Link>
+          </Row>          
         </Col>
-        <Col md={2} className="mt-5">
+        <Col md={6} className="mt-5">
+          
+            
+              
+          <h3 style={{ fontSize: "font-size: 1.75rem" }}>Donasi ({allhistorydata.length})</h3>
+            
+          <div></div>
+            {historydata.slice(0, 3).map((data, idx) => (
+              <div>
+                <Col key={idx}>
+                  <Card>
+                    <Card.Header>{data.username}</Card.Header>
+                    <Card.Body>
+                      <blockquote className="blockquote mb-0">
+                        <h6>
+                          <Card.Text>
+                            <div className="dana-terkumpul">
+                              Berdonasi sebesar
+                              <NumberFormat
+                                value={data.amount}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                                prefix={" Rp. "}
+                              />
+                            </div>
+                          </Card.Text>
+                        </h6>
+                        <h6>
+                          <footer className="blockquote-footer">
+                            <cite title="Source Title">
+                              <Moment fromNow>{data.paid_at}</Moment>
+                            </cite>
+                          </footer>
+                        </h6>
+                      </blockquote>
+                    </Card.Body>
+                  </Card>
+                  <br />
+                </Col>
+              </div>
+            ))}
+             <Row className="mt-4 text-justify justify-content-center">
+            <Link to="/history-donate">
+              <Button>Lihat lainnya</Button>
+            </Link>
+          </Row>  
+          {/* <CarouselCard responsive={ucapandoaCarousel} arrows={false}>
+            {historydata.map((data, idx) => (
+              
+            ))}
+          </CarouselCard> */}
+        </Col>
+        {/* <Col md={2} className="mt-5">
           <h6 style={{ fontSize: "font-size: 1.75rem" }}>Lihat Lainnya</h6>
           <div></div>
-        </Col>
+        </Col> */}
       </Row>
-      <CarouselCard responsive={ucapandoaCarousel}>
-        {datas.map((data, idx) => (
-          <Col key={idx}>
-            <Card>              
-              <Card.Body>
-                {/* <Card.Title>{data.title}</Card.Title>      */}
-                <h6 style={{ fontSize: "font-size: 1.75rem" }}>Ucapan dan Doa :</h6>           
-                <Card.Text>
-                  <div className="dana-terkumpul">
-                    <NumberFormat
-                      value={data.donation_collect}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"Rp. "}
-                    />{" "}
-                    terkumpul dari
-                    <NumberFormat
-                      value={data.target}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={" Rp. "}
-                    />
-                  </div>
-                </Card.Text>                
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </CarouselCard>
-      
+
       {/* <Row className="text-justify justify-content-center">
         <Col md={8}>
           Arief Ramdhani - "Contrary to popular belief, Lorem Ipsum is not
@@ -346,46 +406,6 @@ const DetailDonasi2 = (props) => {
               </Card.Body>
             </Card>
           </Col>
-        ))}
-      </CarouselCard>
-      <Row>
-        <Col md={10} className="mt-5">
-          <h3 style={{ fontSize: "font-size: 1.75rem" }}>Donasi </h3>
-          <div></div>
-        </Col>
-        <Col md={2} className="mt-5">
-          <h6 style={{ fontSize: "font-size: 1.75rem" }}><Link to="/history-donate">Lihat lainnya</Link></h6>
-          <div></div>
-          
-        </Col>
-      </Row>
-      <CarouselCard responsive={ucapandoaCarousel} arrows={false}>
-        {historydata.map((data, idx) => (
-          <div>
-            
-          <Col key={idx}>
-            <Card>              
-              <Card.Body>
-                {/* <Card.Title>{data.title}</Card.Title>      */}
-                <h6 style={{ fontSize: "font-size: 1.75rem" }}>{data.username}</h6>           
-                <Card.Text>
-                  <div className="dana-terkumpul">
-                    
-                    Berdonasi sebesar
-                    <NumberFormat
-                      value={data.amount}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={" Rp. "}
-                    />
-                  </div>
-                </Card.Text>  
-                <div className="dana-terkumpul"><Moment fromNow>{data.paid_at}</Moment> </div>             
-                
-              </Card.Body>
-            </Card>
-          </Col>
-            </div>
         ))}
       </CarouselCard>
     </div>

@@ -8,6 +8,9 @@ import {
     GET_HISTORY_DONATION,
     GET_HISTORY_DONATION_SUCCESS,
     GET_HISTORY_DONATION_FAILURE,  
+    GET_ALL_HISTORY_DONATION,
+    GET_ALL_HISTORY_DONATION_SUCCESS,
+    GET_ALL_HISTORY_DONATION_FAILURE,  
     } from '../actionTypes';
 import axios from 'axios';
 import history from '../../history'
@@ -132,7 +135,7 @@ export function fetchAllHistoryDonation(token) {
             }
         })
         .then(res => {
-            dispatch(getHistoryDonationSuccess(res.data.data));
+            dispatch(getAllHistoryDonationSuccess(res.data.data));
             console.log(res.data.data)
         })
         .catch(err => {
@@ -142,7 +145,7 @@ export function fetchAllHistoryDonation(token) {
                 localStorage.removeItem("token");
                 history.push('/dashboard')
             }
-            dispatch(getHistoryDonationFailure(err));
+            dispatch(getAllHistoryDonationFailure(err));
         });
     };
 };
@@ -174,7 +177,7 @@ const getDetailDonasiRutinFailure = () => ({
     type: GET_DETAIL_DONASI_RUTIN_FAILURE
 });
 
-// Get Transaction
+// Get History Donate
 const getHistoryDonationSuccess = (payload) => ({
     type: GET_HISTORY_DONATION_SUCCESS,
     payload
@@ -182,4 +185,14 @@ const getHistoryDonationSuccess = (payload) => ({
 
 const getHistoryDonationFailure = () => ({
     type: GET_HISTORY_DONATION_FAILURE
+});
+
+// Get All History Donate
+const getAllHistoryDonationSuccess = (payload) => ({
+    type: GET_ALL_HISTORY_DONATION_SUCCESS,
+    payload
+});
+
+const getAllHistoryDonationFailure = () => ({
+    type: GET_ALL_HISTORY_DONATION_FAILURE
 });

@@ -22,7 +22,7 @@ const ListProgram = () => {
   // const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
   const datas = useSelector((state) => state.pagedonasi2Reducer.pagedonasi2);
 
-  const historydata = useSelector((state) => state.donasiDetailReducer.historydata);
+  const allhistorydata = useSelector((state) => state.donasiDetailReducer.allhistorydata);
   
   return (
     <div className="content">
@@ -32,12 +32,12 @@ const ListProgram = () => {
         <div className="col-md-6">
           <div className="article-detail">
             <div className="article-heading">
-              <h2 className="article-title">{"Donasi"}</h2>
+              <h2 className="article-title">{"Donasi "}({allhistorydata.length})</h2>
             </div>
           </div>
         </div>
         </center>
-        {historydata.map((data, idx) => (
+        {allhistorydata.map((data, idx) => (
             
           <Row key={idx}>
             <Col md={12}>
