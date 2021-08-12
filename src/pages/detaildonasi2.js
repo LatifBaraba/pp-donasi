@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchDetailDonasi,
   fetchHistoryDonation,
-  fetchAllHistoryDonation
+  fetchAllHistoryDonation,
 } from "../Redux/detaildonasi/action";
 import { fetchPageDonasi } from "../Redux/pagelistdonasi/actions";
 import NumberFormat from "react-number-format";
@@ -280,54 +280,51 @@ const DetailDonasi2 = (props) => {
             <Link to="/history-donate">
               <Button>Lihat lainnya</Button>
             </Link>
-          </Row>          
+          </Row>
         </Col>
         <Col md={6} className="mt-5">
-          
-            
-              
-          <h3 style={{ fontSize: "font-size: 1.75rem" }}>Donasi ({allhistorydata.length})</h3>
-            
+          <h3 style={{ fontSize: "font-size: 1.75rem" }}>
+            Donasi ({allhistorydata.length})
+          </h3>
+
           <div></div>
-            {historydata.slice(0, 3).map((data, idx) => (
-              <div>
-                <Col key={idx}>
-                  <Card>
-                    <Card.Header>{data.username}</Card.Header>
-                    <Card.Body>
-                      <blockquote className="blockquote mb-0">
-                        <h6>
-                          <Card.Text>
-                            <div className="dana-terkumpul">
-                              Berdonasi sebesar
-                              <NumberFormat
-                                value={data.amount}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={" Rp. "}
-                              />
-                            </div>
-                          </Card.Text>
-                        </h6>
-                        <h6>
-                          <footer className="blockquote-footer">
-                            <cite title="Source Title">
-                              <Moment fromNow>{data.paid_at}</Moment>
-                            </cite>
-                          </footer>
-                        </h6>
-                      </blockquote>
-                    </Card.Body>
-                  </Card>
-                  <br />
-                </Col>
-              </div>
-            ))}
-             <Row className="mt-4 text-justify justify-content-center">
+          {historydata.slice(0, 3).map((data, idx) => (
+            <div>
+              <Card>
+                <Card.Header>{data.username}</Card.Header>
+                <Card.Body>
+                  <blockquote className="blockquote mb-0">
+                    <h6>
+                      <Card.Text>
+                        <div className="dana-terkumpul">
+                          Berdonasi sebesar
+                          <NumberFormat
+                            value={data.amount}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={" Rp. "}
+                          />
+                        </div>
+                      </Card.Text>
+                    </h6>
+                    <h6>
+                      <footer className="blockquote-footer">
+                        <cite title="Source Title">
+                          <Moment fromNow>{data.paid_at}</Moment>
+                        </cite>
+                      </footer>
+                    </h6>
+                  </blockquote>
+                </Card.Body>
+              </Card>
+              <br />
+            </div>
+          ))}
+          <Row className="mt-4 text-justify justify-content-center">
             <Link to="/history-donate">
               <Button>Lihat lainnya</Button>
             </Link>
-          </Row>  
+          </Row>
           {/* <CarouselCard responsive={ucapandoaCarousel} arrows={false}>
             {historydata.map((data, idx) => (
               
