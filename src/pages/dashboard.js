@@ -19,7 +19,7 @@ const Dashboard = () => {
   })) 
 
   const getToken = () => (new Promise((resolve,reject) => {
-    setTimeout(() => { resolve(localStorage.getItem("token"))}, 1000)
+    setTimeout(() => { resolve(localStorage.getItem("token"))}, 2000)
   })) 
 
   useEffect(() => {
@@ -27,12 +27,14 @@ const Dashboard = () => {
     async function fetchTokenAsync() {
       
       if (!localStorage.getItem("token")) {
+        console.log("masuk if async")
         let a = await setToken()
         let token = await getToken()
         
         dispatch(fetchDonasilist(token));
         dispatch(fetchDonasilist2(token));  
       } else {
+        console.log("masuk else async")
         let token = await getToken()
 
         dispatch(fetchDonasilist(token));

@@ -45,7 +45,7 @@ export function fetchDonasilist2(token) {
             console.log(err)
             if(err.response.status === 401){
                 localStorage.removeItem("token");
-                history.push('/login')
+                history.push('/dashboard')
             }
         });
     };

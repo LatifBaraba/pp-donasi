@@ -8,19 +8,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { fetchOrderRutin } from "../Redux/order-rutin/actions";
 import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
+import { fetchHistory } from '../Redux/history/action'
 
 const Order = (props) => {
-  const { register, handleSubmit, errors } = useForm();  
-    const refresh = () => {
-      setInterval(() => {
-        window.location.reload();
-      }, 100);
-    };
+  const username = localStorage.getItem("username");
+  const { register, handleSubmit, errors } = useForm();
+  const refresh = () => {
+    setInterval(() => {
+      window.location.reload();
+    }, 100);
+  };
 
   const [nominal, setNominal] = useState("");
   const [ucapan, setUcapan] = useState("");
   const [tipebayar, setTipeBayar] = useState("");
   const [isrutin, setIsRutin] = useState(true);
+  const [jumlahnominal, setJumlahNominal] = useState(0);
+  const [anonim, setAnonim] = useState(false);
 
   const donasi = props.location.state.data;
 
@@ -28,9 +32,11 @@ const Order = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchDetailDonasiRutin(token, donasi.id));
+    dispatch(fetchHistory(token, username))
   }, []);
 
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
+  const datauser = useSelector((state) => state.historyReducer.history);
   const onSubmit = (datas) => {
     let datax = [];
     if (datas === "") {
@@ -49,8 +55,27 @@ const Order = (props) => {
     }
   };
 
+  const handleChange = (e)=>{
+    // setJumlahNominal(e.target.value);
+    const arr1 = e.target.innerHTML.split(" ")[1].split(".")[0]
+    const arr2 = e.target.innerHTML.split(" ")[1].split(".")[1]
+    const arr3 = e.target.innerHTML.split(" ")[1].split(".")[2] ? e.target.innerHTML.split(" ")[1].split(".")[2] : ""
+    const arr4 = arr1.concat(arr2).concat(arr3)    
+    setNominal(parseInt(arr4))
+  }
+
   return (
     <div className="container order">
+       {datauser.slice(0,1).map((datax, id) => 
+      <div>
+        <Row className="mt-5 justify-content-center">
+          <Col md={8}>
+            <h2>Halo Kak, {datax.username} </h2>            
+          </Col>
+        </Row>
+        <hr/>
+        </div>        
+      )}
       <Form onSubmit={handleSubmit(onSubmit)}>
         {/* <Row className="mt-3 justify-content-center">
           <Col md={8}>
@@ -75,12 +100,21 @@ const Order = (props) => {
               <Form.Label>Nominal Donasi</Form.Label>
               <Form.Control
                 type="number"
+                defaultValue={`${nominal}`}
                 // placeholder="No. Hp"
                 {...register("nominal", {
                   required: true,
                 })}
                 onChange={(e) => setNominal(e.target.value)}
               />
+            </Form.Group>
+            <Form.Group controlId="formJumlahNominal">
+              <Button variant="outline-dark" onClick={handleChange}>Rp. 25.000</Button>{" "}
+              <Button variant="outline-dark" onClick={handleChange}>Rp. 50.000</Button>{" "}
+              <Button variant="outline-dark" onClick={handleChange}>Rp. 100.000</Button>{" "}
+              <Button variant="outline-dark" onClick={handleChange}>Rp. 250.000</Button>{" "}
+              <Button variant="outline-dark" onClick={handleChange}>Rp. 500.000</Button>{" "}
+              <Button variant="outline-dark" onClick={handleChange}>Rp. 1.000.000</Button>
             </Form.Group>
             <Form.Group controlId="formTipeBayar">
               <Form.Control
@@ -132,12 +166,16 @@ const Order = (props) => {
               </Form.Label>
               <Form.Control
                 type="text"
+                as="textarea"
                 placeholder="Enter Text"
                 {...register("ucapan", {
                   required: true,
                 })}
                 onChange={(e) => setUcapan(e.target.value)}
               />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+              <Form.Check type="checkbox" label="Tampilkan Anonim" onChange={(e) => setAnonim(true)}/>
             </Form.Group>
           </Col>
         </Row>

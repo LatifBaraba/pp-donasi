@@ -18,7 +18,7 @@ const Order = (props) => {
 
   let token = localStorage.getItem("token");
   const dispatch = useDispatch();
-  console.log(donasi)
+  // console.log(donasi)
   const onSubmit = (datas) => {
     let datax = [];
     if (datas === "") {
@@ -150,6 +150,8 @@ const Order = (props) => {
     </Row> */}
         <Row className="mt-5 justify-content-center donasi-amount">
           <Col md={8}>
+          {donasi[2] === "Manual" ? (
+            <div>
             <h3>Panduan Pembayaran</h3>
             <br />
             <b>Melalui Internet/Mobile Banking</b>
@@ -190,6 +192,9 @@ const Order = (props) => {
             <br />
             <br />
             <br />
+            </div>
+          ) : (<Col></Col>)
+          }
           </Col>
         </Row>
       </Form>

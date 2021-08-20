@@ -4,6 +4,7 @@ import { LogOutOutline, PencilOutline } from 'react-ionicons'
 import { Link } from 'react-router-dom';
 import { fetchLogout } from "../../Redux/auth/login/actions";
 import { useDispatch } from 'react-redux';
+import LogoAyoKitaPeduli from "../../assets/images/logo.png"
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const Header = () => {
 
     return (
         <Navbar sticky="top" expand="lg">
-            <Navbar.Brand><Link to="/dashboard">Pemuda Peduli</Link></Navbar.Brand>
+            <Navbar.Brand><Link to="/dashboard"><img src={LogoAyoKitaPeduli}  style={{ width: '25%' }} /></Link></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">

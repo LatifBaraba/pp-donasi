@@ -11,7 +11,7 @@ import "react-multi-carousel/lib/styles.css";
 
 const DetailDonasi = (props) => {
   const [now, setNow] = useState(45);
-  const username = localStorage.getItem('username')
+  const username = localStorage.getItem("username");
   const refresh = () => {
     setInterval(() => {
       window.location.reload();
@@ -55,39 +55,41 @@ const DetailDonasi = (props) => {
   // }
   return (
     <div className="container detail-program">
-      <div className="row row-mb-5" style={{ display: 'flex' }}>
-        <div className="col-md-6" style={{ width: '50%' }}>
+      <div className="row row-mb-5" style={{ display: "flex" }}>
+        <div className="col-md-6" style={{ width: "50%" }}>
           <div className="article-content">
             <div className="article-media">
-              <img src={data.thumbnail_image_url} className="article-image img-1" alt="" />
+              <img
+                src={data.thumbnail_image_url}
+                className="article-image img-1"
+                alt=""
+              />
             </div>
             <div className="article-summary">
-              <p className="os-12 txt-600">
-                {data.title}
-              </p>
+              <p className="os-12 txt-600">{data.title}</p>
             </div>
-            <div className="article-action">
-            </div>
+            <div className="article-action"></div>
           </div>
         </div>
         <div className="col-md-6">
           <div className="article-detail">
             <div className="article-heading">
-              <h2 className="article-title">
-                {data.title}
-              </h2>
+              <h2 className="article-title">{data.title}</h2>
             </div>
             <div>
-              {isReadMore ? data.description && data.description.slice(0, 150) : data.description}
-              {data.description && data.description.length < 150 ? "" : (
+              {isReadMore
+                ? data.description && data.description.slice(0, 150)
+                : data.description}
+              {data.description && data.description.length < 150 ? (
+                ""
+              ) : (
                 <span onClick={toggleReadMore} className="read-or-hide">
                   {isReadMore ? "...read more" : " show less"}
                 </span>
               )}
             </div>
             <div className="article-status">
-              <span className="os-13 txt-600 text-terkumpul">
-                Target 									</span>
+              <span className="os-13 txt-600 text-terkumpul">Target </span>
               <div className="article-number campaign-donate">
                 <h2>
                   <NumberFormat
@@ -97,55 +99,47 @@ const DetailDonasi = (props) => {
                     thousandSeparator={true}
                     prefix={"Rp. "}
                   />
-                  </h2>
+                </h2>
               </div>
             </div>
-            <div className="article-button my-4" style={{ display: 'flex' }}>
+            <div className="article-button my-4" style={{ display: "flex" }}>
               <Col md={4}>
-                <Link
-                  to={{
-                    pathname: "/order/" + data.id,
-                    state: { data: donasi },
-                  }}
-                  className="mr-2"
-                >
-                  <Button variant="primary">Donasi Sekarang</Button>
-                </Link>
-              </Col>
-              {data.ayobantu_link !== "" && (
-                <Col md={4}>
-                  <a
-                    href={data.ayobantu_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                {username ? (
+                  <Link
+                    to={{
+                      pathname: "/order-rutin/" + data.id,
+                      state: { data: donasi },
+                    }}
                     className="mr-2"
                   >
-                    <Button variant="primary">Donasi di ayobantu.com</Button>
-                  </a>
-                </Col>
-              )}
-              {data.kitabisa_link !== "" && (
-                <Col md={4}>
-                  <a
-                    href={data.kitabisa_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ marginLeft: 'auto' }}
+                    <Button variant="primary">Donasi Sekarang</Button>
+                  </Link>
+                ) : (
+                  <Link
+                    to={{
+                      pathname: "/login",
+                    }}
+                    className="mr-2"
                   >
-                    <Button variant="primary">Donasi di kitabisa.com</Button>
-                  </a>
-                </Col>
-              )}
+                    <Button variant="primary">Donasi Sekarang</Button>
+                  </Link>
+                )}
+              </Col>              
             </div>
           </div>
         </div>
       </div>
-      <Row className="mt-4 text-justify justify-content-center" style={{ marginLeft: '10%', marginRight: '10%' }}>
-        <Col md={12} style={{ border: '4px' }}>
+      <Row
+        className="mt-4 text-justify justify-content-center"
+        style={{ marginLeft: "10%", marginRight: "10%" }}
+      >
+        <Col md={12} style={{ border: "4px" }}>
           <Card>
             <div className="container">
               <div className="mb-3">
-                <h2><strong>{data.title}</strong></h2>
+                <h2>
+                  <strong>{data.title}</strong>
+                </h2>
               </div>
               <div dangerouslySetInnerHTML={{ __html: data.content }} />
             </div>
@@ -155,10 +149,8 @@ const DetailDonasi = (props) => {
       </Row>
       <Row>
         <Col md={12} className="mt-5">
-          <h3 style={{ fontSize: 'font-size: 1.75rem' }}>Ucapan dan Doa :</h3>
-          <div>
-
-          </div>
+          <h3 style={{ fontSize: "font-size: 1.75rem" }}>Ucapan dan Doa :</h3>
+          <div></div>
         </Col>
       </Row>
       {/* <Row className="text-justify justify-content-center">
