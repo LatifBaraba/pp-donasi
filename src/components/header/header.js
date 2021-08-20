@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Nav, Navbar, Dropdown, DropdownButton } from 'react-bootstrap'
-import { LogOutOutline, PencilOutline } from 'react-ionicons'
+import { LogOutOutline, PencilOutline, AiOutlineHistory, TimeOutline } from 'react-ionicons'
 import { Link } from 'react-router-dom';
 import { fetchLogout } from "../../Redux/auth/login/actions";
 import { useDispatch } from 'react-redux';
@@ -18,7 +18,7 @@ const Header = () => {
 
     return (
         <Navbar sticky="top" expand="lg">
-            <Navbar.Brand><Link to="/dashboard"><img src={LogoAyoKitaPeduli}  style={{ width: '25%' }} /></Link></Navbar.Brand>
+            <Navbar.Brand><Link to="/dashboard"><img src={LogoAyoKitaPeduli} style={{ width: '25%' }} /></Link></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
@@ -33,18 +33,18 @@ const Header = () => {
                                 id="dropdown-menu-align-right"
                                 className="btn-profile"
                             >
-                                <Dropdown.Item eventKey="1">
+                                <Dropdown.Item>
                                     <PencilOutline color={'#00000'} height="15px" width="15px" />
                                 &nbsp; Edit Profile
                                 </Dropdown.Item>
-                                <Link to="/history" style={{ color: "#212529" }}>
-                                    <Dropdown.Item eventKey="2">
-                                        <LogOutOutline height="15px" width="15px" />
-                                       History
+                                <Dropdown.Item>
+                                    <Link to="/history" style={{ color: "#212529" }}>
+                                        <TimeOutline color={'#00000'} height="15px" width="15px" />
+                                      &nbsp; History
+                                    </Link>
                                 </Dropdown.Item>
-                                </Link>
                                 <Dropdown.Divider />
-                                <Dropdown.Item eventKey="4">
+                                <Dropdown.Item>
                                     <LogOutOutline color={'#00000'} height="15px" width="15px" />
                                 &nbsp; <a onClick={() => { logout() }}>Log out</a>
                                 </Dropdown.Item>
