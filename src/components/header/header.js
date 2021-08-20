@@ -24,34 +24,33 @@ const Header = () => {
                     <Nav.Link href="#features">Contact</Nav.Link>
                     <Nav.Link href="#pricing">Legal</Nav.Link>
                     <Nav.Link href="#pricing">FAQ</Nav.Link>
-                    { username ?                     
-                    <Nav.Link>
-                        <DropdownButton
-                            menuAlign="right"
-                            title="Profile"
-                            id="dropdown-menu-align-right"
-                            className="btn-profile"
-                        >
-                            <Dropdown.Item eventKey="1">
-                                <PencilOutline color={'#00000'} height="15px" width="15px" />
+                    {username ?
+                        <Nav.Link>
+                            <DropdownButton
+                                menuAlign="right"
+                                title="Profile"
+                                id="dropdown-menu-align-right"
+                                className="btn-profile"
+                            >
+                                <Dropdown.Item eventKey="1">
+                                    <PencilOutline color={'#00000'} height="15px" width="15px" />
                                 &nbsp; Edit Profile
                                 </Dropdown.Item>
-                            <Dropdown.Item eventKey="4">
-                                <Link to="/history">
+                                <Link to="/history" style={{ color: "#212529" }}>
+                                    <Dropdown.Item eventKey="2">
+                                        <LogOutOutline height="15px" width="15px" />
+                                       History
+                                </Dropdown.Item>
+                                </Link>
+                                <Dropdown.Divider />
+                                <Dropdown.Item eventKey="4">
                                     <LogOutOutline color={'#00000'} height="15px" width="15px" />
-                                &nbsp; History
-                            </Link>
-                            </Dropdown.Item>
-                            <Dropdown.Divider />
-                          
-                            <Dropdown.Item eventKey="4">
-                                <LogOutOutline color={'#00000'} height="15px" width="15px" />
-                                &nbsp; <a onClick={() => {logout()}}>Log out</a>
-                            </Dropdown.Item>
+                                &nbsp; <a onClick={() => { logout() }}>Log out</a>
+                                </Dropdown.Item>
 
-                        </DropdownButton>
-                    </Nav.Link>
-                    : <Nav.Link href="/login">Login</Nav.Link>
+                            </DropdownButton>
+                        </Nav.Link>
+                        : <Nav.Link href="/login">Login</Nav.Link>
                     }
                 </Nav>
             </Navbar.Collapse>
