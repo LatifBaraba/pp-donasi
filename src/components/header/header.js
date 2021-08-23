@@ -18,7 +18,7 @@ const Header = () => {
 
     return (
         <Navbar sticky="top" expand="lg">
-            <Navbar.Brand><Link to="/dashboard"><img src={LogoAyoKitaPeduli} style={{ width: '25%' }} /></Link></Navbar.Brand>
+            <Navbar.Brand href="/dashboard"><img src={LogoAyoKitaPeduli} style={{ width: '25%' }} /></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
@@ -33,18 +33,18 @@ const Header = () => {
                                 id="dropdown-menu-align-right"
                                 className="btn-profile"
                             >
-                                <Dropdown.Item>
+                                <Dropdown.Item eventKey="1">
                                     <PencilOutline color={'#00000'} height="15px" width="15px" />
                                 &nbsp; Edit Profile
                                 </Dropdown.Item>
-                                <Dropdown.Item>
+                                <Dropdown.Item eventKey="2"> 
                                     <Link to="/history" style={{ color: "#212529" }}>
                                         <TimeOutline color={'#00000'} height="15px" width="15px" />
                                       &nbsp; History
                                     </Link>
                                 </Dropdown.Item>
                                 <Dropdown.Divider />
-                                <Dropdown.Item>
+                                <Dropdown.Item eventKey="3">
                                     <LogOutOutline color={'#00000'} height="15px" width="15px" />
                                 &nbsp; <a onClick={() => { logout() }}>Log out</a>
                                 </Dropdown.Item>
