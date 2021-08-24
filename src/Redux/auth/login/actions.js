@@ -47,6 +47,44 @@ export function fetchLogin(token, payload) {
 };
 }
 
+export function fetchLoginSession(token, payload, donasi) {
+  console.log(token)
+  console.log(payload)
+  console.log(donasi)
+  return (dispatch) => {
+    axios(LOGINURL, {
+        method: 'POST',
+        data: {
+            username: payload.username,
+            password: payload.password
+        },
+        headers: {
+            "pp-token": `${token}`,
+            "Content-type": "application/json"
+        }
+    })
+    .then(res => {
+        dispatch(loginSuccess(res));
+        toast.success("Login Success !")
+        // localStorage.setItem("token", token)
+        localStorage.setItem("username", payload.username)
+        // history.push("/donasi-detail2/"+donasi.id)
+        history.push({
+          pathname: '/donasi-detail2/'+ donasi.id,
+          state: { donasi: donasi }
+      });
+        
+    })
+    .catch(err => {
+        if (err.response.status === 400) {
+            toast.error("incorrect username or password !")
+        } else if (err.response.status === 401) {
+            toast.error("password not match !")
+        }
+        dispatch(loginFailure(err));
+    });
+};
+}
 
 export function fetchLogout(token) {
   return (dispatch) => {

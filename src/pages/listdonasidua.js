@@ -41,11 +41,11 @@ const Listdonasidua = () => {
               {/* <Card.Img src="https://i.pinimg.com/originals/99/f7/6b/99f76b3de162688defe73255366828e2.jpg" alt="Card image"/> */}
               {data.thumbnail_image_url ? <Card.Img src={data.thumbnail_image_url} alt="Card image"/> : <Card.Img src="https://img.freepik.com/free-vector/diverse-crowd-people-different-ages-races_74855-5235.jpg?size=626&ext=jpg"alt="Card image"/>}
               <Card.ImgOverlay>
-                <Card.Title>{data.title}</Card.Title>
+                {/* <Card.Title>{data.title}</Card.Title> */}
                 <Card.Text className="card-desc">
                   {data.sub_title}
                 </Card.Text>
-                <Card.Text>Last updated 3 mins ago</Card.Text>
+                {/* <Card.Text>Last updated 3 mins ago</Card.Text> */}
                 
                 <Link to={{
                       pathname: "/donasi-detail2/" + data.id,

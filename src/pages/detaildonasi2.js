@@ -23,7 +23,7 @@ const DetailDonasi2 = (props) => {
   };
   const { donasi } = props.location.state;
 
-  // console.log(donasi, "donasi yeuh")
+  console.log(donasi, "donasi yeuh")
   const dispatch = useDispatch();
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -47,6 +47,10 @@ const DetailDonasi2 = (props) => {
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
+
+  let from = new Date();
+  let to = new Date(data.valid_to);
+  // let Difference_In_Days = to.getUTCDate() - from.getUTCDate;
 
   const responsive = {
     superLargeDesktop: {
@@ -165,6 +169,7 @@ const DetailDonasi2 = (props) => {
                     />
                   </span>
                 </h2>
+                {"Sisa " + (to.getUTCDate() - from.getUTCDate()) + " Hari"}
               </div>
               <div className="cardbox-stat mb-2 progressbar">
                 <ProgressBar
@@ -174,6 +179,9 @@ const DetailDonasi2 = (props) => {
                   className="donasi-progressbar"
                 />
               </div>
+              
+              {/* <Moment fromNow ago>{data.valid_to}</Moment> */}
+              
               {/* <div class="remain-txt remaining-day">
                 <span class="total-dermawan">4.787 Dermawan</span>
                 <span>
@@ -197,6 +205,7 @@ const DetailDonasi2 = (props) => {
                   <Link
                     to={{
                       pathname: "/login",
+                      state: { data: donasi },
                     }}
                     className="mr-2"
                   >

@@ -51,7 +51,23 @@ const Header = () => {
 
                             </DropdownButton>
                         </Nav.Link>
-                        : <Nav.Link href="/login">Login</Nav.Link>
+                        : 
+                        <Nav.Link href="#"><Link
+                            to={{
+                            pathname: "/login",
+                            state: { data: "kosong" },
+                            }}
+                            className="mr-2"
+                        >Login
+                        </Link></Nav.Link>
+                        // <Link
+                        //     to={{
+                        //     pathname: "/login",
+                        //     state: { data: "kosong" },
+                        //     }}
+                        //     className="mr-2"
+                        // >Login
+                        // </Link>
                     }
                 </Nav>
             </Navbar.Collapse>

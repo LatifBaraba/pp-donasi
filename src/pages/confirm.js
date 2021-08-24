@@ -10,6 +10,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { uploadImage } from "../helper/index";
 
+import NumberFormat from "react-number-format";
+
 const Confirm = () => {
   const { register, handleSubmit, errors, watch } = useForm();
   const dispatch = useDispatch();
@@ -25,7 +27,7 @@ const Confirm = () => {
   const [idtransaction, setIdtransaction] = useState("");
 
   useEffect(() => {
-    let token = localStorage.getItem("token")        
+    let token = localStorage.getItem("token");
     dispatch(fetchConfirmList(token));
   }, []);
 
@@ -33,20 +35,19 @@ const Confirm = () => {
   const confirmlist = useSelector((state) => state.confirmReducer.confirm);
 
   const onSubmit = (data) => {
-
-    let token = localStorage.getItem("token")    
-    if (data !== '') {
-        uploadImage(bukti).then(message => {
-            const bukti = message.response.data.url;
-            dispatch(fetchAddConfirm(token, idtransaction, bukti))
+    let token = localStorage.getItem("token");
+    if (data !== "") {
+      uploadImage(bukti)
+        .then((message) => {
+          const bukti = message.response.data.url;
+          dispatch(fetchAddConfirm(token, idtransaction, bukti));
         })
-        .catch(error => {
-            ToastContainer.error("Upload Image Failed !");
-        })
+        .catch((error) => {
+          ToastContainer.error("Upload Image Failed !");
+        });
     } else {
-        errors.showMessages();
+      errors.showMessages();
     }
-
   };
   return (
     <div className="checkout container">
@@ -60,25 +61,30 @@ const Confirm = () => {
       <hr />
       <Row className="justify-content-md-center">
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <Form.Group controlId="formIdtransaction">
-              <Form.Label>Pilih Donasi</Form.Label>
-              <Form.Control
-                required
-                as="select"
-                type="select"
-                onChange={(e) => setIdtransaction(e.target.value)}      
-              
-              >
-               <option value="">Pilih Donasi</option>
-                {confirmlist.map((confirm, index) => (
-                    <option key={index} value={confirm.id}>{confirm.id + " -- " + confirm.donasi_title}</option>                    
-                ))}
-              </Form.Control>
-              
-            </Form.Group>
+          <Form.Group controlId="formIdtransaction">
+            <Form.Label>Pilih Donasi</Form.Label>
+            <Form.Control
+              required
+              as="select"
+              type="select"
+              onChange={(e) => setIdtransaction(e.target.value)}
+            >
+              <option value="">Pilih Donasi</option>
+              {confirmlist.map((confirm, index) => (
+                <option key={index} value={confirm.id}>
+                  {"Rp. " + confirm.amount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".")  + " -- " + confirm.donasi_title}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
 
-            <Form.Label>Upload Bukti Bayar</Form.Label>
-          <input className="form-control" type="file" accept="image/*" onChange={(e) => setBukti(e.target.files[0])}/>
+          <Form.Label>Upload Bukti Bayar</Form.Label>
+          <input
+            className="form-control"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setBukti(e.target.files[0])}
+          />
           <Form.Group controlId="formBasicCheckbox"></Form.Group>
           <ToastContainer autoClose={2000} />
           <Button variant="primary" type="submit" block>

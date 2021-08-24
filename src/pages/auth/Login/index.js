@@ -3,14 +3,14 @@ import { Button, Card, Row, Container, Form } from "react-bootstrap";
 import LogoPP from "../../../assets/images/pemudapeduli.png";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { fetchLogin } from "../../../Redux/auth/login/actions";
+import { fetchLogin , fetchLoginSession} from "../../../Redux/auth/login/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchToken } from "../../../Redux/token/action";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Login = () => {
+const Login = (props) => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
 
@@ -25,7 +25,8 @@ const Login = () => {
   // pass : 12345678
   
   // const token = useSelector((state) => state.tokenReducer.token.token);
-
+  const donasi = props.location.state.data;
+  console.log(donasi)
   let token = localStorage.getItem("token")
 
   const onSubmit = (data) => {
@@ -37,7 +38,11 @@ const Login = () => {
         username: username,
         password: password,
       };
-      dispatch(fetchLogin(token, payload));
+      if (donasi == "kosong") {
+        dispatch(fetchLogin(token, payload));        
+      } else {
+        dispatch(fetchLoginSession(token, payload, donasi));        
+      }
     }
   };
 
