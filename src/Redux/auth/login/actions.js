@@ -47,7 +47,7 @@ export function fetchLogin(token, payload) {
 };
 }
 
-export function fetchLoginSession(token, payload, donasi) {
+export function fetchLoginSession(token, payload, donasi, uripath) {
   console.log(token)
   console.log(payload)
   console.log(donasi)
@@ -69,10 +69,21 @@ export function fetchLoginSession(token, payload, donasi) {
         // localStorage.setItem("token", token)
         localStorage.setItem("username", payload.username)
         // history.push("/donasi-detail2/"+donasi.id)
-        history.push({
-          pathname: '/donasi-detail2/'+ donasi.id,
-          state: { donasi: donasi }
-      });
+
+        const uri = uripath.split('/');
+
+        if (uri[1] == 'donasi-detail') {
+          history.push({
+              pathname: '/donasi-detail/'+ donasi.id,
+              state: { donasi: donasi }
+          });
+        } else {
+          history.push({
+              pathname: '/donasi-detail2/'+ donasi.id,
+              state: { donasi: donasi }
+          });
+        }
+        
         
     })
     .catch(err => {

@@ -26,6 +26,7 @@ const Login = (props) => {
   
   // const token = useSelector((state) => state.tokenReducer.token.token);
   const donasi = props.location.state.data;
+  const uripath = props.location.state.uripath;
   console.log(donasi)
   let token = localStorage.getItem("token")
 
@@ -41,7 +42,7 @@ const Login = (props) => {
       if (donasi == "kosong") {
         dispatch(fetchLogin(token, payload));        
       } else {
-        dispatch(fetchLoginSession(token, payload, donasi));        
+        dispatch(fetchLoginSession(token, payload, donasi, uripath));        
       }
     }
   };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Button, Dropdown, MenuItem } from "react-bootstrap";
 import NumberFormat from "react-number-format";
-import { fetchDetailDonasiRutin } from "../Redux/detaildonasi/action";
+import { fetchDetailDonasiRutin, fetchDetailDonasiRutinPaket } from "../Redux/detaildonasi/action";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -18,6 +18,23 @@ const Order = (props) => {
       window.location.reload();
     }, 100);
   };
+  
+ 
+  
+  const donasi = props.location.state.data;
+  
+  let token = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchDetailDonasiRutin(token, donasi.id));
+    dispatch(fetchDetailDonasiRutinPaket(token, donasi.id));
+    dispatch(fetchHistory(token, username))
+  }, []);
+
+  const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
+  const datadetailpaket = useSelector((state) => state.donasiDetailReducer.donasiDetailPaket);
+  const datauser = useSelector((state) => state.historyReducer.history);
+  console.log(datadetailpaket)
 
   const [nominal, setNominal] = useState("");
   const [ucapan, setUcapan] = useState("");
@@ -26,29 +43,18 @@ const Order = (props) => {
   const [jumlahnominal, setJumlahNominal] = useState(0);
   const [anonim, setAnonim] = useState(false);
 
-  const donasi = props.location.state.data;
-
-  let token = localStorage.getItem("token");
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchDetailDonasiRutin(token, donasi.id));
-    dispatch(fetchHistory(token, username))
-  }, []);
-
-  const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
-  const datauser = useSelector((state) => state.historyReducer.history);
+  // console.log(datadetailpaket.nominal)
   const onSubmit = (datas) => {
     let datax = [];
     if (datas === "") {
       errors.showMessage();
     } else {
       let username = localStorage.getItem("username");
-
       datax = {
         is_rutin: true,
         id_pp_cp_program_donasi: "",
         id_pp_cp_program_donasi_rutin: data.id,
-        amount: parseInt(nominal),
+        amount: datadetailpaket.nominal,
         payment_method: tipebayar,
       };
       dispatch(fetchOrderRutin(token, datax));
@@ -85,7 +91,7 @@ const Order = (props) => {
         <Row className="mt-5 justify-content-center">
           <Col md={8}>
             <h4>Silahkan Melakukan Pembayaran Donasi </h4>
-            <h3>{data.title}</h3>
+            <h3>{datadetailpaket.paket_name}</h3>
           </Col>
         </Row>
         <Row className="mt-5 justify-content-center donasi-amount">
@@ -98,24 +104,26 @@ const Order = (props) => {
             /> */}
             <Form.Group controlId="formNominal">
               <Form.Label>Nominal Donasi</Form.Label>
-              <Form.Control
-                type="number"
-                defaultValue={`${nominal}`}
+              <h4>{datadetailpaket.nominal}</h4>
+              {/* <Form.Control
+                type="text"
+                defaultValue={`${datadetailpaket.nominal}`}
                 // placeholder="No. Hp"
                 {...register("nominal", {
                   required: true,
                 })}
                 onChange={(e) => setNominal(e.target.value)}
-              />
+                readOnly
+              /> */}
             </Form.Group>
-            <Form.Group controlId="formJumlahNominal">
+            {/* <Form.Group controlId="formJumlahNominal">
               <Button variant="outline-dark" onClick={handleChange}>Rp. 25.000</Button>{" "}
               <Button variant="outline-dark" onClick={handleChange}>Rp. 50.000</Button>{" "}
               <Button variant="outline-dark" onClick={handleChange}>Rp. 100.000</Button>{" "}
               <Button variant="outline-dark" onClick={handleChange}>Rp. 250.000</Button>{" "}
               <Button variant="outline-dark" onClick={handleChange}>Rp. 500.000</Button>{" "}
               <Button variant="outline-dark" onClick={handleChange}>Rp. 1.000.000</Button>
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group controlId="formTipeBayar">
               <Form.Control
                 required
@@ -195,7 +203,7 @@ const Order = (props) => {
             <Link
               to={{
                 pathname: "/invoice/" + data.id,
-                state: { donasi: [data, nominal, tipebayar, isrutin] },
+                state: { donasi: [data, datadetailpaket.nominal, tipebayar, isrutin] },
               }}
               className="mr-2"
             >

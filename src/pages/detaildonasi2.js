@@ -205,7 +205,7 @@ const DetailDonasi2 = (props) => {
                   <Link
                     to={{
                       pathname: "/login",
-                      state: { data: donasi },
+                      state: { data: donasi, uripath : window.location.pathname },
                     }}
                     className="mr-2"
                   >
@@ -330,7 +330,10 @@ const DetailDonasi2 = (props) => {
             </div>
           ))}
           <Row className="mt-4 text-justify justify-content-center">
-            <Link to="/history-donate">
+            <Link  to={{
+                    pathname: "/history-donate",
+                    state: window.location.pathname 
+                  }}>
               <Button>Lihat lainnya</Button>
             </Link>
           </Row>
