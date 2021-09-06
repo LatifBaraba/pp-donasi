@@ -13,6 +13,8 @@ import CarouselCard from "react-multi-carousel";
 import Moment from "react-moment";
 import "react-multi-carousel/lib/styles.css";
 import "./detaildonasi2.css";
+import { CheckCircle } from "react-feather";
+
 const DetailDonasi2 = (props) => {
   const [now, setNow] = useState(0);
   const username = localStorage.getItem("username");
@@ -403,7 +405,10 @@ const DetailDonasi2 = (props) => {
                   </div>
                 </Card.Text>
                 {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
-
+                <Card.Text style={{width:"10"}}>{data.penggalang_dana.Name ? data.penggalang_dana.Name : ''} 
+                                                {' '}{data.penggalang_dana.Name && data.penggalang_dana.IsVerified ? 
+                                                 <CheckCircle color="blue" style={{width:"15"}}></CheckCircle>
+                                                : data.penggalang_dana.Name}</Card.Text>
                 <Link
                   to={{
                     pathname: "/donasi-detail2/" + data.id,
