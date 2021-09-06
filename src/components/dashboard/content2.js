@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
 import { fetchDetailDonasi } from "../../Redux/detaildonasi/action";
 import { useDispatch, useSelector } from "react-redux";
+import { CheckCircle } from "react-feather";
 
 const Content2 = (props) => {
   // const [now, setNow] = useState(0);
+  const [icon , setIcon] = useState(<CheckCircle color="blue" style={{width:"15"}}></CheckCircle>)
   const datas = props.data;
-  
+  console.log(datas)
   // const dispatch = useDispatch();
   // useEffect(() => {
   //   let token = localStorage.getItem("token");   
@@ -72,7 +74,11 @@ const Content2 = (props) => {
                   </div>
                 </Card.Text>
                 {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
-
+                
+                <Card.Text style={{width:"10"}}>{data.penggalang_dana.Name ? data.penggalang_dana.Name : ''} 
+                                                {' '}{data.penggalang_dana.Name && data.penggalang_dana.IsVerified ? 
+                                                 <CheckCircle color="blue" style={{width:"15"}}></CheckCircle>
+                                                : data.penggalang_dana.Name}</Card.Text>
                 <Link
                   to={{
                     pathname: "/donasi-detail2/" + data.id,

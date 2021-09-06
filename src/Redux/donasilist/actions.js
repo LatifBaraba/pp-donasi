@@ -14,7 +14,7 @@ export function fetchDonasilist(token) {
     axios(URL, {
       method: "POST",
       data: {
-        limit: "12",
+        limit: "22",
         offset: "0",
         filters: [
           {
