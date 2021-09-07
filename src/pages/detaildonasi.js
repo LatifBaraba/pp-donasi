@@ -222,25 +222,24 @@ const DetailDonasi = (props) => {
         <Col md={6} className="mt-5">
           <h3 style={{ fontSize: "font-size: 1.75rem" }}>Ucapan dan Doa </h3>
           <div></div>
-          {datas.slice(0, 3).map((data, idx) => (
+          {historydata.slice(0, 3).map((data, idx) => (
             <div>
-              <Card>
-                <Card.Header>Anonim</Card.Header>
+              {data.ucapan_dan_doa ? <Card>
+                <Card.Header>{data.is_anonymous ? "Anonim" : data.username}</Card.Header>
                 <Card.Body>
                   <blockquote className="blockquote mb-0">
                     <h6>
                       {" "}
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Integer posuere erat a ante.{" "}
+                      {data.ucapan_dan_doa}{" "}
                     </h6>
                     <h6>
                       <footer className="blockquote-footer">
-                        <cite title="Source Title">4 mins ago</cite>
+                        <cite title="Source Title"><Moment fromNow>{data.paid_at}</Moment></cite>
                       </footer>
                     </h6>
                   </blockquote>
                 </Card.Body>
-              </Card>
+              </Card> : ''}
               <br />
             </div>
           ))}

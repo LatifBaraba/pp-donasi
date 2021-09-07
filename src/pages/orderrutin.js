@@ -55,6 +55,8 @@ const Order = (props) => {
         id_pp_cp_program_donasi: "",
         id_pp_cp_program_donasi_rutin: data.id,
         amount: datadetailpaket.nominal,
+        ucapan_dan_doa: ucapan,
+        is_anonymous: anonim,
         payment_method: tipebayar,
       };
       dispatch(fetchOrderRutin(token, datax));
@@ -183,7 +185,12 @@ const Order = (props) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Tampilkan Anonim" onChange={(e) => setAnonim(true)}/>
+              {/* <Form.Check type="checkbox" label="Tampilkan Anonim" onChange={(e) => setAnonim(true)}/> */}
+              <input
+                type="checkbox"
+                checked={anonim}
+                onChange={e => setAnonim(e.target.checked)}
+              /> Tampilkan Anonim
             </Form.Group>
           </Col>
         </Row>

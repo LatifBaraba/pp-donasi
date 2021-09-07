@@ -22,6 +22,8 @@ export function fetchOrderRutin(token, payload) {
             id_pp_cp_program_donasi: payload.id_pp_cp_program_donasi,
             id_pp_cp_program_donasi_rutin: payload.id_pp_cp_program_donasi_rutin,
             amount: payload.amount,
+            ucapan_dan_doa: payload.ucapan_dan_doa,
+            is_anonymous: payload.is_anonymous,
             payment_method: payload.payment_method
         },
         headers: {

@@ -50,8 +50,11 @@ const Order = (props) => {
         id_pp_cp_program_donasi: data.id,
         id_pp_cp_program_donasi_rutin: "",
         amount: parseInt(nominal),
+        ucapan_dan_doa: ucapan,
+        is_anonymous: anonim,
         payment_method: tipebayar,
-      };      
+      };     
+      // console.log(datax) 
       dispatch(fetchOrder(token, datax));      
     }
   };
@@ -110,12 +113,20 @@ const Order = (props) => {
               />
             </Form.Group>
             <Form.Group controlId="formJumlahNominal">
-              <Button variant="outline-dark" onClick={handleChange}>Rp. 25.000</Button>{" "}
+              {data.nominal.map((data, id) => 
+                <Button variant="outline-dark" onClick={handleChange}>{ <NumberFormat
+                  value={data}
+                  displayType={"text"}
+                  thousandSeparator={false}
+                  prefix={"Rp. "}
+                />}</Button>
+              )}
+              {/* <Button variant="outline-dark" onClick={handleChange}>{data.nominal}</Button>{" "}
               <Button variant="outline-dark" onClick={handleChange}>Rp. 50.000</Button>{" "}
               <Button variant="outline-dark" onClick={handleChange}>Rp. 100.000</Button>{" "}
               <Button variant="outline-dark" onClick={handleChange}>Rp. 250.000</Button>{" "}
               <Button variant="outline-dark" onClick={handleChange}>Rp. 500.000</Button>{" "}
-              <Button variant="outline-dark" onClick={handleChange}>Rp. 1.000.000</Button>
+              <Button variant="outline-dark" onClick={handleChange}>Rp. 1.000.000</Button> */}
             </Form.Group>
             <Form.Group controlId="formTipeBayar">
               <Form.Control
@@ -174,7 +185,12 @@ const Order = (props) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Tampilkan Anonim" onChange={(e) => setAnonim(true)}/>
+              {/* <Form.Check type="checkbox" label="Tampilkan Anonim" onChange={(e) => setAnonim(e.target.value)}/> */}
+              <input
+                type="checkbox"
+                checked={anonim}
+                onChange={e => setAnonim(e.target.checked)}
+              /> Tampilkan Anonim
             </Form.Group>
           </Col>
         </Row>
@@ -191,7 +207,7 @@ const Order = (props) => {
             {/* <Button variant="primary" type="submit" block>
               Checkout
             </Button> */}
-            <Link
+            {/* <Link
             to={{
               pathname: "/invoice/" + data.id,
               state: { donasi: [data,nominal,tipebayar, isrutin] },
@@ -199,8 +215,8 @@ const Order = (props) => {
             className="mr-2"
           >
             <Button onClick={refresh}>Donasi Sekarang</Button>
-          </Link>
-            {/* <Button onClick={refresh} type="submit">Donasi Sekarang</Button> */}
+          </Link> */}
+            <Button type="submit">Donasi Sekarang</Button>
           </Col>
         </Row>
       </Form>
