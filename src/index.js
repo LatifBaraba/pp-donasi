@@ -46,7 +46,7 @@ ReactDOM.render(
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
         <Route path="/forgot" exact component={Forgot} />
-        <Route path="/reset/:id" exact component={Reset} />
+        <Route path="/reset" exact component={Reset} />
         {/* Login */}
         {/* End Auth Route */}
 

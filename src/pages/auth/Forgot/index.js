@@ -15,12 +15,12 @@ function Index() {
   // const onSubmit = (data) => fetchForgot(data);
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");  
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
-      dispatch(fetchToken())
+    dispatch(fetchToken());
   }, []);
-  
+
   const token = useSelector((state) => state.tokenReducer.token.token);
 
   const onSubmit = (data) => {
@@ -62,7 +62,16 @@ function Index() {
                 <hr />
                 <Form.Text>
                   <center>
-                    Sudah punya Akun ? <Link to="/login"> Masuk</Link>{" "}
+                    Sudah punya Akun ?{" "}
+                    <Link
+                      to={{
+                        pathname: "/login",
+                        state: { data: "kosong" },
+                      }}
+                      className="mr-2"
+                    >
+                      Login
+                    </Link>{" "}
                   </center>
                 </Form.Text>
                 <hr />

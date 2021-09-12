@@ -21,7 +21,7 @@ export function fetchRegister(token, payload) {
         conf_password: payload.konfirmasi_password,
         nama_lengkap: payload.nama_lengkap,
         nama_panggilan: payload.nama_panggilan,
-        alamat: ""
+        alamat: payload.alamat
       },
       headers: {
         "pp-token": `${token}`,

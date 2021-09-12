@@ -41,6 +41,7 @@ const DetailDonasi2 = (props) => {
   const historydata = useSelector(
     (state) => state.donasiDetailReducer.historydata
   );
+  console.log(historydata.length)
   const allhistorydata = useSelector(
     (state) => state.donasiDetailReducer.allhistorydata
   );
@@ -286,11 +287,11 @@ const DetailDonasi2 = (props) => {
               <br />
             </div>
           ))}
-          <Row className="mt-4 text-justify justify-content-center">
+          {/* <Row className="mt-4 text-justify justify-content-center">
             <Link to="/history-donate">
               <Button>Lihat lainnya</Button>
             </Link>
-          </Row>
+          </Row> */}
         </Col>
         <Col md={6} className="mt-5">
           <h3 style={{ fontSize: "font-size: 1.75rem" }}>

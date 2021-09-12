@@ -21,6 +21,7 @@ function Index() {
   const [password, setPassword] = useState("");
   const [konfirmasi_password, setKonfirmasiPassword] = useState("");
   const [no_hp, setNoHp] = useState("");
+  const [alamat, setAlamat] = useState("");
 
   useEffect(() => {
     dispatch(fetchToken());
@@ -39,6 +40,7 @@ function Index() {
         password: password,
         konfirmasi_password: konfirmasi_password,
         no_hp: no_hp,
+        alamat: alamat,
       };
       dispatch(fetchRegister(token, payload));
     }
@@ -120,6 +122,17 @@ function Index() {
                     onChange={(e) => setNoHp(e.target.value)}
                   />
                 </Form.Group>
+
+                <Form.Group controlId="formAlamat">
+                  <Form.Control
+                    placeholder="Alamat"
+                    {...register("alamat", {
+                      required: true,
+                    })}
+                    onChange={(e) => setAlamat(e.target.value)}
+                  />
+                </Form.Group>
+
                 <Form.Group controlId="formBasicCheckbox"></Form.Group>
                 <ToastContainer autoClose={2000} />
                 <Button variant="primary" type="submit" block>

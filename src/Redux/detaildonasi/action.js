@@ -202,8 +202,8 @@ export function fetchAllHistoryDonation(token) {
                 offset: "1",
                 filters: [  
                     {
-                        field: "id_pp_cp_program_donasi_rutin",
-                        keyword: " "
+                        field: "is_rutin",
+                        keyword: "false"
                     },                                  
                     {
                         field: "status",
@@ -249,8 +249,8 @@ export function fetchAllHistoryRutinDonation(token) {
                 offset: "1",
                 filters: [     
                     {
-                        field: "id_pp_cp_program_donasi",
-                        keyword: " "
+                        field: "is_rutin",
+                        keyword: "true"
                     },  
                     {
                         field: "status",
