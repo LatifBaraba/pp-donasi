@@ -54,16 +54,16 @@ ReactDOM.render(
         <Layout>
           <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/order/:id" exact component={Order} />
-          <Route path="/order-rutin/:id" exact component={OrderRutin} />
+          <Route path="/order-rutin/:id/:id" exact component={OrderRutin} />
           <Route path="/checkout" exact component={Checkout} />
           <Route path="/list-donasi" exact component={ListDonasiSatu} />
           <Route path="/list-donasi-dua" exact component={ListDonasiDua} />
-          <Route path="/donasi-detail/:id" exact component={DonasiDetail} />
-          <Route path="/donasi-detail2/:id" exact component={DonasiDetail2} />
+          <Route path="/rutin/:id" exact component={DonasiDetail} />
+          <Route path="/otime/:id" exact component={DonasiDetail2} />
           <Route path="/rutin" exact component={Rutin} />
           <Route path="/history" exact component={History} />
           <Route path="/detail/:id" exact component={Detail} />
-          <Route path="/invoice/:id" exact component={Invoice} />
+          <Route path="/invoice/:id/:id" exact component={Invoice} />
           <Route path="/thankyou" exact component={Thankyou} />
           <Route path="/history-donate" exact component={HistoryDonate} />
           <Route path="/rutin-history-donate" exact component={RutinHistoryDonate} />

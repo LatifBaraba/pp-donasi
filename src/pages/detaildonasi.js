@@ -18,7 +18,7 @@ const DetailDonasi = (props) => {
     }, 100);
   };
   const { donasi } = props.location.state;
-
+  console.log(donasi)
   const dispatch = useDispatch();
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -118,7 +118,7 @@ const DetailDonasi = (props) => {
                 {username ? (
                   <Link
                     to={{
-                      pathname: "/order-rutin/" + data.id,
+                      pathname: "/order-rutin/" + window.location.pathname.split('/')[2] + "/" + data.seo_url,
                       state: { data: donasi },
                     }}
                     className="mr-2"
@@ -182,7 +182,7 @@ const DetailDonasi = (props) => {
 
                 {/* <Link
                   to={{
-                    pathname: "/order-rutin/" + data.id,
+                    pathname: "/order-rutin/" + window.location.pathname.split('/')[2] + "/" + data.seo_url,
                     state: { donasi: data },
                   }}
                 >
@@ -193,7 +193,7 @@ const DetailDonasi = (props) => {
                 {username ? (
                   <Link
                     to={{
-                      pathname: "/order-rutin/" + data.id,
+                      pathname: "/order-rutin/" + window.location.pathname.split('/')[2] + "/" + data.seo_url,
                       state: { data: data },
                     }}
                     className="mr-2"
@@ -330,7 +330,7 @@ const DetailDonasi = (props) => {
 
                 <Link
                   to={{
-                    pathname: "/donasi-detail/" + data.id,
+                    pathname: "/rutin/" + data.seo_url,
                     state: { donasi: data },
                   }}
                 >

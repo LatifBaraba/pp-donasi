@@ -65,7 +65,8 @@ const Order = (props) => {
     const arr2 = e.target.innerHTML.split(" ")[1].split(".")[1]
     const arr3 = e.target.innerHTML.split(" ")[1].split(".")[2] ? e.target.innerHTML.split(" ")[1].split(".")[2] : ""
     const arr4 = arr1.concat(arr2).concat(arr3)        
-    setNominal(parseInt(arr4))
+    // console.log(e.target.innerHTML.split(" ")[1])
+    setNominal(parseInt(e.target.innerHTML.split(" ")[1]))
   }
 
   return (
@@ -207,16 +208,16 @@ const Order = (props) => {
             {/* <Button variant="primary" type="submit" block>
               Checkout
             </Button> */}
-            {/* <Link
+            <Link
             to={{
-              pathname: "/invoice/" + data.id,
+              pathname: "/invoice/"+ window.location.pathname.split('/')[2] + "/" + data.id,
               state: { donasi: [data,nominal,tipebayar, isrutin] },
             }}
             className="mr-2"
           >
             <Button onClick={refresh}>Donasi Sekarang</Button>
-          </Link> */}
-            <Button type="submit">Donasi Sekarang</Button>
+          </Link>
+            {/* <Button type="submit">Donasi Sekarang</Button> */}
           </Col>
         </Row>
       </Form>

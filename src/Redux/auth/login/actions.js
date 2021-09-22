@@ -68,18 +68,18 @@ export function fetchLoginSession(token, payload, donasi, uripath) {
         toast.success("Login Success !")
         // localStorage.setItem("token", token)
         localStorage.setItem("username", payload.username)
-        // history.push("/donasi-detail2/"+donasi.id)
+        // history.push("/otime/"+donasi.seo_url)
 
         const uri = uripath.split('/');
 
-        if (uri[1] == 'donasi-detail') {
+        if (uri[1] == 'rutin') {
           history.push({
-              pathname: '/donasi-detail/'+ donasi.id,
+              pathname: '/rutin/'+ donasi.seo_url,
               state: { donasi: donasi }
           });
         } else {
           history.push({
-              pathname: '/donasi-detail2/'+ donasi.id,
+              pathname: '/otime/'+ donasi.seo_url,
               state: { donasi: donasi }
           });
         }

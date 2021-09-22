@@ -48,7 +48,7 @@ const Content = (props) => {
               <div className="style__ListCount-sc-1sl4ulh-5 gXlqqS">
                 <div type="dayLeft" className="style__ListCountItem-sc-1sl4ulh-6 ioWrdr">
                   <Link to={{
-                    pathname: "/donasi-detail/" + data.id,
+                    pathname: "/rutin/" + data.seo_url,
                     state: { donasi: data }
                   }}><Button>Donasi Sekarang</Button>
                   </Link>

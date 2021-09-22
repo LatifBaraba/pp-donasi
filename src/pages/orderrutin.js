@@ -209,7 +209,7 @@ const Order = (props) => {
             </Button> */}
             <Link
               to={{
-                pathname: "/invoice/" + data.id,
+                pathname: "/invoice/"+ window.location.pathname.split('/')[2] + "/" + window.location.pathname.split('/')[3],
                 state: { donasi: [data, datadetailpaket.nominal, tipebayar, isrutin] },
               }}
               className="mr-2"

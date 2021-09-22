@@ -69,11 +69,11 @@ export function fetchPaketPagedonasi2(token, id) {
                     {
                         field: "id_pp_cp_program_donasi_rutin",
                         keyword: `${id}`
+                    },
+                    {
+                        field: "is_deleted",
+                        keyword: "false"
                     }
-                    // {
-                    //     field: "is_deleted",
-                    //     keyword: "false"
-                    // }
                 ],
                 order: "created_at",
                 sort: "ASC",

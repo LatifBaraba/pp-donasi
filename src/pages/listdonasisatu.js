@@ -48,7 +48,7 @@ const ListProgram = () => {
           //       <Col className="text-right">
           //         <Link
           //           to={{
-          //             pathname: "/donasi-detail/" + data.id,
+          //             pathname: "/rutin/" + data.id,
           //             state: { donasi: data },
           //           }}
           //         >
@@ -97,7 +97,7 @@ const ListProgram = () => {
                     <Col className="text-right">
                       <Link
                         to={{
-                          pathname: "/donasi-detail/" + data.id,
+                          pathname: "/rutin/" + data.seo_url,
                           state: { donasi: data },
                         }}
                       >

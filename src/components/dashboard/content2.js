@@ -81,7 +81,7 @@ const Content2 = (props) => {
                                                 : data.penggalang_dana.Name}</Card.Text>
                 <Link
                   to={{
-                    pathname: "/donasi-detail2/" + data.id,
+                    pathname: "/otime/" + data.seo_url,
                     state: { donasi: data },
                   }}
                 >

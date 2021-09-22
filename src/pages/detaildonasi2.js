@@ -197,7 +197,7 @@ const DetailDonasi2 = (props) => {
                 {username ? (
                   <Link
                     to={{
-                      pathname: "/order/" + data.id,
+                      pathname: "/order/" + data.seo_url,
                       state: { data: donasi },
                     }}
                     className="mr-2"
@@ -411,7 +411,7 @@ const DetailDonasi2 = (props) => {
                                                 : data.penggalang_dana.Name}</Card.Text>
                 <Link
                   to={{
-                    pathname: "/donasi-detail2/" + data.id,
+                    pathname: "/otime/" + data.seo_url,
                     state: { donasi: data },
                   }}
                 >
