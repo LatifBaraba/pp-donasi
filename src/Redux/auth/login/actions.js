@@ -74,13 +74,13 @@ export function fetchLoginSession(token, payload, donasi, uripath) {
 
         if (uri[1] == 'rutin') {
           history.push({
-              pathname: '/rutin/'+ donasi.seo_url,
-              state: { donasi: donasi }
+              pathname: '/rutin/'+ uri[2],
+              // state: { donasi: donasi }
           });
         } else {
           history.push({
-              pathname: '/otime/'+ donasi.seo_url,
-              state: { donasi: donasi }
+              pathname: '/otime/'+ uri[2],
+              // state: { donasi: donasi }
           });
         }
         

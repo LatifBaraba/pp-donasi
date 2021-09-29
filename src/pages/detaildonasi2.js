@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Carousel, ProgressBar, Card, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchDetailDonasi,
@@ -14,8 +14,10 @@ import Moment from "react-moment";
 import "react-multi-carousel/lib/styles.css";
 import "./detaildonasi2.css";
 import { CheckCircle } from "react-feather";
+import { fetchDonasiOneTimeBySeo } from "../Redux/donasilist/actions";
+import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
 
-const DetailDonasi2 = (props) => {
+const DetailDonasi2 = () => {
   const [now, setNow] = useState(0);
   const username = localStorage.getItem("username");
   const refresh = () => {
@@ -23,20 +25,40 @@ const DetailDonasi2 = (props) => {
       window.location.reload();
     }, 100);
   };
-  const { donasi } = props.location.state;
-
-  console.log(donasi, "donasi yeuh")
+  // const { donasi } = props.location.state;
+  const { id } = useParams();
+  
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.tokenReducer.token.token);
   useEffect(() => {
-    let token = localStorage.getItem("token");
-    let percent = localStorage.getItem("percent");
-    dispatch(fetchDetailDonasi(token, donasi.id));
-    dispatch(fetchHistoryDonation(token, donasi.id));
-    dispatch(fetchAllHistoryDonation(token));
-    dispatch(fetchPageDonasi(token));
+    // let token = localStorage.getItem("token");    
+    // dispatch(fetchDetailDonasi(token, donasi.id));
+    // dispatch(fetchHistoryDonation(token, donasi.id));
+    // dispatch(fetchAllHistoryDonation(token));
+    // dispatch(fetchPageDonasi(token));
+
+    if (token == undefined) {
+      dispatch(fetchToken())
+      setTimeout(() => {
+        let tokens = localStorage.getItem("token");
+      console.log(" detail donasi ", tokens)
+      // dispatch(fetchDonasiRutinBySeo(tokens, id)); 
+      dispatch(fetchDonasiOneTimeBySeo(tokens, id));
+      dispatch(fetchAllHistoryDonation(tokens));
+      dispatch(fetchPageDonasi(tokens));
+      }, 2000);
+      
+    } else {
+      console.log('detail ', token)
+      dispatch(fetchDonasiOneTimeBySeo(token, id));
+      dispatch(fetchAllHistoryDonation(token));
+      dispatch(fetchPageDonasi(token));
+    }  
+
   }, []);
 
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
+  // const data = useSelector((state) => state.donasiDetailReducer.donasiseo);
   const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
   const historydata = useSelector(
     (state) => state.donasiDetailReducer.historydata
@@ -50,6 +72,8 @@ const DetailDonasi2 = (props) => {
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
+
+  console.log(data)
 
   let from = new Date();
   let to = new Date(data.valid_to);
@@ -198,7 +222,7 @@ const DetailDonasi2 = (props) => {
                   <Link
                     to={{
                       pathname: "/order/" + data.seo_url,
-                      state: { data: donasi },
+                      state: { data: data },
                     }}
                     className="mr-2"
                   >
@@ -208,7 +232,7 @@ const DetailDonasi2 = (props) => {
                   <Link
                     to={{
                       pathname: "/login",
-                      state: { data: donasi, uripath : window.location.pathname },
+                      state: { data: data, uripath : window.location.pathname },
                     }}
                     className="mr-2"
                   >

@@ -1,43 +1,68 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, ProgressBar, Card, Button, Collapse } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDetailDonasiRutin, fetchHistoryRutinDonation, fetchAllHistoryRutinDonation} from "../Redux/detaildonasi/action";
-import { fetchPagedonasi2, fetchPaketPagedonasi2 } from "../Redux/pagelistdonasi2/actions";
-import { Link } from "react-router-dom";
+import {
+  fetchDetailDonasiRutin,
+  fetchHistoryRutinDonation,
+  fetchAllHistoryRutinDonation,
+} from "../Redux/detaildonasi/action";
+import {
+  fetchPagedonasi2,
+  fetchPaketPagedonasi2,
+} from "../Redux/pagelistdonasi2/actions";
+import { Link, useParams } from "react-router-dom";
 import Moment from "react-moment";
 import NumberFormat from "react-number-format";
 import CarouselCard from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { fetchDonasiRutinBySeo } from "../Redux/donasilist2/actions";
+import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
 
-const DetailDonasi = (props) => {
-  const [now, setNow] = useState(45);
+const DetailDonasi = () => {
   const username = localStorage.getItem("username");
   const refresh = () => {
     setInterval(() => {
       window.location.reload();
     }, 100);
   };
-  const { donasi } = props.location.state;
-  console.log(donasi)
+  
+  const { id } = useParams();
+  
   const dispatch = useDispatch();
-  useEffect(() => {
-    let token = localStorage.getItem("token");
-    dispatch(fetchDetailDonasiRutin(token, donasi.id));
-    dispatch(fetchPagedonasi2(token));
-    dispatch(fetchPaketPagedonasi2(token, donasi.id));
-    dispatch(fetchAllHistoryRutinDonation(token));
-    dispatch(fetchHistoryRutinDonation(token, donasi.id));
+  const token = useSelector((state) => state.tokenReducer.token.token);
+  useEffect(() => {   
+    if (token == undefined) {
+      dispatch(fetchToken())
+      setTimeout(() => {
+        let tokens = localStorage.getItem("token");
+      console.log(" detail donasi ", tokens)
+      dispatch(fetchDonasiRutinBySeo(tokens, id)); 
+      dispatch(fetchPagedonasi2(tokens)); 
+      dispatch(fetchAllHistoryRutinDonation(tokens));
+      }, 2000);
+      
+    } else {
+      console.log('detail ', token)
+      dispatch(fetchDonasiRutinBySeo(token, id));
+      dispatch(fetchPagedonasi2(token));
+      dispatch(fetchAllHistoryRutinDonation(token));
+    }  
   }, []);
+
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
   const datas = useSelector((state) => state.pagedonasi2Reducer.pagedonasi2);
-  const datapaket = useSelector((state) => state.pagedonasi2Reducer.paketpagedonasi2);
+  const datapaket = useSelector(
+    (state) => state.pagedonasi2Reducer.paketpagedonasi2
+  );
+  console.log(datapaket)
+ 
   const historydata = useSelector(
     (state) => state.donasiDetailReducer.historydata
   );
   const allhistorydata = useSelector(
     (state) => state.donasiDetailReducer.allrutinhistorydata
   );
-  console.log(datapaket)
+  // console.log(datapaket)
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -178,7 +203,7 @@ const DetailDonasi = (props) => {
               )}
               <Card.Body>
                 <Card.Title>{data.paket_name}</Card.Title>
-                {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
+                <Card.Text>{data.benefit}</Card.Text>
 
                 {/* <Link
                   to={{
@@ -188,12 +213,15 @@ const DetailDonasi = (props) => {
                 >
                   <Button onClick={refresh}>Donasi Sekarang</Button>
                 </Link> */}
-                
 
                 {username ? (
                   <Link
                     to={{
-                      pathname: "/order-rutin/" + window.location.pathname.split('/')[2] + "/" + data.seo_url,
+                      pathname:
+                        "/order-rutin/" +
+                        window.location.pathname.split("/")[2] +
+                        "/" +
+                        data.seo_url,
                       state: { data: data },
                     }}
                     className="mr-2"
@@ -204,19 +232,18 @@ const DetailDonasi = (props) => {
                   <Link
                     to={{
                       pathname: "/login",
-                      state: { data: donasi, uripath : window.location.pathname },
+                      state: { data: data, uripath : window.location.pathname },
                     }}
                     className="mr-2"
                   >
                     <Button variant="primary">Donasi Sekarang</Button>
                   </Link>
                 )}
-
-
               </Card.Body>
             </Card>
           </Col>
         ))}
+      
       </CarouselCard>
       <Row>
         <Col md={6} className="mt-5">
@@ -224,22 +251,27 @@ const DetailDonasi = (props) => {
           <div></div>
           {historydata.slice(0, 3).map((data, idx) => (
             <div>
-              {data.ucapan_dan_doa ? <Card>
-                <Card.Header>{data.is_anonymous ? "Anonim" : data.username}</Card.Header>
-                <Card.Body>
-                  <blockquote className="blockquote mb-0">
-                    <h6>
-                      {" "}
-                      {data.ucapan_dan_doa}{" "}
-                    </h6>
-                    <h6>
-                      <footer className="blockquote-footer">
-                        <cite title="Source Title"><Moment fromNow>{data.paid_at}</Moment></cite>
-                      </footer>
-                    </h6>
-                  </blockquote>
-                </Card.Body>
-              </Card> : ''}
+              {data.ucapan_dan_doa ? (
+                <Card>
+                  <Card.Header>
+                    {data.is_anonymous ? "Anonim" : data.username}
+                  </Card.Header>
+                  <Card.Body>
+                    <blockquote className="blockquote mb-0">
+                      <h6> {data.ucapan_dan_doa} </h6>
+                      <h6>
+                        <footer className="blockquote-footer">
+                          <cite title="Source Title">
+                            <Moment fromNow>{data.paid_at}</Moment>
+                          </cite>
+                        </footer>
+                      </h6>
+                    </blockquote>
+                  </Card.Body>
+                </Card>
+              ) : (
+                ""
+              )}
               <br />
             </div>
           ))}

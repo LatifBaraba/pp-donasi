@@ -50,7 +50,8 @@ export function fetchDetailDonasi(token, id) {
 };
 
 export function fetchDetailDonasiRutin(token, id) {
-    return (dispatch) => {        
+    return (dispatch) => {    
+        console.log("masuk detail donasi rutin")    
         axios(URL_RUTIN+`${id}`, {
             method: 'GET',
             headers: {
