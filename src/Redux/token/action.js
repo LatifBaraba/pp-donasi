@@ -2,6 +2,11 @@ import { GET_TOKEN, GET_TOKEN_SUCCESS, GET_TOKEN_FAILURE } from '../actionTypes'
 import axios from 'axios';
 import Bowser from "bowser";
 
+
+import { fetchDonasilist } from "../../Redux/donasilist/actions";
+import { fetchDonasilist2 } from "../../Redux/donasilist2/actions";
+import { useDispatch, useSelector } from "react-redux";
+
 const URL = `${process.env.REACT_APP_BASE_URL}/token`;
 const URLREF = `${process.env.REACT_APP_BASE_URL}/refresh-token`;
 const SERVICENAME = `${process.env.REACT_APP_SERVICE_NAME}`;
@@ -13,6 +18,8 @@ const randomType = Math.floor(Math.random() * (max - min));
 
 const browser = Bowser.getParser(window.navigator.userAgent);
 // console.log(`The current browser name is "${browser.getBrowserName()}"`);
+
+
 
 export function fetchToken() {
     return (dispatch) => {
@@ -33,6 +40,9 @@ export function fetchToken() {
             // console.log(res.data.data.token)
             localStorage.setItem("token", res.data.data.token);
             // console.log(res)
+            // const dispatch = useDispatch()
+            dispatch(fetchDonasilist(res.data.data.token));
+            dispatch(fetchDonasilist2(res.data.data.token));  
         })
         .catch(err => {
             console.log(err)

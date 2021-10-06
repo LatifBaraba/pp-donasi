@@ -27,15 +27,15 @@ const Dashboard = () => {
     async function fetchTokenAsync() {
       
       if (!localStorage.getItem("token")) {
-        // console.log("masuk if async")
+        console.log("masuk if async")
         // let a = await setToken()
         dispatch(fetchToken())
-        let token = await getToken()
+        // let token = await getToken()
         
-        dispatch(fetchDonasilist(token));
-        dispatch(fetchDonasilist2(token));  
+        // dispatch(fetchDonasilist(token));
+        // dispatch(fetchDonasilist2(token));  
       } else {
-        // console.log("masuk else async")
+        console.log("masuk else async")
         let token = await getToken()
 
         dispatch(fetchDonasilist(token));
