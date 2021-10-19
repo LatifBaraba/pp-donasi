@@ -24,11 +24,11 @@ const Login = (props) => {
   // user : 085721128354
   // pass : 12345678
   
-  const token = useSelector((state) => state.tokenReducer.token.token);
+  // const token = useSelector((state) => state.tokenReducer.token.token);
   const donasi = props.location.state.data;
   const uripath = props.location.state.uripath;
   console.log(donasi)
-  // let token = localStorage.getItem("token")
+  let token = localStorage.getItem("token")
 
   const onSubmit = (data) => {
     let payload = [];

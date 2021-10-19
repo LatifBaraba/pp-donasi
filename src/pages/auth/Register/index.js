@@ -28,7 +28,7 @@ function Index() {
   }, []);
 
   const token = useSelector((state) => state.tokenReducer.token.token);
-  const onSubmit = (data) => {
+  const onSubmit = (data, e) => {
     let payload = [];
     if (data === "") {
       errors.showMessage();
@@ -42,6 +42,9 @@ function Index() {
         no_hp: no_hp,
         alamat: alamat,
       };
+      
+      e.target.reset();
+
       dispatch(fetchRegister(token, payload));
     }
   };
@@ -141,7 +144,15 @@ function Index() {
                 <hr />
                 <Form.Text>
                   <center>
-                    Sudah punya Akun ? <Link to="/login"> Masuk</Link>{" "}
+                    Sudah punya Akun ? <Link
+                  to={{
+                    pathname: "/login",
+                    state: { data: "kosong" },
+                  }}
+                  className="mr-2"
+                >
+                 Masuk
+                </Link>{" "}
                   </center>
                 </Form.Text>
                 <hr />

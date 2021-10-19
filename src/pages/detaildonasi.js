@@ -54,11 +54,12 @@ const DetailDonasi = () => {
   const datapaket = useSelector(
     (state) => state.pagedonasi2Reducer.paketpagedonasi2
   );
-  console.log(datapaket)
+  console.log(data)
  
-  const historydata = useSelector(
-    (state) => state.donasiDetailReducer.historydata
+  const rutinhistorydata = useSelector(
+    (state) => state.donasiDetailReducer.rutinhistorydata
   );
+  
   const allhistorydata = useSelector(
     (state) => state.donasiDetailReducer.allrutinhistorydata
   );
@@ -249,7 +250,7 @@ const DetailDonasi = () => {
         <Col md={6} className="mt-5">
           <h3 style={{ fontSize: "font-size: 1.75rem" }}>Ucapan dan Doa </h3>
           <div></div>
-          {historydata.slice(0, 3).map((data, idx) => (
+          {rutinhistorydata.slice(0, 3).map((data, idx) => (
             <div>
               {data.ucapan_dan_doa ? (
                 <Card>
@@ -276,18 +277,21 @@ const DetailDonasi = () => {
             </div>
           ))}
           <Row className="mt-4 text-justify justify-content-center">
-            <Link to="/rutin-history-donate">
+          <Link  to={{
+                    pathname: "/rutin-history-donate/" + data.id ,
+                    state: window.location.pathname 
+                  }}>
               <Button>Lihat lainnya</Button>
             </Link>
           </Row>
         </Col>
         <Col md={6} className="mt-5">
           <h3 style={{ fontSize: "font-size: 1.75rem" }}>
-            Donasi ({allhistorydata.length})
+            Donasi ({rutinhistorydata.length})
           </h3>
 
           <div></div>
-          {historydata.slice(0, 3).map((data, idx) => (
+          {rutinhistorydata.slice(0, 3).map((data, idx) => (
             <div>
               <Card>
                 <Card.Header>{data.username}</Card.Header>
@@ -320,7 +324,13 @@ const DetailDonasi = () => {
             </div>
           ))}
           <Row className="mt-4 text-justify justify-content-center">
-            <Link to="/rutin-history-donate">
+            {/* <Link to="/rutin-history-donate">
+              <Button>Lihat lainnya</Button>
+            </Link> */}
+            <Link  to={{
+                    pathname: "/rutin-history-donate/" + data.id ,
+                    state: window.location.pathname 
+                  }}>
               <Button>Lihat lainnya</Button>
             </Link>
           </Row>

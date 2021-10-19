@@ -209,7 +209,7 @@ export function fetchAllHistoryDonation(token) {
                     {
                         field: "status",
                         keyword: "Paid"
-                    },
+                    }
                 ],
                 order: "created_at",
                 sort: "ASC",

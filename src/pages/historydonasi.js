@@ -1,9 +1,9 @@
 import { React, useEffect, useState } from "react";
 import { Row, Col, Button, Card, ProgressBar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // import { fetchPageDonasi } from '../Redux/pagelistdonasi/actions'
 import { fetchPagedonasi2 } from "../Redux/pagelistdonasi2/actions";
-import { fetchAllHistoryDonation } from "../Redux/detaildonasi/action";
+import { fetchAllHistoryDonation, fetchHistoryDonation } from "../Redux/detaildonasi/action";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
 import NumberFormat from "react-number-format";
@@ -12,11 +12,13 @@ const ListProgram = () => {
   const [now, setNow] = useState(45);
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
-  
+  const { id } = useParams();
+  console.log(id)
   useEffect(() => {
     // dispatch(fetchPageDonasi(token));
     dispatch(fetchPagedonasi2(token));
     dispatch(fetchAllHistoryDonation(token));
+    dispatch(fetchHistoryDonation(token, id));
   }, []);
 
   // const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
@@ -24,6 +26,10 @@ const ListProgram = () => {
 
   const allhistorydata = useSelector((state) => state.donasiDetailReducer.allhistorydata);
   
+  const historydata = useSelector(
+    (state) => state.donasiDetailReducer.historydata
+  );
+    console.log(historydata)
   return (
     <div className="content">
     
@@ -32,12 +38,12 @@ const ListProgram = () => {
         <div className="col-md-6">
           <div className="article-detail">
             <div className="article-heading">
-              <h2 className="article-title">{"Donasi "}({allhistorydata.length})</h2>
+              <h2 className="article-title">{"Donasi "}({historydata.length})</h2>
             </div>
           </div>
         </div>
         </center>
-        {allhistorydata.map((data, idx) => (
+        {historydata.map((data, idx) => (
             
           <Row key={idx}>
             <Col md={12}>

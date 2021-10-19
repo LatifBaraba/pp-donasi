@@ -319,7 +319,7 @@ const DetailDonasi2 = () => {
         </Col>
         <Col md={6} className="mt-5">
           <h3 style={{ fontSize: "font-size: 1.75rem" }}>
-            Donasi ({allhistorydata.length})
+            Donasi ({historydata.length})
           </h3>
 
           <div></div>
@@ -357,7 +357,7 @@ const DetailDonasi2 = () => {
           ))}
           <Row className="mt-4 text-justify justify-content-center">
             <Link  to={{
-                    pathname: "/history-donate",
+                    pathname: "/history-donate/" + data.id ,
                     state: window.location.pathname 
                   }}>
               <Button>Lihat lainnya</Button>

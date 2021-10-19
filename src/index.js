@@ -69,9 +69,9 @@ ReactDOM.render(
           <Route path="/detail/:id" exact component={Detail} />
           <Route path="/invoice/:id/:id" exact component={Invoice} />
           <Route path="/thankyou" exact component={Thankyou} />
-          <Route path="/history-donate" exact component={HistoryDonate} />
+          <Route path="/history-donate/:id" exact component={HistoryDonate} />
           <Route
-            path="/rutin-history-donate"
+            path="/rutin-history-donate/:id"
             exact
             component={RutinHistoryDonate}
           />
