@@ -27,43 +27,44 @@ const DetailDonasi2 = () => {
   };
   // const { donasi } = props.location.state;
   const { id } = useParams();
-  
+
   const dispatch = useDispatch();
   const token = useSelector((state) => state.tokenReducer.token.token);
   useEffect(() => {
-    // let token = localStorage.getItem("token");    
+    // let token = localStorage.getItem("token");
     // dispatch(fetchDetailDonasi(token, donasi.id));
     // dispatch(fetchHistoryDonation(token, donasi.id));
     // dispatch(fetchAllHistoryDonation(token));
     // dispatch(fetchPageDonasi(token));
 
     if (token == undefined) {
-      dispatch(fetchToken())
+      dispatch(fetchToken());
       setTimeout(() => {
         let tokens = localStorage.getItem("token");
-      console.log(" detail donasi ", tokens)
-      // dispatch(fetchDonasiRutinBySeo(tokens, id)); 
-      dispatch(fetchDonasiOneTimeBySeo(tokens, id));
-      dispatch(fetchAllHistoryDonation(tokens));
-      dispatch(fetchPageDonasi(tokens));
+        console.log(" detail donasi ", tokens);
+        // dispatch(fetchDonasiRutinBySeo(tokens, id));
+        dispatch(fetchDonasiOneTimeBySeo(tokens, id));
+        dispatch(fetchAllHistoryDonation(tokens));
+        dispatch(fetchPageDonasi(tokens));
       }, 2000);
-      
     } else {
-      console.log('detail ', token)
+      console.log("detail ", token);
       dispatch(fetchDonasiOneTimeBySeo(token, id));
       dispatch(fetchAllHistoryDonation(token));
       dispatch(fetchPageDonasi(token));
-    }  
-
+    }
   }, []);
 
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
-  // const data = useSelector((state) => state.donasiDetailReducer.donasiseo);
+  const kabarterbaru = useSelector(
+    (state) => state.kabarTerbaruReducer.kabarterbaruot
+  );
+
   const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
   const historydata = useSelector(
     (state) => state.donasiDetailReducer.historydata
   );
-  console.log(historydata.length)
+  console.log(historydata.length);
   const allhistorydata = useSelector(
     (state) => state.donasiDetailReducer.allhistorydata
   );
@@ -73,7 +74,7 @@ const DetailDonasi2 = () => {
     setIsReadMore(!isReadMore);
   };
 
-  console.log(data)
+  console.log(data);
 
   let from = new Date();
   let to = new Date(data.valid_to);
@@ -206,9 +207,9 @@ const DetailDonasi2 = () => {
                   className="donasi-progressbar"
                 />
               </div>
-              
+
               {/* <Moment fromNow ago>{data.valid_to}</Moment> */}
-              
+
               {/* <div class="remain-txt remaining-day">
                 <span class="total-dermawan">4.787 Dermawan</span>
                 <span>
@@ -232,7 +233,7 @@ const DetailDonasi2 = () => {
                   <Link
                     to={{
                       pathname: "/login",
-                      state: { data: data, uripath : window.location.pathname },
+                      state: { data: data, uripath: window.location.pathname },
                     }}
                     className="mr-2"
                   >
@@ -292,22 +293,27 @@ const DetailDonasi2 = () => {
           <div></div>
           {historydata.slice(0, 3).map((data, idx) => (
             <div>
-              {data.ucapan_dan_doa ? <Card>
-                <Card.Header>{data.is_anonymous ? "Anonim" : data.username}</Card.Header>
-                <Card.Body>
-                  <blockquote className="blockquote mb-0">
-                    <h6>
-                      {" "}
-                      {data.ucapan_dan_doa}{" "}
-                    </h6>
-                    <h6>
-                      <footer className="blockquote-footer">
-                        <cite title="Source Title"><Moment fromNow>{data.paid_at}</Moment></cite>
-                      </footer>
-                    </h6>
-                  </blockquote>
-                </Card.Body>
-              </Card> : ''}
+              {data.ucapan_dan_doa ? (
+                <Card>
+                  <Card.Header>
+                    {data.is_anonymous ? "Anonim" : data.username}
+                  </Card.Header>
+                  <Card.Body>
+                    <blockquote className="blockquote mb-0">
+                      <h6> {data.ucapan_dan_doa} </h6>
+                      <h6>
+                        <footer className="blockquote-footer">
+                          <cite title="Source Title">
+                            <Moment fromNow>{data.paid_at}</Moment>
+                          </cite>
+                        </footer>
+                      </h6>
+                    </blockquote>
+                  </Card.Body>
+                </Card>
+              ) : (
+                ""
+              )}
               <br />
             </div>
           ))}
@@ -356,32 +362,95 @@ const DetailDonasi2 = () => {
             </div>
           ))}
           <Row className="mt-4 text-justify justify-content-center">
-            <Link  to={{
-                    pathname: "/history-donate/" + data.id ,
-                    state: window.location.pathname 
-                  }}>
+            <Link
+              to={{
+                pathname: "/history-donate/" + data.id,
+                state: window.location.pathname,
+              }}
+            >
               <Button>Lihat lainnya</Button>
             </Link>
           </Row>
-          {/* <CarouselCard responsive={ucapandoaCarousel} arrows={false}>
-            {historydata.map((data, idx) => (
-              
-            ))}
-          </CarouselCard> */}
         </Col>
-        {/* <Col md={2} className="mt-5">
-          <h6 style={{ fontSize: "font-size: 1.75rem" }}>Lihat Lainnya</h6>
-          <div></div>
-        </Col> */}
       </Row>
+      <Row>
+        <Col md={3} className="mt-5"></Col>
+        <Col md={6} className="mt-5">
+          <h3 style={{ fontSize: "font-size: 1.75rem" }}>
+            Kabar Terbaru ({kabarterbaru.length})
+          </h3>
 
-      {/* <Row className="text-justify justify-content-center">
-        <Col md={8}>
-          Arief Ramdhani - "Contrary to popular belief, Lorem Ipsum is not
-          simply random text. It has roots in a piece of classical Latin
-          literature from 45 BC, making it over 2000 years old."
+          <div></div>
+          {kabarterbaru.slice(0, 1).map((data, idx) => (
+            <div>
+              <Card
+                bg={"secondary"}
+                text={"secondary" === "light" ? "dark" : "white"}
+                style={{ width: "30rem", alignContent: "center" }}
+                className="mb-2"
+              >
+                {/* <Card.Header>{data.username}</Card.Header> */}
+                <Card.Body>
+                  <blockquote className="blockquote mb-0">
+                    <h4>
+                      <Card.Text>{data.title}</Card.Text>
+                    </h4>
+                    <h6>
+                      <Card.Text>
+                        <div className="dana-terkumpul">
+                          <Moment fromNow>{data.created_at}</Moment>
+                        </div>
+                      </Card.Text>
+                    </h6>
+                    <h6>
+                      <Card.Text>
+                        Pencairan Dana Sebesar
+                        <b>
+                          <NumberFormat
+                            value={data.disbursement_balance}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={" Rp. "}
+                          />
+                          .~
+                        </b>
+                      </Card.Text>
+                    </h6>
+                    <h6>
+                      <Card.Text>
+                        <p>ke Rekening {data.disbursement_bank_name} {" "} {data.disbursement_account}</p>
+                        <p>a/n {data.disbursement_name}</p>
+                        <p>
+                          Rencana Penggunaan Pencairan :{" "}
+                          {data.disbursement_description}
+                        </p>
+                      </Card.Text>
+                    </h6>
+                    <h6>
+                      <footer className="blockquote-footer">
+                        <cite title="Source Title">
+                          <Moment fromNow>{data.paid_at}</Moment>
+                        </cite>
+                      </footer>
+                    </h6>
+                  </blockquote>
+                </Card.Body>
+              </Card>
+              <br />
+            </div>
+          ))}
+          <Row className="mt-4 text-justify justify-content-center">
+            <Link
+              to={{
+                pathname: "/kabar-terbaru-ot/" + data.id,
+                state: window.location.pathname,
+              }}
+            >
+              <Button>Lihat lainnya</Button>
+            </Link>
+          </Row>
         </Col>
-      </Row> */}
+      </Row>
       <Row className="mt-5 text-justify">
         <Col md={8}>
           <h3>Kamu juga bisa berdonasi yang lain :</h3>
@@ -429,10 +498,18 @@ const DetailDonasi2 = () => {
                   </div>
                 </Card.Text>
                 {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
-                <Card.Text style={{width:"10"}}>{data.penggalang_dana.Name ? data.penggalang_dana.Name : ''} 
-                                                {' '}{data.penggalang_dana.Name && data.penggalang_dana.IsVerified ? 
-                                                 <CheckCircle color="blue" style={{width:"15"}}></CheckCircle>
-                                                : data.penggalang_dana.Name}</Card.Text>
+                <Card.Text style={{ width: "10" }}>
+                  {data.penggalang_dana.Name ? data.penggalang_dana.Name : ""}{" "}
+                  {data.penggalang_dana.Name &&
+                  data.penggalang_dana.IsVerified ? (
+                    <CheckCircle
+                      color="blue"
+                      style={{ width: "15" }}
+                    ></CheckCircle>
+                  ) : (
+                    data.penggalang_dana.Name
+                  )}
+                </Card.Text>
                 <Link
                   to={{
                     pathname: "/otime/" + data.seo_url,

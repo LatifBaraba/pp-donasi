@@ -12,6 +12,7 @@ import {
   fetchDetailDonasi,
   fetchHistoryDonation,
 } from "../detaildonasi/action";
+import { fetchKabarTerbaruOt } from "../kabarterbaru/action"
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi/list`;
 
@@ -115,6 +116,7 @@ export function fetchDonasiOneTimeBySeo(token, url) {
         dispatch(getDonasionetimeseoSuccess(res.data.data));
         dispatch(fetchDetailDonasi(token, res.data.data[0].id));
         dispatch(fetchHistoryDonation(token, res.data.data[0].id))
+        dispatch(fetchKabarTerbaruOt(token, res.data.data[0].id))
       })
       .catch((err) => {
         dispatch(getDonasionetimeseoFailure(err));

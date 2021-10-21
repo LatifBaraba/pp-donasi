@@ -10,6 +10,7 @@ import history from '../../history'
 
 import { fetchDetailDonasiRutin, fetchHistoryRutinDonation } from "../detaildonasi/action";
 import { fetchPaketPagedonasi2 } from "../pagelistdonasi2/actions";
+import { fetchKabarTerbaruRutin } from "../kabarterbaru/action"
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/list`;
 
@@ -101,6 +102,7 @@ export function fetchDonasiRutinBySeo(token, url) {
             dispatch(fetchDetailDonasiRutin(token, res.data.data[0].id))
             dispatch(fetchHistoryRutinDonation(token, res.data.data[0].id))
             dispatch(fetchPaketPagedonasi2(token, res.data.data[0].id))
+            dispatch(fetchKabarTerbaruRutin(token, res.data.data[0].id))
         })
         .catch(err => {
             dispatch(getDonasiseoFailure(err));
