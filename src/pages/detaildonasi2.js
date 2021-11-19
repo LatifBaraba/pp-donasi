@@ -421,7 +421,7 @@ const DetailDonasi2 = () => {
                         <p>ke Rekening {data.disbursement_bank_name} {" "} {data.disbursement_account}</p>
                         <p>a/n {data.disbursement_name}</p>
                         <p>
-                          Rencana Penggunaan Pencairan :{" "}
+                          Rencana Penggunaan Pencairans :{" "}
                           {data.disbursement_description}
                         </p>
                       </Card.Text>
