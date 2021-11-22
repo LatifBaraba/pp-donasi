@@ -418,10 +418,13 @@ const DetailDonasi2 = () => {
                     </h6>
                     <h6>
                       <Card.Text>
-                        <p>ke Rekening {data.disbursement_bank_name} {" "} {data.disbursement_account}</p>
+                        <p>
+                          ke Rekening {data.disbursement_bank_name}{" "}
+                          {data.disbursement_account}
+                        </p>
                         <p>a/n {data.disbursement_name}</p>
                         <p>
-                          Rencana Penggunaan Pencairans :{" "}
+                          Rencana Penggunaan Pencairan :{" "}
                           {data.disbursement_description}
                         </p>
                       </Card.Text>
@@ -449,6 +452,47 @@ const DetailDonasi2 = () => {
               <Button>Lihat lainnya</Button>
             </Link>
           </Row>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={3} className="mt-5"></Col>
+        <Col md={6} className="mt-5">
+          <h3 style={{ fontSize: "font-size: 1.75rem" }}>Fundraiser</h3>
+          <Card>
+            <Card.Body>
+              <b>
+                <a style={{ color: "#48c78e" }}>Bantu dari Fundraiser</a>
+              </b>
+              <br />
+              <a>Alwy Said</a>
+              <br />
+              <a style={{ color: "#b3b5b4" }}>Mengajak 125 Orang</a>
+              <br />
+              <b>
+                <a style={{ color: "#696969" }}>2.500.000</a>
+              </b>
+              <hr />
+              <Row className="text-justify justify-content-center">
+                <Link
+                  to={{
+                    pathname: "/fundraiser/" + data.id,
+                    state: window.location.pathname,
+                  }}
+                >
+                  <Button>Lihat lainnya</Button>
+                </Link>
+                <Col md={3} className="mt-5"></Col>
+                <Link
+                  to={{
+                    pathname: "/fundraiser",
+                    state: window.location.pathname,
+                  }}
+                >
+                  <Button>Jadi Fundraiser</Button>
+                </Link>
+              </Row>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
       <Row className="mt-5 text-justify">

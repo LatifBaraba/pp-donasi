@@ -27,6 +27,9 @@ import HistoryDonate from "./pages/historydonasi";
 import RutinHistoryDonate from "./pages/historydonasirutin";
 import KabarTerbaruOt from "./pages/kabarterbaruot";
 import KabarTerbaruRutin from "./pages/kabarterbarurutin";
+import ListFundraiser from "./pages/fundraiser/listfundraiser";
+import AddFundraiser from "./pages/fundraiser/addfundraiser";
+import MyFundraiser from "./pages/fundraiser/myfundraiser";
 import Rutin from "./pages/rutin";
 import Detail from "./pages/detail";
 import Invoice from "./pages/invoice";
@@ -75,6 +78,9 @@ ReactDOM.render(
           <Route path="/rutin-history-donate/:id" exact component={RutinHistoryDonate}/>
           <Route path="/kabar-terbaru-ot/:id" exact component={KabarTerbaruOt}/>
           <Route path="/kabar-terbaru-rutin/:id" exact component={KabarTerbaruRutin}/>
+          <Route path="/fundraiser/:id" exact component={ListFundraiser}/>
+          <Route path="/fundraiser/" exact component={AddFundraiser}/>
+          <Route path="/myfundraiser/" exact component={MyFundraiser}/>
 
           <Route path="/confirm" exact component={Confirm} />
 

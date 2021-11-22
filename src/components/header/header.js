@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Nav, Navbar, Dropdown, DropdownButton } from 'react-bootstrap'
-import { LogOutOutline, PencilOutline, AiOutlineHistory, TimeOutline } from 'react-ionicons'
+import { LogOutOutline, PencilOutline, AiOutlineHistory, TimeOutline, HeartOutline } from 'react-ionicons'
 import { Link } from 'react-router-dom';
 import { fetchLogout } from "../../Redux/auth/login/actions";
 import { useDispatch } from 'react-redux';
@@ -22,9 +22,9 @@ const Header = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
-                    <Nav.Link href="#features">Contact</Nav.Link>
+                    {/* <Nav.Link href="#features">Contact</Nav.Link>
                     <Nav.Link href="#pricing">Legal</Nav.Link>
-                    <Nav.Link href="#pricing">FAQ</Nav.Link>
+                    <Nav.Link href="#pricing">FAQ</Nav.Link> */}
                     {username ?
                         <Nav.Link>
                             <DropdownButton
@@ -36,6 +36,12 @@ const Header = () => {
                                 <Dropdown.Item eventKey="1">
                                     <PencilOutline color={'#00000'} height="15px" width="15px" />
                                 &nbsp; Edit Profile
+                                </Dropdown.Item>
+                                <Dropdown.Item eventKey="2"> 
+                                    <Link to="/myfundraiser" style={{ color: "#212529" }}>
+                                        <HeartOutline color={'#00000'} height="15px" width="15px" />
+                                      &nbsp; Galang Dana Saya
+                                    </Link>
                                 </Dropdown.Item>
                                 <Dropdown.Item eventKey="2"> 
                                     <Link to="/history" style={{ color: "#212529" }}>
