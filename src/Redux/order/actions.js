@@ -33,9 +33,9 @@ export function fetchOrder(token, payload) {
       })
       .catch((err) => {
         if (err.response.status === 400) {
-          toast.error("Order unsuccessful");
+          toast.error("Order Tidak Berhasil");
         } else if (err.response.status === 401) {
-          toast.error("Order unsuccessful !");
+          toast.error("Order Tidak Berhasil");
         }
         dispatch(orderFailure(err));
       });

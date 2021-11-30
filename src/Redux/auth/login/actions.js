@@ -15,114 +15,115 @@ const LOGINURL = `${process.env.REACT_APP_BASE_URL}/auth/user/login`;
 const LOGOUTURL = `${process.env.REACT_APP_BASE_URL}/auth/user/logout`;
 
 export function fetchLogin(token, payload) {
-  console.log(token)
-  console.log(payload)
+  console.log(token);
+  console.log(payload);
   return (dispatch) => {
     axios(LOGINURL, {
-        method: 'POST',
-        data: {
-            username: payload.username,
-            password: payload.password
-        },
-        headers: {
-            "pp-token": `${token}`,
-            "Content-type": "application/json"
-        }
+      method: "POST",
+      data: {
+        username: payload.username,
+        password: payload.password,
+      },
+      headers: {
+        "pp-token": `${token}`,
+        "Content-type": "application/json",
+      },
     })
-    .then(res => {
+      .then((res) => {
         dispatch(loginSuccess(res));
-        toast.success("Login Success !")
+        toast.success("Login Success !");
         // localStorage.setItem("token", token)
-        localStorage.setItem("username", payload.username)
-        history.push("/dashboard")
-    })
-    .catch(err => {
+        localStorage.setItem("username", payload.username);
+        history.push("/dashboard");
+      })
+      .catch((err) => {
         if (err.response.status === 400) {
-            toast.error("incorrect username or password !")
+          toast.error("Usernama atau password tidak sesuai");
         } else if (err.response.status === 401) {
-            toast.error("password not match !")
+          toast.error("Password tidak sesuai");
+        } else if (err.response.status === 422) {
+          toast.error("Username tidak sesuai");
         }
         dispatch(loginFailure(err));
-    });
-};
+      });
+  };
 }
 
 export function fetchLoginSession(token, payload, donasi, uripath) {
-  console.log(token)
-  console.log(payload)
-  console.log(donasi)
+  console.log(token);
+  console.log(payload);
+  console.log(donasi);
   return (dispatch) => {
     axios(LOGINURL, {
-        method: 'POST',
-        data: {
-            username: payload.username,
-            password: payload.password
-        },
-        headers: {
-            "pp-token": `${token}`,
-            "Content-type": "application/json"
-        }
+      method: "POST",
+      data: {
+        username: payload.username,
+        password: payload.password,
+      },
+      headers: {
+        "pp-token": `${token}`,
+        "Content-type": "application/json",
+      },
     })
-    .then(res => {
+      .then((res) => {
         dispatch(loginSuccess(res));
-        toast.success("Login Success !")
+        toast.success("Login Success !");
         // localStorage.setItem("token", token)
-        localStorage.setItem("username", payload.username)
+        localStorage.setItem("username", payload.username);
         // history.push("/otime/"+donasi.seo_url)
 
-        const uri = uripath.split('/');
+        const uri = uripath.split("/");
 
-        if (uri[1] == 'rutin') {
+        if (uri[1] == "rutin") {
           history.push({
-              pathname: '/rutin/'+ uri[2],
-              // state: { donasi: donasi }
+            pathname: "/rutin/" + uri[2],
+            // state: { donasi: donasi }
           });
         } else {
           history.push({
-              pathname: '/otime/'+ uri[2],
-              // state: { donasi: donasi }
+            pathname: "/otime/" + uri[2],
+            // state: { donasi: donasi }
           });
         }
-        
-        
-    })
-    .catch(err => {
+      })
+      .catch((err) => {
         if (err.response.status === 400) {
-            toast.error("incorrect username or password !")
+          toast.error("Usernama atau password tidak sesuai");
         } else if (err.response.status === 401) {
-            toast.error("password not match !")
+          toast.error("Password tidak sesuai");
+        } else if (err.response.status === 422) {
+          toast.error("Username tidak sesuai");
         }
         dispatch(loginFailure(err));
-    });
-};
+      });
+  };
 }
 
 export function fetchLogout(token) {
   return (dispatch) => {
-      axios(LOGOUTURL, {
-          method: 'POST',
-          headers: {
-              "pp-token": `${token}`,
-              "Content-type": "application/json"
-          }
+    axios(LOGOUTURL, {
+      method: "POST",
+      headers: {
+        "pp-token": `${token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        dispatch(logoutSuccess(res));
+        // localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        history.push("/dashboard");
+        console.log(res);
       })
-      .then(res => {
-          dispatch(logoutSuccess(res));
-          // localStorage.removeItem("token");
-          localStorage.removeItem("username");
-          history.push("/dashboard")
-          console.log(res)
-      })
-      .catch(err => {
-          console.log(err)
-          // localStorage.removeItem("token");
-          localStorage.removeItem("username");
-          history.push("/dashboard")
-          dispatch(logoutFailure(err));
+      .catch((err) => {
+        console.log(err);
+        // localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        history.push("/dashboard");
+        dispatch(logoutFailure(err));
       });
   };
-};
-
+}
 
 // Login
 const login = () => ({

@@ -38,9 +38,11 @@ import {
       })
       .catch(err => {
           if (err.response.status === 400) {
-              toast.error("incorrect username or password !")
+            toast.error("Usernama atau password tidak sesuai");
           } else if (err.response.status === 401) {
-              toast.error("password not match !")
+            toast.error("Password tidak sesuai");
+          } else if (err.response.status === 422) {
+            toast.error("Username tidak sesuai");
           }
           dispatch(resetFailure(err));
       });

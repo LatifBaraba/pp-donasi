@@ -30,7 +30,7 @@ export function fetchRegister(token, payload) {
     })
       .then((res) => {
         // setTimeout(() => {
-          toast.success("Register Account is Succeesful !");
+          toast.success("Register Akun Berhasil");
           dispatch(addUserSuccess(res));
           // history.push("/login");
           // history.push({
@@ -40,9 +40,9 @@ export function fetchRegister(token, payload) {
         // }, 2000);
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        // console.log(err.response.data.message);
         // toast.error(err.response.data.message)
-        toast.error("Username, Email or Password not match !");
+        toast.error("Username, Email atau Password tidak sesuai");
         if (err.response.status === 401) {
           toast.error("Unauthorized");
           // dispatch(fetchRefreshToken(token));

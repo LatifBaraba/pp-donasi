@@ -33,15 +33,15 @@ export function fetchOrderRutin(token, payload) {
     })
     .then(res => {
         dispatch(orderRutinSuccess(res));
-        toast.success("Order Success !")
+        toast.success("Order Berhasil")
         localStorage.setItem("token", token)
         history.push("/confirm")
     })
     .catch(err => {
         if (err.response.status === 400) {
-            toast.error("Please Login First")
+            toast.error("Harap Login Terlebih Dahulu")
         } else if (err.response.status === 401) {
-            toast.error("Please Login First")
+            toast.error("Harap Login Terlebih Dahulu")
         }
         dispatch(orderRutinFailure(err));
     });
