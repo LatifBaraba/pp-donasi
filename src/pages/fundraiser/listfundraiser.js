@@ -10,6 +10,7 @@ import { fetchKabarTerbaruOt } from "../../Redux/kabarterbaru/action";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
 import NumberFormat from "react-number-format";
+import { fetchFundraiserByDonasi } from "../../Redux/fundraiser/action";
 
 const Listfundraiser = () => {
   const [now, setNow] = useState(45);
@@ -17,12 +18,12 @@ const Listfundraiser = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   useEffect(() => {
-    dispatch(fetchPagedonasi2(token));
-    dispatch(fetchKabarTerbaruOt(token, id));
+    // dispatch(fetchPagedonasi2(token));
+    dispatch(fetchFundraiserByDonasi(token, id));
   }, []);
 
   // const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
-  const datas = useSelector((state) => state.pagedonasi2Reducer.pagedonasi2);
+  const datafund = useSelector((state) => state.fundraiserReducer.fundraiserbydonate);
   const kabarterbaru = useSelector(
     (state) => state.kabarTerbaruReducer.kabarterbaruot
   );
@@ -42,67 +43,34 @@ const Listfundraiser = () => {
             <div className="article-detail">
               <div className="article-heading">
                 <h2 className="article-title">
-                  {"Fundraiser "}({kabarterbaru.length})
+                  {"Fundraiser "}({datafund.length})
                 </h2>
               </div>
             </div>
           </div>
         </center>
-        {kabarterbaru.map((data, idx) => (
+        {datafund.map((data, idx) => (
           <Row key={idx}>
             <Col md={12}>
-              <Card
-                bg={"secondary"}
-                text={"secondary" === "light" ? "dark" : "white"}                
-                className="mb-2"
-              >
-                {/* <Card.Header>{data.username}</Card.Header> */}
+            <Card>
                 <Card.Body>
-                  <blockquote className="blockquote mb-0">
-                    <h4>
-                      <Card.Text>{data.title}</Card.Text>
-                    </h4>
-                    <h6>
-                      <Card.Text>
-                        <div className="dana-terkumpul">
-                          <Moment fromNow>{data.created_at}</Moment>
-                        </div>
-                      </Card.Text>
-                    </h6>
-                    <h6>
-                      <Card.Text>
-                        Pencairan Dana Sebesar
-                        <b>
-                          <NumberFormat
-                            value={data.disbursement_balance}
-                            displayType={"text"}
-                            thousandSeparator={true}
-                            prefix={" Rp. "}
-                          />
-                          .~
-                        </b>
-                      </Card.Text>
-                    </h6>
-                    <h6>
-                      <Card.Text>
-                        <p>
-                          ke Rekening {data.disbursement_bank_name} {" "} {data.disbursement_account}                          
-                        </p>
-                        <p>a/n {data.disbursement_name}</p>
-                        <p>
-                          Rencana Penggunaan Pencairan :{" "}
-                          {data.disbursement_description}
-                        </p>
-                      </Card.Text>
-                    </h6>
-                    <h6>
-                      <footer className="blockquote-footer">
-                        <cite title="Source Title">
-                          <Moment fromNow>{data.paid_at}</Moment>
-                        </cite>
-                      </footer>
-                    </h6>
-                  </blockquote>
+                  <b>
+                    <a style={{ color: "#48c78e" }}>{data.title}</a>
+                  </b>
+                  <br />
+                  <a>{data.nama_lengkap}</a>
+                  <br />
+                  <a style={{ color: "#b3b5b4" }}>Mengajak 125 Orang</a>
+                  <br />
+                  <NumberFormat
+                    className="mr-2"
+                    value={data.donation_collect}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"Donasi Terkumpul Rp. "}
+                  />
+                  <hr />
+                 
                 </Card.Body>
               </Card>
             </Col>

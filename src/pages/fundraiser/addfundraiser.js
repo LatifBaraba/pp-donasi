@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Row,
@@ -12,25 +12,29 @@ import {
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchFundraiser } from "../../Redux/fundraiser/action";
+import { fetchAddFundraiser } from "../../Redux/fundraiser/action";
+// import { fetchToken, fetchRefreshToken } from "../../Redux/token/action";
 
-const Fundraiser = () => {
-  const { register, handleSubmit, errors } = useForm(); 
+const Fundraiser = (props) => {
+  const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
 
   const [targetdonasi, setTargetDonasi] = useState(0);
   const [penggalangan, setPenggalangan] = useState("");
   const [link, setLink] = useState("");
   const [checkbox, setCheckbox] = useState("");
-
+  // useEffect(() => {
+  //   dispatch(fetchToken());
+  // }, []);
   const onSubmit = () => {
     const payload = {
-      targetdonasi: targetdonasi,
-      penggalangan: penggalangan,
-      link: link,
-    }
+      id_donasi: props.location.state.data.id,
+      target: targetdonasi,
+      title: penggalangan,
+      seo_url: link,
+    };
 
-  let token = localStorage.getItem("token");    
+    let token = localStorage.getItem("token");
     // let datax = [];
     // if (datas === "") {
     //   errors.showMessage();
@@ -46,7 +50,7 @@ const Fundraiser = () => {
     //     payment_method: tipebayar,
     //   };
     //   // console.log(datax)
-      dispatch(fetchFundraiser(token, payload));
+    dispatch(fetchAddFundraiser(token, payload));
     // }
   };
 
@@ -74,7 +78,7 @@ const Fundraiser = () => {
                   <a>kamu membantu menggalang dana ke penggalangan</a>
                   <br />
                   <b>
-                    <a>Roda Dagangan Buat Pak Ule</a>
+                    <a>{props.location.state.data.title}</a>
                   </b>
                   <hr />
                 </div>
@@ -145,9 +149,13 @@ const Fundraiser = () => {
                       <Card.Text color>
                         Dengan menjadi fundraiser, saya tidak bisa mencairkan
                         dana yang terkumpul di penggalangan ini
-                        <Form.Check type="checkbox" label="Ya, Saya Setuju"  {...register("checkbox", {
-                        required: true,
-                      })}/>
+                        <Form.Check
+                          type="checkbox"
+                          label="Ya, Saya Setuju"
+                          {...register("checkbox", {
+                            required: true,
+                          })}
+                        />
                       </Card.Text>
                     </Card.Body>
                   </Card>

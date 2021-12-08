@@ -50,9 +50,7 @@ export function fetchLogin(token, payload) {
 }
 
 export function fetchLoginSession(token, payload, donasi, uripath) {
-  console.log(token);
-  console.log(payload);
-  console.log(donasi);
+
   return (dispatch) => {
     axios(LOGINURL, {
       method: "POST",

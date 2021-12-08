@@ -1,55 +1,57 @@
 import {
-  GET_KABAR_TERBARU_OT,
-  GET_KABAR_TERBARU_OT_SUCCESS,
-  GET_KABAR_TERBARU_OT_FAILURE,
-  GET_KABAR_TERBARU_RUTIN,
-  GET_KABAR_TERBARU_RUTIN_SUCCESS,
-  GET_KABAR_TERBARU_RUTIN_FAILURE,
+  GET_FUNDRAISER,
+  GET_FUNDRAISER_SUCCESS,
+  GET_FUNDRAISER_FAILURE,
+  GET_FUNDRAISER_BY_DONASI,
+  GET_FUNDRAISER_BY_DONASI_SUCCESS,
+  GET_FUNDRAISER_BY_DONASI_FAILURE,
 } from "../actionTypes";
 
 const initialState = {
   loading: false,
-  kabarterbaruot: [],
-  kabarterbarurutin: [],
+  fundraiser: [],
+  fundraiserbydonate: [],
   error: null,
 };
 
-export default function kabarTerbaruReducer(state = initialState, action) {
+export default function fundraiserReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_KABAR_TERBARU_OT:
+    case GET_FUNDRAISER:
       return {
         ...state,
         loading: true,
       };
-    case GET_KABAR_TERBARU_OT_SUCCESS:
+    case GET_FUNDRAISER_SUCCESS:
       return {
         ...state,
         loading: false,
         error: null,
-        kabarterbaruot: action.payload,
+        fundraiser: action.payload,
       };
-    case GET_KABAR_TERBARU_OT_FAILURE:
+    case GET_FUNDRAISER_FAILURE:
       return {
         ...state,
         loading: false,
       };
-    case GET_KABAR_TERBARU_RUTIN:
+
+    case GET_FUNDRAISER_BY_DONASI:
       return {
         ...state,
         loading: true,
       };
-    case GET_KABAR_TERBARU_RUTIN_SUCCESS:
+    case GET_FUNDRAISER_BY_DONASI_SUCCESS:
       return {
         ...state,
         loading: false,
         error: null,
-        kabarterbarurutin: action.payload,
+        fundraiserbydonate: action.payload,
       };
-    case GET_KABAR_TERBARU_RUTIN_FAILURE:
+    case GET_FUNDRAISER_BY_DONASI_FAILURE:
       return {
         ...state,
         loading: false,
       };
+
     default:
       return state;
   }

@@ -15,9 +15,11 @@ import "react-multi-carousel/lib/styles.css";
 import "./detaildonasi2.css";
 import { CheckCircle } from "react-feather";
 import { fetchDonasiOneTimeBySeo } from "../Redux/donasilist/actions";
-import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
+import { fetchFundraiserByDonasi } from "../Redux/fundraiser/action";
+// import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
 
-const DetailDonasi2 = () => {
+const DetailDonasi2 = (props) => {
+  console.log({...props})
   const [now, setNow] = useState(0);
   const username = localStorage.getItem("username");
   const refresh = () => {
@@ -25,7 +27,8 @@ const DetailDonasi2 = () => {
       window.location.reload();
     }, 100);
   };
-  // const { donasi } = props.location.state;
+  const { donasi } = props.location.state;
+  console.log(donasi);
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -38,18 +41,20 @@ const DetailDonasi2 = () => {
     // dispatch(fetchPageDonasi(token));
 
     if (token == undefined) {
-      dispatch(fetchToken());
+      // dispatch(fetchToken());
       setTimeout(() => {
         let tokens = localStorage.getItem("token");
         console.log(" detail donasi ", tokens);
         // dispatch(fetchDonasiRutinBySeo(tokens, id));
         dispatch(fetchDonasiOneTimeBySeo(tokens, id));
+        dispatch(fetchFundraiserByDonasi(tokens, donasi.id));
         dispatch(fetchAllHistoryDonation(tokens));
         dispatch(fetchPageDonasi(tokens));
       }, 2000);
     } else {
       console.log("detail ", token);
       dispatch(fetchDonasiOneTimeBySeo(token, id));
+      dispatch(fetchFundraiserByDonasi(token, donasi.id));
       dispatch(fetchAllHistoryDonation(token));
       dispatch(fetchPageDonasi(token));
     }
@@ -68,6 +73,12 @@ const DetailDonasi2 = () => {
   const allhistorydata = useSelector(
     (state) => state.donasiDetailReducer.allhistorydata
   );
+
+  const datafundraiser = useSelector(
+    (state) => state.fundraiserReducer.fundraiserbydonate
+  );
+
+  console.log(datafundraiser)
 
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
@@ -265,6 +276,28 @@ const DetailDonasi2 = () => {
                   </a>
                 </Col>
               )}
+              <Col md={4}>
+                {username ? (
+                  <Link
+                    to={{
+                      pathname: "/fundraiser",
+                      state: { data: data, uripath: window.location.pathname },
+                    }}
+                  >
+                    <Button>Jadi Fundraiser</Button>
+                  </Link>
+                ) : (
+                  <Link
+                    to={{
+                      pathname: "/login",
+                      state: { data: data, uripath: window.location.pathname },
+                    }}
+                    className="mr-2"
+                  >
+                    <Button variant="primary">Jadi Fundraiser</Button>
+                  </Link>
+                )}
+              </Col>
             </div>
           </div>
         </div>
@@ -458,30 +491,40 @@ const DetailDonasi2 = () => {
         <Col md={3} className="mt-5"></Col>
         <Col md={6} className="mt-5">
           <h3 style={{ fontSize: "font-size: 1.75rem" }}>Fundraiser</h3>
-          <Card>
-            <Card.Body>
-              <b>
-                <a style={{ color: "#48c78e" }}>Bantu dari Fundraiser</a>
-              </b>
-              <br />
-              <a>Alwy Said</a>
-              <br />
-              <a style={{ color: "#b3b5b4" }}>Mengajak 125 Orang</a>
-              <br />
-              <b>
-                <a style={{ color: "#696969" }}>2.500.000</a>
-              </b>
-              <hr />
-              <Row className="text-justify justify-content-center">
-                <Link
-                  to={{
-                    pathname: "/fundraiser/" + data.id,
-                    state: window.location.pathname,
-                  }}
-                >
-                  <Button>Lihat lainnya</Button>
-                </Link>
-                <Col md={3} className="mt-5"></Col>
+          <div></div>
+          {datafundraiser.slice(0, 1).map((data, idx) => (
+            <div>
+              <Card>
+                <Card.Body>
+                  <b>
+                    <a style={{ color: "#48c78e" }}>{data.title}</a>
+                  </b>
+                  <br />
+                  <a>{data.nama_lengkap}</a>
+                  <br />
+                  <a style={{ color: "#b3b5b4" }}>Mengajak 125 Orang</a>
+                  <br />
+                  <NumberFormat
+                    className="mr-2"
+                    value={data.donation_collect}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"Donasi Terkumpul Rp. "}
+                  />
+                  {/* <b>
+                    <a style={{ color: "#696969" }}>{data.donation_collect}</a>
+                  </b> */}
+                  <hr />
+                  <Row className="text-justify justify-content-center">
+                    <Link
+                      to={{
+                        pathname: "/fundraiser/" + data.id_pp_cp_program_donasi,
+                        state: window.location.pathname,
+                      }}
+                    >
+                      <Button>Lihat lainnya</Button>
+                    </Link>
+                    {/* <Col md={3} className="mt-5"></Col>
                 <Link
                   to={{
                     pathname: "/fundraiser",
@@ -489,10 +532,12 @@ const DetailDonasi2 = () => {
                   }}
                 >
                   <Button>Jadi Fundraiser</Button>
-                </Link>
-              </Row>
-            </Card.Body>
-          </Card>
+                </Link> */}
+                  </Row>
+                </Card.Body>
+              </Card>
+            </div>
+          ))}
         </Col>
       </Row>
       <Row className="mt-5 text-justify">

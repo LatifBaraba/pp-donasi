@@ -68,7 +68,10 @@ ReactDOM.render(
           <Route path="/list-donasi-dua" exact component={ListDonasiDua} />
           <Route path="/rutin/:id" exact component={DonasiDetail} />
           {/* <Route path="/rutin/:id" render={props => <DonasiDetail props={...props}/>} /> */}
+          
           <Route path="/otime/:id" exact component={DonasiDetail2} />
+
+
           <Route path="/rutin" exact component={Rutin} />
           <Route path="/history" exact component={History} />
           <Route path="/detail/:id" exact component={Detail} />
