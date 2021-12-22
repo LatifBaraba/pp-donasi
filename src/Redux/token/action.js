@@ -17,7 +17,6 @@ let max = 100;
 const randomType = Math.floor(Math.random() * (max - min));
 
 const browser = Bowser.getParser(window.navigator.userAgent);
-// console.log(`The current browser name is "${browser.getBrowserName()}"`);
 
 
 
@@ -37,9 +36,7 @@ export function fetchToken() {
         })
         .then(res => {
             dispatch(getTokenSuccess(res.data.data));
-            // console.log(res.data.data.token)
             localStorage.setItem("token", res.data.data.token);
-            // console.log(res)
             // const dispatch = useDispatch()
             dispatch(fetchDonasilist(res.data.data.token));
             dispatch(fetchDonasilist2(res.data.data.token));  
@@ -63,7 +60,6 @@ export function fetchRefreshToken(token) {
         .then(res => {
             localStorage.setItem("token", res.data.data.token);
             dispatch(getTokenSuccess(res.data.data));
-            // console.log(res)
         })
         .catch(err => {
             console.log(err)

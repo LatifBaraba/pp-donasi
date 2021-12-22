@@ -49,7 +49,6 @@ const Fundraiser = (props) => {
     //     is_anonymous: anonim,
     //     payment_method: tipebayar,
     //   };
-    //   // console.log(datax)
     dispatch(fetchAddFundraiser(token, payload));
     // }
   };

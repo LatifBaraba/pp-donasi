@@ -42,7 +42,6 @@ export function fetchPagedonasi2(token) {
         })
         .then(res => {
             dispatch(getPagedonasi2Success(res.data.data));
-            console.log(res.data.data)
         })
         .catch(err => {
             dispatch(getPagedonasi2Failure(err));
@@ -58,8 +57,6 @@ export function fetchPagedonasi2(token) {
 
 export function fetchPaketPagedonasi2(token, id) {
     return (dispatch) => {
-        console.log(token)
-        console.log(id)
         axios(ListPaketURL, {
             method: 'POST',
             data: {
@@ -89,7 +86,6 @@ export function fetchPaketPagedonasi2(token, id) {
             }
         })
         .then(res => {
-            console.log(res.data.data)
             dispatch(getPaketPagedonasi2Success(res.data.data));
         })
         .catch(err => {

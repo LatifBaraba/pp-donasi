@@ -6,7 +6,6 @@ const Checkout = () => {
     const [vaNumber, setVaNumber] = useState('PPDONASI182738127831')
 
     const copyToClipboard = (e) => {
-        console.log(e)
         document.execCommand(vaNumber);
         // This is just personal preference.
         // I prefer to not show the whole text area selected.

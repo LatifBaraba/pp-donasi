@@ -35,13 +35,11 @@ const DetailDonasi = () => {
       dispatch(fetchToken());
       setTimeout(() => {
         let tokens = localStorage.getItem("token");
-        console.log(" detail donasi ", tokens);
         dispatch(fetchDonasiRutinBySeo(tokens, id));
         dispatch(fetchPagedonasi2(tokens));
         dispatch(fetchAllHistoryRutinDonation(tokens));
       }, 2000);
     } else {
-      console.log("detail ", token);
       dispatch(fetchDonasiRutinBySeo(token, id));
       dispatch(fetchPagedonasi2(token));
       dispatch(fetchAllHistoryRutinDonation(token));
@@ -56,7 +54,6 @@ const DetailDonasi = () => {
   const datapaket = useSelector(
     (state) => state.pagedonasi2Reducer.paketpagedonasi2
   );
-  console.log(data);
 
   const rutinhistorydata = useSelector(
     (state) => state.donasiDetailReducer.rutinhistorydata
@@ -65,7 +62,6 @@ const DetailDonasi = () => {
   const allhistorydata = useSelector(
     (state) => state.donasiDetailReducer.allrutinhistorydata
   );
-  // console.log(datapaket)
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },

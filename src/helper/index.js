@@ -11,14 +11,10 @@ export function uploadImage(files) {
         const formData = new FormData();
         formData.append("file", files);
         formData.append("upload_preset", PRESET);
-        console.log(files.size)
-        console.log(URL)
-        console.log(PRESET)
-        console.log(SIZE)
+       
         if(files.size < SIZE) {
             axios.post(URL, formData)
             .then((res) => {
-                console.log(res)
                 resolve({
                     message: "success",
                     response: res
@@ -39,7 +35,6 @@ export function uploadImage(files) {
 }
 
 export function toIsoString(date) {
-    console.log(date, 'date')
     var tzo = -date.getTimezoneOffset(),
         dif = tzo >= 0 ? '+' : '-',
         pad = function(num) {

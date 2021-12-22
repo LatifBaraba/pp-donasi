@@ -6,136 +6,125 @@ import {
   fetchDetailDonasi,
   fetchHistoryDonation,
   fetchAllHistoryDonation,
-} from "../Redux/detaildonasi/action";
-import { fetchPageDonasi } from "../Redux/pagelistdonasi/actions";
+} from "../../Redux/detaildonasi/action";
+import { fetchPageDonasi } from "../../Redux/pagelistdonasi/actions";
 import NumberFormat from "react-number-format";
 import CarouselCard from "react-multi-carousel";
 import Moment from "react-moment";
 import "react-multi-carousel/lib/styles.css";
 import "./detaildonasi2.css";
 import { CheckCircle } from "react-feather";
-import { fetchDonasiOneTimeBySeo } from "../Redux/donasilist/actions";
-import { fetchFundraiserByDonasi } from "../Redux/fundraiser/action";
-// import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
+import { fetchDonasiOneTimeBySeo } from "../../Redux/donasilist/actions";
+import { fetchFundraiserByDonasi, fetchFundraiserBySeo } from "../../Redux/fundraiser/action";
+import { fetchToken, fetchRefreshToken } from "../../Redux/token/action";
 
-const DetailDonasi2 = (props) => {
-  const [now, setNow] = useState(0);
+const DetailFundraiser = (props) => {
+//   console.log();
+//   const [now, setNow] = useState(0);
   const username = localStorage.getItem("username");
   const refresh = () => {
     setInterval(() => {
       window.location.reload();
     }, 100);
   };
-  const { donasi } = props.location.state;
+//   const { donasi } = props.location.state;
   const { id } = useParams();
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.tokenReducer.token.token);
   useEffect(() => {
-    // let token = localStorage.getItem("token");
-    // dispatch(fetchDetailDonasi(token, donasi.id));
-    // dispatch(fetchHistoryDonation(token, donasi.id));
-    // dispatch(fetchAllHistoryDonation(token));
-    // dispatch(fetchPageDonasi(token));
+   
 
     if (token == undefined) {
-      // dispatch(fetchToken());
+      dispatch(fetchToken());
       setTimeout(() => {
         let tokens = localStorage.getItem("token");
+        // console.log(" detail donasi ", tokens);
         // dispatch(fetchDonasiRutinBySeo(tokens, id));
-        dispatch(fetchDonasiOneTimeBySeo(tokens, id));
-        dispatch(fetchFundraiserByDonasi(tokens, donasi.id));
-        dispatch(fetchAllHistoryDonation(tokens));
-        dispatch(fetchPageDonasi(tokens));
+        // dispatch(fetchDonasiOneTimeBySeo(tokens, id));
+        // dispatch(fetchFundraiserByDonasi(tokens, donasi.id));
+        // dispatch(fetchAllHistoryDonation(tokens));
+        // dispatch(fetchPageDonasi(tokens));
+        dispatch(fetchFundraiserBySeo(tokens, id));
       }, 2000);
     } else {
-      dispatch(fetchDonasiOneTimeBySeo(token, id));
-      dispatch(fetchFundraiserByDonasi(token, donasi.id));
-      dispatch(fetchAllHistoryDonation(token));
-      dispatch(fetchPageDonasi(token));
+      // console.log("detail ", token);
+      // dispatch(fetchDonasiOneTimeBySeo(token, id));
+      // dispatch(fetchFundraiserByDonasi(token, donasi.id));
+      // dispatch(fetchAllHistoryDonation(token));
+      dispatch(fetchFundraiserBySeo(token, id));
     }
   }, []);
 
-  const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
+    const databyseo = useSelector((state) => state.fundraiserReducer.fundraiserbyseo);
+
+//   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
   const kabarterbaru = useSelector(
     (state) => state.kabarTerbaruReducer.kabarterbaruot
   );
 
-  const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
+//   const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
   const historydata = useSelector(
     (state) => state.donasiDetailReducer.historydata
   );
-  const allhistorydata = useSelector(
-    (state) => state.donasiDetailReducer.allhistorydata
-  );
+//   console.log(historydata.length);
+//   const allhistorydata = useSelector(
+//     (state) => state.donasiDetailReducer.allhistorydata
+//   );
 
-  const datafundraiser = useSelector(
-    (state) => state.fundraiserReducer.fundraiserbydonate
-  );
+//   const datafundraiser = useSelector(
+//     (state) => state.fundraiserReducer.fundraiserbydonate
+//   );
 
+//   console.log(datafundraiser);
 
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
 
+  // console.log(databyseo);
 
   let from = new Date();
-  let to = new Date(data.valid_to);
-  // let Difference_In_Days = to.getUTCDate() - from.getUTCDate;
+  let to = new Date(databyseo.valid_to);
+//   // let Difference_In_Days = to.getUTCDate() - from.getUTCDate;
 
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
+//   const responsive = {
+//     superLargeDesktop: {
+//       breakpoint: { max: 4000, min: 3000 },
+//       items: 5,
+//     },
+//     desktop: {
+//       breakpoint: { max: 3000, min: 1024 },
+//       items: 4,
+//     },
+//     tablet: {
+//       breakpoint: { max: 1024, min: 464 },
+//       items: 2,
+//     },
+//     mobile: {
+//       breakpoint: { max: 464, min: 0 },
+//       items: 1,
+//     },
+//   };
 
-  const ucapandoaCarousel = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-
+  
   return (
     <div className="container detail-program">
+        {/* Halaman seo */}
+        {/* {props.data} */}
       <div className="row row-mb-5" style={{ display: "flex" }}>
         <div className="col-md-6" style={{ width: "50%" }}>
           <div className="article-content">
             <div className="article-media">
               <img
-                src={data.thumbnail_image_url}
+                src={databyseo.thumbnail_image_url}
                 className="article-image img-1"
                 alt=""
               />
             </div>
             <div className="article-summary">
-              <p className="os-12 txt-600">{data.title}</p>
+              <p className="os-12 txt-600">{databyseo.title}</p>
             </div>
             <div className="article-action"></div>
           </div>
@@ -143,13 +132,13 @@ const DetailDonasi2 = (props) => {
         <div className="col-md-6">
           <div className="article-detail">
             <div className="article-heading">
-              <h2 className="article-title">{data.title}</h2>
+              <h2 className="article-title">{databyseo.title}</h2>
             </div>
             <div>
               {isReadMore
-                ? data.description && data.description.slice(0, 150)
-                : data.description}
-              {data.description && data.description.length < 150 ? (
+                ? databyseo.description && databyseo.description.slice(0, 150)
+                : databyseo.description}
+              {databyseo.description && databyseo.description.length < 150 ? (
                 ""
               ) : (
                 <span onClick={toggleReadMore} className="read-or-hide">
@@ -157,29 +146,14 @@ const DetailDonasi2 = (props) => {
                 </span>
               )}
             </div>
-            {/* Periode Donasi dari{" "}
-            <i>
-              <b>
-                <Moment format="YYYY-MM-DD hh:mm:ss">
-                  {moment(data.valid_from).format("YYYY-MM-DDTHH:mm:ss")}
-                </Moment>
-              </b>
-            </i>{" "}
-          -{" "}
-            <i>
-              <b>
-                <Moment format="YYYY-MM-DD hh:mm:ss">
-                  {moment(data.valid_to).format("YYYY-MM-DDTHH:mm:ss")}
-                </Moment>
-              </b>
-            </i> */}
+           
             <div className="article-status">
               <span className="os-13 txt-600 text-terkumpul">Target </span>
               <div className="article-number campaign-donate">
                 <h2>
                   <NumberFormat
                     className="mr-2"
-                    value={data.donation_collect}
+                    value={databyseo.donation_collect}
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"Rp. "}
@@ -194,7 +168,7 @@ const DetailDonasi2 = (props) => {
                     Dari
                     <NumberFormat
                       className="ml-2"
-                      value={data.target}
+                      value={databyseo.target}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"Rp. "}
@@ -206,28 +180,20 @@ const DetailDonasi2 = (props) => {
               <div className="cardbox-stat mb-2 progressbar">
                 <ProgressBar
                   animated
-                  now={localStorage.getItem("percent" + data.id)}
-                  label={`${localStorage.getItem("percent" + data.id)}%`}
+                  now={localStorage.getItem("percent" + databyseo.id)}
+                  label={`${localStorage.getItem("percent" + databyseo.id)}%`}
                   className="donasi-progressbar"
                 />
               </div>
 
-              {/* <Moment fromNow ago>{data.valid_to}</Moment> */}
-
-              {/* <div class="remain-txt remaining-day">
-                <span class="total-dermawan">4.787 Dermawan</span>
-                <span>
-                  <strong>147 hari tersisa</strong>
-                </span>
-              </div> */}
             </div>
             <div className="article-button my-4" style={{ display: "flex" }}>
               <Col md={4}>
                 {username ? (
                   <Link
                     to={{
-                      pathname: "/order/" + data.seo_url,
-                      state: { data: data },
+                      pathname: "/orderfund/" + databyseo.seo_url,
+                      state: { data: databyseo },
                     }}
                     className="mr-2"
                   >
@@ -237,7 +203,7 @@ const DetailDonasi2 = (props) => {
                   <Link
                     to={{
                       pathname: "/login",
-                      state: { data: data, uripath: window.location.pathname },
+                      state: { data: databyseo, uripath: window.location.pathname },
                     }}
                     className="mr-2"
                   >
@@ -245,10 +211,10 @@ const DetailDonasi2 = (props) => {
                   </Link>
                 )}
               </Col>
-              {data.ayobantu_link !== "" && (
+              {databyseo.ayobantu_link !== "" && (
                 <Col md={4}>
                   <a
-                    href={data.ayobantu_link}
+                    href={databyseo.ayobantu_link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mr-2"
@@ -257,10 +223,10 @@ const DetailDonasi2 = (props) => {
                   </a>
                 </Col>
               )}
-              {data.kitabisa_link !== "" && (
+              {databyseo.kitabisa_link !== "" && (
                 <Col md={4}>
                   <a
-                    href={data.kitabisa_link}
+                    href={databyseo.kitabisa_link}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ marginLeft: "auto" }}
@@ -269,12 +235,12 @@ const DetailDonasi2 = (props) => {
                   </a>
                 </Col>
               )}
-              <Col md={4}>
+              {/* <Col md={4}>
                 {username ? (
                   <Link
                     to={{
                       pathname: "/fundraiser",
-                      state: { data: data, uripath: window.location.pathname },
+                      state: { data: databyseo, uripath: window.location.pathname },
                     }}
                   >
                     <Button>Jadi Fundraiser</Button>
@@ -283,14 +249,14 @@ const DetailDonasi2 = (props) => {
                   <Link
                     to={{
                       pathname: "/login",
-                      state: { data: data, uripath: window.location.pathname },
+                      state: { data: databyseo, uripath: window.location.pathname },
                     }}
                     className="mr-2"
                   >
                     <Button variant="primary">Jadi Fundraiser</Button>
                   </Link>
                 )}
-              </Col>
+              </Col> */}
             </div>
           </div>
         </div>
@@ -304,10 +270,10 @@ const DetailDonasi2 = (props) => {
             <div className="container">
               <div className="mb-3">
                 <h2>
-                  <strong>{data.title}</strong>
+                  <strong>{databyseo.title}</strong>
                 </h2>
               </div>
-              <div dangerouslySetInnerHTML={{ __html: data.content }} />
+              <div dangerouslySetInnerHTML={{ __html: databyseo.content }} />
             </div>
           </Card>
         </Col>
@@ -343,11 +309,7 @@ const DetailDonasi2 = (props) => {
               <br />
             </div>
           ))}
-          {/* <Row className="mt-4 text-justify justify-content-center">
-            <Link to="/history-donate">
-              <Button>Lihat lainnya</Button>
-            </Link>
-          </Row> */}
+     
         </Col>
         <Col md={6} className="mt-5">
           <h3 style={{ fontSize: "font-size: 1.75rem" }}>
@@ -390,7 +352,7 @@ const DetailDonasi2 = (props) => {
           <Row className="mt-4 text-justify justify-content-center">
             <Link
               to={{
-                pathname: "/history-donate/" + data.id,
+                pathname: "/history-donate/" + databyseo.id,
                 state: window.location.pathname,
               }}
             >
@@ -415,7 +377,7 @@ const DetailDonasi2 = (props) => {
                 style={{ width: "30rem", alignContent: "center" }}
                 className="mb-2"
               >
-                {/* <Card.Header>{data.username}</Card.Header> */}
+             
                 <Card.Body>
                   <blockquote className="blockquote mb-0">
                     <h4>
@@ -471,7 +433,7 @@ const DetailDonasi2 = (props) => {
           <Row className="mt-4 text-justify justify-content-center">
             <Link
               to={{
-                pathname: "/kabar-terbaru-ot/" + data.id,
+                pathname: "/kabar-terbaru-ot/" + databyseo.id,
                 state: window.location.pathname,
               }}
             >
@@ -480,7 +442,7 @@ const DetailDonasi2 = (props) => {
           </Row>
         </Col>
       </Row>
-      <Row>
+      {/* <Row>
         <Col md={3} className="mt-5"></Col>
         <Col md={6} className="mt-5">
           <h3 style={{ fontSize: "font-size: 1.75rem" }}>Fundraiser</h3>
@@ -504,9 +466,7 @@ const DetailDonasi2 = (props) => {
                     thousandSeparator={true}
                     prefix={"Donasi Terkumpul Rp. "}
                   />
-                  {/* <b>
-                    <a style={{ color: "#696969" }}>{data.donation_collect}</a>
-                  </b> */}
+                
                   <hr />
                   <Row className="text-justify justify-content-center">
                     <Link
@@ -517,15 +477,7 @@ const DetailDonasi2 = (props) => {
                     >
                       <Button>Lihat lainnya</Button>
                     </Link>
-                    {/* <Col md={3} className="mt-5"></Col>
-                <Link
-                  to={{
-                    pathname: "/fundraiser",
-                    state: window.location.pathname,
-                  }}
-                >
-                  <Button>Jadi Fundraiser</Button>
-                </Link> */}
+                   
                   </Row>
                 </Card.Body>
               </Card>
@@ -537,8 +489,8 @@ const DetailDonasi2 = (props) => {
         <Col md={8}>
           <h3>Kamu juga bisa berdonasi yang lain :</h3>
         </Col>
-      </Row>
-      <CarouselCard responsive={responsive}>
+      </Row> */}
+      {/* <CarouselCard responsive={responsive}>
         {datas.map((data, idx) => (
           <Col key={idx}>
             <Card>
@@ -579,7 +531,7 @@ const DetailDonasi2 = (props) => {
                     />
                   </div>
                 </Card.Text>
-                {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
+                
                 <Card.Text style={{ width: "10" }}>
                   {data.penggalang_dana.Name ? data.penggalang_dana.Name : ""}{" "}
                   {data.penggalang_dana.Name &&
@@ -604,9 +556,9 @@ const DetailDonasi2 = (props) => {
             </Card>
           </Col>
         ))}
-      </CarouselCard>
+      </CarouselCard> */}
     </div>
   );
 };
 
-export default DetailDonasi2;
+export default DetailFundraiser;

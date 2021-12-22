@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Button, Dropdown, MenuItem } from "react-bootstrap";
 import NumberFormat from "react-number-format";
-import { fetchDetailDonasi } from "../Redux/detaildonasi/action";
+import { fetchDetailDonasi } from "../../Redux/detaildonasi/action";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useForm } from "react-hook-form";
-import { fetchOrder } from "../Redux/order/actions";
-import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
-import { fetchHistory } from '../Redux/history/action'
+import { fetchOrder } from "../../Redux/order/actions";
+// import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
+import { fetchHistory } from '../../Redux/history/action'
 
-const Order = (props) => {
+const OrderFundraiser = (props) => {
   const username = localStorage.getItem("username");
   const refresh = () => {
     setInterval(() => {
@@ -31,7 +31,7 @@ const Order = (props) => {
   let token = localStorage.getItem("token");    
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchDetailDonasi(token, donasi.id));
+    dispatch(fetchDetailDonasi(token, donasi.id_pp_cp_program_donasi));
     dispatch(fetchHistory(token, username))
   }, []);
   
@@ -54,6 +54,7 @@ const Order = (props) => {
         is_anonymous: anonim,
         payment_method: tipebayar,
       };     
+      // console.log(datax) 
       dispatch(fetchOrder(token, datax));      
     }
   };
@@ -64,6 +65,7 @@ const Order = (props) => {
     const arr2 = e.target.innerHTML.split(" ")[1].split(".")[1]
     const arr3 = e.target.innerHTML.split(" ")[1].split(".")[2] ? e.target.innerHTML.split(" ")[1].split(".")[2] : ""
     const arr4 = arr1.concat(arr2).concat(arr3)        
+    // console.log(e.target.innerHTML.split(" ")[1])
     setNominal(parseInt(e.target.innerHTML.split(" ")[1]))
   }
 
@@ -80,11 +82,7 @@ const Order = (props) => {
         </div>        
       )}
       <Form onSubmit={handleSubmit(onSubmit)}>
-        {/* <Row className="mt-3 justify-content-center">
-          <Col md={8}>
-            <h2>Halo Kak Alwy</h2>
-          </Col>
-        </Row> */}
+       
         <Row className="mt-5 justify-content-center">
           <Col md={8}>
             <h4>Silahkan Melakukan Pembayaran Donasi </h4>
@@ -93,12 +91,7 @@ const Order = (props) => {
         </Row>
         <Row className="mt-5 justify-content-center donasi-amount">
           <Col md={8} className="donasi-amount-content">
-            {/* <span className="mr-2 text-bold">Nominal Donasi</span> */}
-            {/* <NumberFormat
-              thousandSeparator={"."}
-              decimalSeparator={","}
-              prefix="Rp."
-            /> */}
+           
             <Form.Group controlId="formNominal">
               <Form.Label>Nominal Donasi</Form.Label>
               <Form.Control
@@ -111,25 +104,14 @@ const Order = (props) => {
                 onChange={(e) => setNominal(e.target.value)}
               />
             </Form.Group>
-            {/* <Form.Group controlId="formJumlahNominal">
-              {data.nominal.map((data, id) => 
-                <Button variant="outline-dark" onClick={handleChange}>{ <NumberFormat
-                  value={data}
-                  displayType={"text"}
-                  thousandSeparator={false}
-                  prefix={"Rp. "}
-                />}</Button>
-              )}
-            </Form.Group> */}
+          
             <Form.Group controlId="formTipeBayar">
               <Form.Control
                 required
                 as="select"
                 type="select"
                 onChange={(e) => setTipeBayar(e.target.value)}      
-                // {...register("tipebayar", {
-                //   required: true,
-                // })}          
+                
                 
               >
                 <option value="">Pilih Pembayaran</option>
@@ -178,7 +160,6 @@ const Order = (props) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              {/* <Form.Check type="checkbox" label="Tampilkan Anonim" onChange={(e) => setAnonim(e.target.value)}/> */}
               <input
                 type="checkbox"
                 checked={anonim}
@@ -189,17 +170,7 @@ const Order = (props) => {
         </Row>
         <Row className="mt-4 justify-content-center donasi-amount">
           <Col md={3} className="donasi-amount-content">
-            {/* <Link
-              to={{
-                pathname: "/checkout",
-                state: { donasi: data },
-              }}
-            >
-              <Button>Konfirmasi Pembayaran</Button>
-            </Link> */}
-            {/* <Button variant="primary" type="submit" block>
-              Checkout
-            </Button> */}
+           
             <Link
             to={{
               pathname: "/invoice/"+ window.location.pathname.split('/')[2] + "/" + data.id,
@@ -209,7 +180,6 @@ const Order = (props) => {
           >
             <Button onClick={refresh}>Donasi Sekarang</Button>
           </Link>
-            {/* <Button type="submit">Donasi Sekarang</Button> */}
           </Col>
         </Row>
       </Form>
@@ -217,4 +187,4 @@ const Order = (props) => {
   );
 };
 
-export default Order;
+export default OrderFundraiser;

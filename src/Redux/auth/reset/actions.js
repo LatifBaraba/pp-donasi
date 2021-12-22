@@ -12,8 +12,6 @@ import {
   
   export function fetchReset(token, payload) {
     return (dispatch) => {
-      // console.log(token)
-      // console.log(payload)
       axios(RESETURL, {
           method: 'PUT',
           data: {

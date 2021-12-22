@@ -27,7 +27,6 @@ const Login = (props) => {
   // const token = useSelector((state) => state.tokenReducer.token.token);
   const donasi = props.location.state.data;
   const uripath = props.location.state.uripath;
-  console.log(donasi)
   let token = localStorage.getItem("token")
 
   const onSubmit = (data) => {

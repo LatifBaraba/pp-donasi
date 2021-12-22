@@ -8,6 +8,9 @@ import {
   GET_FUNDRAISER_BY_DONASI,
   GET_FUNDRAISER_BY_DONASI_SUCCESS,
   GET_FUNDRAISER_BY_DONASI_FAILURE,
+  GET_FUNDRAISER_BY_SEO,
+  GET_FUNDRAISER_BY_SEO_SUCCESS,
+  GET_FUNDRAISER_BY_SEO_FAILURE,
 } from "../actionTypes";
 import axios from "axios";
 import history from "../../history";
@@ -17,6 +20,7 @@ import { fetchRefreshToken } from "../token/action";
 
 // const URL = `${process.env.REACT_APP_BASE_URL}/transaction/my-list`;
 const URL = `${process.env.REACT_APP_BASE_URL}/fundraiser/list`;
+const URL_SEO = `${process.env.REACT_APP_BASE_URL}/fundraiser/seo/`;
 const URL_ADD = `${process.env.REACT_APP_BASE_URL}/fundraiser/create/`;
 
 export function fetchFundraiser(token, email) {
@@ -49,7 +53,6 @@ export function fetchFundraiser(token, email) {
       },
     })
       .then((res) => {
-        console.log(res.data.data);
         dispatch(getFundraiserSuccess(res.data.data));
       })
       .catch((err) => {
@@ -89,7 +92,6 @@ export function fetchFundraiserByDonasi(token, id) {
       },
     })
       .then((res) => {
-        console.log(res.data.data);
         dispatch(getFundraiserByDonasiSuccess(res.data.data));
       })
       .catch((err) => {
@@ -101,8 +103,6 @@ export function fetchFundraiserByDonasi(token, id) {
 
 export function fetchAddFundraiser(token, payload) {
   return (dispatch) => {
-    console.log(payload);
-    console.log(token);
     axios(URL_ADD + `${payload.id_donasi}`, {
       method: "POST",
       data: {
@@ -135,6 +135,24 @@ export function fetchAddFundraiser(token, payload) {
   };
 }
 
+export function fetchFundraiserBySeo(token, url) {
+  return (dispatch) => {
+    axios(URL_SEO + `${url}`, {
+      method: "GET",     
+      headers: {
+        "pp-token": `${token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        dispatch(getFundraiserBySeoSuccess(res.data.data));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(getFundraiserBySeoFailure(err));
+      });
+  };
+}
 // Get Fundraiser
 const getFundraiserSuccess = (payload) => ({
   type: GET_FUNDRAISER_SUCCESS,
@@ -161,6 +179,20 @@ const getFundraiserByDonasiFailure = () => ({
 
 const getFundraiserByDonasi = () => ({
   type: GET_FUNDRAISER_BY_DONASI,
+});
+
+// Get Fundraiser By Seo
+const getFundraiserBySeoSuccess = (payload) => ({
+  type: GET_FUNDRAISER_BY_SEO_SUCCESS,
+  payload,
+});
+
+const getFundraiserBySeoFailure = () => ({
+  type: GET_FUNDRAISER_BY_SEO_FAILURE,
+});
+
+const getFundraiserBySeo = () => ({
+  type: GET_FUNDRAISER_BY_SEO,
 });
 
 // Add Fundraiser

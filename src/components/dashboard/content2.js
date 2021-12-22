@@ -10,7 +10,6 @@ const Content2 = (props) => {
   // const [now, setNow] = useState(0);
   const [icon , setIcon] = useState(<CheckCircle color="blue" style={{width:"15"}}></CheckCircle>)
   const datas = props.data;
-  console.log(datas)
   // const dispatch = useDispatch();
   // useEffect(() => {
   //   let token = localStorage.getItem("token");   

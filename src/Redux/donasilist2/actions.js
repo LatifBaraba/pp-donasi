@@ -16,7 +16,6 @@ const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/list`;
 
 export function fetchDonasilist2(token) {
     return (dispatch) => {        
-        console.log(token)
         axios(URL, {
             method: 'POST',
             data: {
@@ -60,7 +59,6 @@ export function fetchDonasilist2(token) {
 
 export function fetchDonasiRutinBySeo(token, url) {
     return (dispatch) => {        
-        console.log('rutin seo ', token)
         axios(URL, {
             method: 'POST',
             data: {
@@ -96,9 +94,7 @@ export function fetchDonasiRutinBySeo(token, url) {
         .then(res => {
             dispatch(getDonasiseoSuccess(res.data.data));
             // localStorage.setItem("id", JSON.stringify(res.data.data[0]))
-            console.log('ini token dari detail donasi ')
-            console.log('ini token dari detail donasi ', token)
-            console.log(res)
+           
             dispatch(fetchDetailDonasiRutin(token, res.data.data[0].id))
             dispatch(fetchHistoryRutinDonation(token, res.data.data[0].id))
             dispatch(fetchPaketPagedonasi2(token, res.data.data[0].id))

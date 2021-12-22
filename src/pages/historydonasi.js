@@ -13,7 +13,6 @@ const ListProgram = () => {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(id)
   useEffect(() => {
     // dispatch(fetchPageDonasi(token));
     dispatch(fetchPagedonasi2(token));
@@ -29,7 +28,6 @@ const ListProgram = () => {
   const historydata = useSelector(
     (state) => state.donasiDetailReducer.historydata
   );
-    console.log(historydata)
   return (
     <div className="content">
     

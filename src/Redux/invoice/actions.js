@@ -13,7 +13,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 export function fetchInvoice(token, payload) {
   return (dispatch) => {
-    console.log("masuk fetch invoice")
     // axios(INVOICEURL, {
     //     method: 'POST',
     //     data: {

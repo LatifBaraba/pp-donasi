@@ -24,7 +24,6 @@ function Reset(props) {
   const [confirm_password, setConfirmPassword] = useState("");
   const [tokenpassword, setTokenPassword] = useState( new URLSearchParams(useLocation().search).get("token") );
 
-  // console.log(useQuery().get("token"));
   // useEffect(() => {
   //   dispatch(fetchToken());
   // }, []);

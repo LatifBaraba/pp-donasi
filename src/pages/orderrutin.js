@@ -34,7 +34,6 @@ const Order = (props) => {
   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
   const datadetailpaket = useSelector((state) => state.donasiDetailReducer.donasiDetailPaket);
   const datauser = useSelector((state) => state.historyReducer.history);
-  console.log(datadetailpaket)
 
   const [nominal, setNominal] = useState("");
   const [ucapan, setUcapan] = useState("");
@@ -43,7 +42,6 @@ const Order = (props) => {
   const [jumlahnominal, setJumlahNominal] = useState(0);
   const [anonim, setAnonim] = useState(false);
 
-  // console.log(datadetailpaket.nominal)
   const onSubmit = (datas) => {
     let datax = [];
     if (datas === "") {

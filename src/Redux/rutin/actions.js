@@ -6,7 +6,6 @@ import {
   // import axios from 'axios';
   
   export function fetchRutin(payload) {  
-    console.log(payload);
     return (dispatch) => {
       dispatch(rutinSuccess(payload));
     };

@@ -51,7 +51,6 @@ export function fetchDetailDonasi(token, id) {
 
 export function fetchDetailDonasiRutin(token, id) {
     return (dispatch) => {    
-        console.log("masuk detail donasi rutin")    
         axios(URL_RUTIN+`${id}`, {
             method: 'GET',
             headers: {
@@ -76,7 +75,6 @@ export function fetchDetailDonasiRutin(token, id) {
 
 export function fetchDetailDonasiRutinPaket(token, id) {
     return (dispatch) => {        
-        console.log(id)
         axios(URL_PAKET+`${id}`, {
             method: 'GET',
             headers: {
@@ -100,7 +98,6 @@ export function fetchDetailDonasiRutinPaket(token, id) {
 
 export function fetchHistoryDonation(token, id) {
     return (dispatch) => {
-        console.log('masuk redux')
         
         axios(URL_HISTORY, {
             method: 'POST',
@@ -131,7 +128,6 @@ export function fetchHistoryDonation(token, id) {
         })
         .then(res => {
             dispatch(getHistoryDonationSuccess(res.data.data));
-            console.log(res.data.data)
         })
         .catch(err => {
             if(err.response.status == 401){
@@ -148,7 +144,6 @@ export function fetchHistoryDonation(token, id) {
 
 export function fetchHistoryRutinDonation(token, id) {
     return (dispatch) => {
-        console.log('masuk redux')
         
         axios(URL_HISTORY, {
             method: 'POST',
@@ -179,7 +174,6 @@ export function fetchHistoryRutinDonation(token, id) {
         })
         .then(res => {
             dispatch(getHistoryPaketDonationSuccess(res.data.data));
-            console.log(res.data.data)
         })
         .catch(err => {
             if(err.response.status == 401){
@@ -195,7 +189,6 @@ export function fetchHistoryRutinDonation(token, id) {
 
 export function fetchAllHistoryDonation(token) {
     return (dispatch) => {
-        console.log('masuk redux')
         axios(URL_HISTORY, {
             method: 'POST',
             data: {
@@ -225,7 +218,6 @@ export function fetchAllHistoryDonation(token) {
         })
         .then(res => {
             dispatch(getAllHistoryDonationSuccess(res.data.data));
-            console.log(res.data.data)
         })
         .catch(err => {
             if(err.response.status == 401){
@@ -242,7 +234,6 @@ export function fetchAllHistoryDonation(token) {
 
 export function fetchAllHistoryRutinDonation(token) {
     return (dispatch) => {
-        console.log('masuk redux')
         axios(URL_HISTORY, {
             method: 'POST',
             data: {
@@ -272,7 +263,6 @@ export function fetchAllHistoryRutinDonation(token) {
         })
         .then(res => {
             dispatch(getAllRutinPaketHistoryDonationSuccess(res.data.data));
-            console.log(res.data.data)
         })
         .catch(err => {
             if(err.response.status == 401){

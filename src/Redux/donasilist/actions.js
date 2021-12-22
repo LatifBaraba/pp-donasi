@@ -18,7 +18,6 @@ const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi/list`;
 
 export function fetchDonasilist(token) {
   return (dispatch) => {        
-    console.log(token)
     axios(URL, {
       method: "POST",
       data: {
@@ -72,7 +71,6 @@ export function fetchDonasilist(token) {
 
 export function fetchDonasiOneTimeBySeo(token, url) {
   return (dispatch) => {        
-    console.log(token)
     axios(URL, {
       method: "POST",
       data: {

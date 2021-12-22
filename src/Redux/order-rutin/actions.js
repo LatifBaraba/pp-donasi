@@ -13,8 +13,6 @@ const ORDERURL = `${process.env.REACT_APP_BASE_URL}/transaction/create`;
 
 export function fetchOrderRutin(token, payload) {
   return (dispatch) => {
-    // console.log(token)
-    console.log(payload)
     axios(ORDERURL, {
         method: 'POST',
         data: {

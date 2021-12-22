@@ -15,8 +15,6 @@ const LOGINURL = `${process.env.REACT_APP_BASE_URL}/auth/user/login`;
 const LOGOUTURL = `${process.env.REACT_APP_BASE_URL}/auth/user/logout`;
 
 export function fetchLogin(token, payload) {
-  console.log(token);
-  console.log(payload);
   return (dispatch) => {
     axios(LOGINURL, {
       method: "POST",
@@ -77,6 +75,11 @@ export function fetchLoginSession(token, payload, donasi, uripath) {
             pathname: "/rutin/" + uri[2],
             // state: { donasi: donasi }
           });
+        } else if (uri[1] != "rutin" || uri[1] != "otime") {
+          history.push({
+            pathname: "/" + uri[1],
+            // state: { data: donasi }
+          });
         } else {
           history.push({
             pathname: "/otime/" + uri[2],
@@ -111,7 +114,6 @@ export function fetchLogout(token) {
         // localStorage.removeItem("token");
         localStorage.removeItem("username");
         history.push("/dashboard");
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);

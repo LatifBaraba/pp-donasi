@@ -14,7 +14,6 @@ const Myfundraiser = () => {
   }, [token, username]);
 
   const datafund = useSelector((state) => state.fundraiserReducer.fundraiser);
-  console.log(datafund);
   return (
     <div>
       <div className="container detail-program">

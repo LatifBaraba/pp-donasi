@@ -12,7 +12,6 @@ const Header = () => {
     const username = localStorage.getItem('username')
     const logout = () => {
         // history.push(`${process.env.PUBLIC_URL}/dashboard`);
-        // console.log(token)
         dispatch(fetchLogout(token))
     }
 
