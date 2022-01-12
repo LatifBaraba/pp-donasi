@@ -30,6 +30,7 @@ import KabarTerbaruRutin from "./pages/kabarterbarurutin";
 import ListFundraiser from "./pages/fundraiser/listfundraiser";
 import AddFundraiser from "./pages/fundraiser/addfundraiser";
 import MyFundraiser from "./pages/fundraiser/myfundraiser";
+import EditFundraiser from "./pages/fundraiser/editfundraiser";
 import Rutin from "./pages/rutin";
 import Detail from "./pages/detail";
 import Invoice from "./pages/invoice";
@@ -115,6 +116,7 @@ function Root() {
               />
               <Route path="/fundraiser/:id" exact component={ListFundraiser} />
               <Route path="/fundraiser" exact component={AddFundraiser} />
+              <Route path="/myfundraiser/:id" exact component={EditFundraiser} />
               <Route path="/myfundraiser" exact component={MyFundraiser} />
               <Route path="/confirm" exact component={Confirm} />
             

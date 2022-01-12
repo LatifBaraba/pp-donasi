@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Button, Card, ProgressBar } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Button,
+  Card,
+  ProgressBar,
+  InputGroup,
+  FormControl,
+  Dropdown,
+  DropdownButton,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
 import { fetchDetailDonasi } from "../../Redux/detaildonasi/action";
@@ -8,17 +18,51 @@ import { CheckCircle } from "react-feather";
 
 const Content2 = (props) => {
   // const [now, setNow] = useState(0);
-  const [icon , setIcon] = useState(<CheckCircle color="blue" style={{width:"15"}}></CheckCircle>)
+  const [item, setItem] = useState();
+  const [icon, setIcon] = useState(
+    <CheckCircle color="blue" style={{ width: "15" }}></CheckCircle>
+  );
   const datas = props.data;
   // const dispatch = useDispatch();
   // useEffect(() => {
-  //   let token = localStorage.getItem("token");   
+  //   let token = localStorage.getItem("token");
   //   dispatch(fetchDetailDonasi(token, datas.id));
   // }, []);
-  // const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);  
+  // const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
 
+  const onSubmitSearch = (e) => {
+    console.log(e.target.value);
+  };
+
+  const onSubmitSelect = (e) => {
+    console.log(e);
+  };
   return (
     <div className="content2">
+      <Row className="p-2">
+        <Col className="content-title">
+          <InputGroup className="mb-3">
+            <FormControl
+              aria-label="Text input with dropdown button"
+              placeholder="Search"
+              onChange={onSubmitSearch}
+            />
+
+            <DropdownButton
+              variant="outline-secondary"
+              title="Kategori"
+              id="input-group-dropdown-2"
+              align="end"
+              onSelect={onSubmitSelect}
+            >
+              <Dropdown.Item eventKey="pendidikan">Pendidikan</Dropdown.Item>
+              <Dropdown.Item eventKey="kesehatan">Kesehatan</Dropdown.Item>
+              <Dropdown.Item eventKey="bencana">Bencana</Dropdown.Item>
+              <Dropdown.Item eventKey="lainlain">Lain - Lain</Dropdown.Item>
+            </DropdownButton>
+          </InputGroup>
+        </Col>
+      </Row>
       <Row className="p-2">
         <Col className="content-title">
           <div className="content-title-name">
@@ -49,8 +93,8 @@ const Content2 = (props) => {
                 <Card.Text>
                   <ProgressBar
                     animated
-                    now={localStorage.getItem("percent"+data.id)}
-                    label={`${localStorage.getItem("percent"+data.id)}%`}
+                    now={localStorage.getItem("percent" + data.id)}
+                    label={`${localStorage.getItem("percent" + data.id)}%`}
                     className="donasi-progressbar"
                     style={{ height: "10px", backgroundImage: "blue" }}
                   />
@@ -73,11 +117,19 @@ const Content2 = (props) => {
                   </div>
                 </Card.Text>
                 {/* <Card.Text>Nama Penggalang Dana</Card.Text> */}
-                
-                <Card.Text style={{width:"10"}}>{data.penggalang_dana.Name ? data.penggalang_dana.Name : ''} 
-                                                {' '}{data.penggalang_dana.Name && data.penggalang_dana.IsVerified ? 
-                                                 <CheckCircle color="blue" style={{width:"15"}}></CheckCircle>
-                                                : data.penggalang_dana.Name}</Card.Text>
+
+                <Card.Text style={{ width: "10" }}>
+                  {data.penggalang_dana.Name ? data.penggalang_dana.Name : ""}{" "}
+                  {data.penggalang_dana.Name &&
+                  data.penggalang_dana.IsVerified ? (
+                    <CheckCircle
+                      color="blue"
+                      style={{ width: "15" }}
+                    ></CheckCircle>
+                  ) : (
+                    data.penggalang_dana.Name
+                  )}
+                </Card.Text>
                 <Link
                   to={{
                     pathname: "/otime/" + data.seo_url,

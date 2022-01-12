@@ -29,8 +29,8 @@ const Content = (props) => {
           <div className="gWRIil" key={idx}>
             <div className="col-5">
               <figure className="style__ListFigureCanvas-sc-1sl4ulh-1 jXwsPV">
-                {data.thumbnail_image_url ? <img src={data.thumbnail_image_url} alt="" className="kpMTjO" /> : <img src="https://imgix.kitabisa.com/a8526eda-a1db-4479-8c77-33ac65e7cd3a.jpg?ar=16:9&amp;w=214&amp;auto=format,compress" alt="" className="kpMTjO" />}
-
+                {data.thumbnail_image_url ? <img src={data.thumbnail_image_url} alt="" height={310} width={275} style={{paddingBottom: '110px'}} /> : <img src="https://imgix.kitabisa.com/a8526eda-a1db-4479-8c77-33ac65e7cd3a.jpg?ar=16:9&amp;w=214&amp;auto=format,compress" alt="" className="kpMTjO" />}
+                
                 {/* <img alt="Bantu selesaikan masjid pondok quran 2 yg tertunda" src="https://imgix.kitabisa.com/a8526eda-a1db-4479-8c77-33ac65e7cd3a.jpg?ar=16:9&amp;w=214&amp;auto=format,compress" className="style__ListImageCanvas-sc-1sl4ulh-3 kpMTjO" /> */}
               </figure>
             </div>

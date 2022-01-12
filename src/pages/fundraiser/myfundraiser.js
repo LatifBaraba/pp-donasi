@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { fetchFundraiser } from "../../Redux/fundraiser/action";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom'
 import NumberFormat from "react-number-format";
 import Moment from "react-moment";
 
@@ -14,6 +15,11 @@ const Myfundraiser = () => {
   }, [token, username]);
 
   const datafund = useSelector((state) => state.fundraiserReducer.fundraiser);
+
+  const onEditHandle = (e) => {
+    console.log(e);
+  };
+
   return (
     <div>
       <div className="container detail-program">
@@ -38,6 +44,24 @@ const Myfundraiser = () => {
                               >
                                 Aktif
                               </badge>
+                              {/* </div>
+                            <div> */}
+                              <Link
+                                to={{
+                                  pathname:
+                                    "/myfundraiser/" + data.seo_url,
+                                  state: { data: data} ,
+                                }}
+                                className="mr-2"
+                              >
+                                <Button
+                                  className={`badge badge-info float-right`}
+                                  // onClick={onEditHandle}
+                                  // value={data.seo_url}
+                                >
+                                  Edit
+                                </Button>
+                              </Link>
                             </div>
                             <Card.Body>
                               <b>
