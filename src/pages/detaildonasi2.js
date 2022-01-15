@@ -73,12 +73,10 @@ const DetailDonasi2 = (props) => {
     (state) => state.fundraiserReducer.fundraiserbydonate
   );
 
-
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
-
 
   let from = new Date();
   let to = new Date(data.valid_to);
@@ -222,55 +220,63 @@ const DetailDonasi2 = (props) => {
               </div> */}
             </div>
             <div className="article-button my-4" style={{ display: "flex" }}>
-              <Col md={4}>
-                {username ? (
+              {username ? (
+                // <Col md={3}>
+                <div className="mr-2">
                   <Link
                     to={{
                       pathname: "/order/" + data.seo_url,
                       state: { data: data },
                     }}
-                    className="mr-2"
                   >
                     <Button variant="primary">Donasi Sekarang</Button>
                   </Link>
-                ) : (
+                  {/* // </Col> */}
+                </div>
+              ) : (
+                // <Col md={3}>
+                <div className="mr-2">
                   <Link
                     to={{
                       pathname: "/login",
                       state: { data: data, uripath: window.location.pathname },
                     }}
-                    className="mr-2"
                   >
                     <Button variant="primary">Donasi Sekarang</Button>
                   </Link>
-                )}
-              </Col>
+                  {/* // </Col> */}
+                </div>
+              )}
+
               {data.ayobantu_link !== "" && (
-                <Col md={4}>
+                // <Col md={3} className="ml-2">
+                <div className="mr-2">
                   <a
                     href={data.ayobantu_link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mr-2"
                   >
                     <Button variant="primary">Donasi di ayobantu.com</Button>
                   </a>
-                </Col>
+                  {/* // </Col> */}
+                </div>
               )}
               {data.kitabisa_link !== "" && (
-                <Col md={4}>
+                // <Col md={3}>
+                <div className="mr-2">
                   <a
                     href={data.kitabisa_link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ marginLeft: "auto" }}
                   >
                     <Button variant="primary">Donasi di kitabisa.com</Button>
                   </a>
-                </Col>
+                  {/* // </Col> */}
+                </div>
               )}
-              <Col md={4}>
-                {username ? (
+              {username ? (
+                // <Col md={3}>
+                <div className="mr-2">
                   <Link
                     to={{
                       pathname: "/fundraiser",
@@ -279,18 +285,22 @@ const DetailDonasi2 = (props) => {
                   >
                     <Button>Jadi Fundraiser</Button>
                   </Link>
-                ) : (
+                  {/* // </Col> */}
+                </div>
+              ) : (
+                // <Col md={3}>
+                <div className="mr-2">
                   <Link
                     to={{
                       pathname: "/login",
                       state: { data: data, uripath: window.location.pathname },
                     }}
-                    className="mr-2"
                   >
                     <Button variant="primary">Jadi Fundraiser</Button>
                   </Link>
-                )}
-              </Col>
+                  {/* // </Col> */}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -490,7 +500,16 @@ const DetailDonasi2 = (props) => {
               <Card>
                 <Card.Body>
                   <b>
-                    <a style={{ color: "#48c78e" }}>{data.title}</a>
+                    <a style={{ color: "#48c78e" }}>
+                      <Link
+                        to={{
+                          pathname: "/" + data.seo_url,
+                          // state: window.location.pathname,
+                        }}
+                      >
+                        {data.title}
+                      </Link>
+                    </a>
                   </b>
                   <br />
                   <a>{data.nama_lengkap}</a>

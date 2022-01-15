@@ -1,19 +1,20 @@
-import { ORDER, ORDER_SUCCESS, ORDER_FAILURE } from "../actionTypes";
+import { ORDER_FUNDRAISER, ORDER_FUNDRAISER_SUCCESS, ORDER_FUNDRAISER_FAILURE } from "../actionTypes";
 import axios from "axios";
 import history from "../../history";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ORDERURL = `${process.env.REACT_APP_BASE_URL}/transaction/create`;
+const ORDERFUNDRAISERURL = `${process.env.REACT_APP_BASE_URL}/transaction/create`;
 // const LOGOUTURL = `${process.env.REACT_APP_BASE_URL}/auth/user/logout`;
 
-export function fetchOrder(token, payload) {
+export function fetchOrderFundraiser(token, payload) {
   return (dispatch) => {
-    axios(ORDERURL, {
+    // console.log(payload)
+    axios(ORDERFUNDRAISERURL, {
       method: "POST",
       data: {
         is_rutin: payload.is_rutin,
-        is_fundraiser: false,
+        is_fundraiser: payload.is_fundraiser,
         id_pp_cp_program_donasi: payload.id_pp_cp_program_donasi,
         id_pp_cp_program_donasi_rutin: payload.id_pp_cp_program_donasi_rutin,
         amount: payload.amount,
@@ -27,7 +28,7 @@ export function fetchOrder(token, payload) {
       },
     })
       .then((res) => {
-        dispatch(orderSuccess(res));
+        dispatch(orderFundraiserSuccess(res));
         toast.success("Order Success !");
         localStorage.setItem("token", token);
         history.push("/confirm");
@@ -38,21 +39,21 @@ export function fetchOrder(token, payload) {
         } else if (err.response.status === 401) {
           toast.error("Order Tidak Berhasil");
         }
-        dispatch(orderFailure(err));
+        dispatch(orderFundraiserFailure(err));
       });
   };
 }
 
 // Order
-const order = () => ({
-  type: ORDER,
+const orderFundraiser = () => ({
+  type: ORDER_FUNDRAISER,
 });
 
-const orderSuccess = (payload) => ({
-  type: ORDER_SUCCESS,
+const orderFundraiserSuccess = (payload) => ({
+  type: ORDER_FUNDRAISER_SUCCESS,
   payload,
 });
 
-const orderFailure = () => ({
-  type: ORDER_FAILURE,
+const orderFundraiserFailure = () => ({
+  type: ORDER_FUNDRAISER_FAILURE,
 });

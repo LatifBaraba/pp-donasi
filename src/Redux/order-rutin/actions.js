@@ -17,6 +17,7 @@ export function fetchOrderRutin(token, payload) {
         method: 'POST',
         data: {
             is_rutin:payload.is_rutin,
+            is_fundraiser: false,
             id_pp_cp_program_donasi: payload.id_pp_cp_program_donasi,
             id_pp_cp_program_donasi_rutin: payload.id_pp_cp_program_donasi_rutin,
             amount: payload.amount,

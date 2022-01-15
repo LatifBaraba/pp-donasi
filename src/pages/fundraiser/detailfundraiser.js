@@ -32,13 +32,16 @@ const DetailFundraiser = (props) => {
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.tokenReducer.token.token);
+  let tokens = localStorage.getItem("token");
+  console.log(tokens)
   useEffect(() => {
    
 
-    if (token == undefined) {
+    if (tokens === undefined) {
+      console.log(tokens)
       dispatch(fetchToken());
       setTimeout(() => {
-        let tokens = localStorage.getItem("token");
+        // let tokens = localStorage.getItem("token");
         // console.log(" detail donasi ", tokens);
         // dispatch(fetchDonasiRutinBySeo(tokens, id));
         // dispatch(fetchDonasiOneTimeBySeo(tokens, id));
@@ -52,7 +55,7 @@ const DetailFundraiser = (props) => {
       // dispatch(fetchDonasiOneTimeBySeo(token, id));
       // dispatch(fetchFundraiserByDonasi(token, donasi.id));
       // dispatch(fetchAllHistoryDonation(token));
-      dispatch(fetchFundraiserBySeo(token, id));
+      dispatch(fetchFundraiserBySeo(tokens, id));
     }
   }, []);
 

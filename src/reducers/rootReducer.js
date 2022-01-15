@@ -18,6 +18,7 @@ import detailReducer from '../Redux/detail/reducers'
 import invoiceReducer from '../Redux/invoice/reducer'
 import kabarTerbaruReducer from '../Redux/kabarterbaru/reducer'
 import fundraiserReducer from '../Redux/fundraiser/reducer'
+import orderfundraiserReducer from '../Redux/order-fundraiser/reducer'
 
 
 const reducers = combineReducers({
@@ -39,7 +40,8 @@ const reducers = combineReducers({
     detailReducer,
     invoiceReducer,
     kabarTerbaruReducer,
-    fundraiserReducer
+    fundraiserReducer,
+    orderfundraiserReducer
 })
 
 export default reducers

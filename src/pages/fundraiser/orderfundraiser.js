@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { fetchOrder } from "../../Redux/order/actions";
 // import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
 import { fetchHistory } from '../../Redux/history/action'
+import { fetchOrderFundraiser } from "../../Redux/order-fundraiser/actions";
 
 const OrderFundraiser = (props) => {
   const username = localStorage.getItem("username");
@@ -47,7 +48,7 @@ const OrderFundraiser = (props) => {
 
       datax = {
         is_rutin:false,
-        id_pp_cp_program_donasi: data.id,
+        id_pp_cp_program_donasi: donasi.id,
         id_pp_cp_program_donasi_rutin: "",
         amount: parseInt(nominal),
         ucapan_dan_doa: ucapan,
@@ -55,7 +56,7 @@ const OrderFundraiser = (props) => {
         payment_method: tipebayar,
       };     
       // console.log(datax) 
-      dispatch(fetchOrder(token, datax));      
+      dispatch(fetchOrderFundraiser(token, datax));      
     }
   };
 
@@ -86,7 +87,7 @@ const OrderFundraiser = (props) => {
         <Row className="mt-5 justify-content-center">
           <Col md={8}>
             <h4>Silahkan Melakukan Pembayaran Donasi </h4>
-            <h3>{data.title}</h3>
+            <h3>{donasi.title}</h3>
           </Col>
         </Row>
         <Row className="mt-5 justify-content-center donasi-amount">
@@ -173,8 +174,8 @@ const OrderFundraiser = (props) => {
            
             <Link
             to={{
-              pathname: "/invoice/"+ window.location.pathname.split('/')[2] + "/" + data.id,
-              state: { donasi: [data,nominal,tipebayar, isrutin] },
+              pathname: "/invoice/"+ window.location.pathname.split('/')[2] + "/" + donasi.id,
+              state: { donasi: [data,nominal,tipebayar, isrutin, donasi.id] },
             }}
             className="mr-2"
           >

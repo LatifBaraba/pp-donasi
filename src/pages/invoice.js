@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { fetchOrderRutin } from "../Redux/order-rutin/actions";
 import { fetchOrder } from "../Redux/order/actions";
+import { fetchOrderFundraiser } from "../Redux/order-fundraiser/actions";
 
 const Order = (props) => {
   const { register, handleSubmit, errors } = useForm();
@@ -25,7 +26,7 @@ const Order = (props) => {
     } else {
       let username = localStorage.getItem("username");
 
-      if (donasi[3] === false) {
+      if (donasi[3] === false && donasi[4] === undefined) {
         datax = {
           is_rutin: false,
           id_pp_cp_program_donasi: donasi[0].id,
@@ -34,6 +35,16 @@ const Order = (props) => {
           payment_method: tipebayar,
         };
         dispatch(fetchOrder(token, datax));
+      } else if (donasi[4] !== undefined) {
+        datax = {
+          is_rutin: false,
+          is_fundraiser: true,
+          id_pp_cp_program_donasi: donasi[4],
+          id_pp_cp_program_donasi_rutin: "",
+          amount: parseInt(nominal),
+          payment_method: tipebayar,
+        };
+        dispatch(fetchOrderFundraiser(token, datax));
       } else {
         datax = {
           is_rutin: true,

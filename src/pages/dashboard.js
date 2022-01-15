@@ -1,4 +1,4 @@
-import {React, useEffect} from "react";
+import { React, useEffect } from "react";
 import Banner from "../components/dashboard/banner";
 import Content from "../components/dashboard/content";
 import Content2 from "../components/dashboard/content2";
@@ -12,52 +12,58 @@ import { fetchToken } from "../Redux/token/action";
 
 const Dashboard = () => {
   // const token = localStorage.getItem("token");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const setToken = () => (new Promise((resolve,reject) => {
-    setTimeout(() => { resolve(dispatch(fetchToken()))}, 1000)
-  })) 
+  const setToken = () =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(dispatch(fetchToken()));
+      }, 1000);
+    });
 
-  const getToken = () => (new Promise((resolve,reject) => {
-    setTimeout(() => { resolve(localStorage.getItem("token"))}, 1000)
-  })) 
+  const getToken = () =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(localStorage.getItem("token"));
+      }, 1000);
+    });
 
   useEffect(() => {
     // dispatch(fetchBanner(token));
     async function fetchTokenAsync() {
-      
       if (!localStorage.getItem("token")) {
         // let a = await setToken()
-        dispatch(fetchToken())
+        dispatch(fetchToken());
         // let token = await getToken()
-        
+
         // dispatch(fetchDonasilist(token));
-        // dispatch(fetchDonasilist2(token));  
+        // dispatch(fetchDonasilist2(token));
       } else {
-        let token = await getToken()
+        let token = await getToken();
 
         dispatch(fetchDonasilist(token));
-        dispatch(fetchDonasilist2(token));          
+        dispatch(fetchDonasilist2(token));
       }
-
     }
 
-    fetchTokenAsync()
-    
-  }, []);
+    fetchTokenAsync();
+  }, [localStorage.getItem("token")]);
   // const bannerData = useSelector((state) => state.bannerReducer.banner);
-  const donasilistData = useSelector((state) => state.donasilistReducer.donasilist);
-  const donasilist2Data = useSelector((state) => state.donasilist2Reducer.donasilist2);
-    
-  
+  const donasilistData = useSelector(
+    (state) => state.donasilistReducer.donasilist
+  );
+  const donasilist2Data = useSelector(
+    (state) => state.donasilist2Reducer.donasilist2
+  );
+
   return (
     <div className="container dashboard">
       <Row>
-        <Banner data={donasilistData}/>
+        <Banner data={donasilistData} />
       </Row>
       <Row>
-        <Content data={donasilist2Data}/>
-        <Content2 data={donasilistData}/>
+        <Content data={donasilist2Data} />
+        <Content2 data={donasilistData} />
       </Row>
     </div>
   );

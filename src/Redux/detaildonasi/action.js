@@ -90,7 +90,7 @@ export function fetchDetailDonasiRutinPaket(token, id) {
             console.log(err)
             if(err.response.status === 401){
                 localStorage.removeItem("token");
-                history.push('/login')
+                history.push('/dashboard')
             }
         });
     };
@@ -134,7 +134,7 @@ export function fetchHistoryDonation(token, id) {
                 // toast.error("Unauthorized")
                 dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
-                history.push('/transaction')
+                history.push('/dashboard')
             }
             dispatch(getHistoryDonationFailure(err));
         });
@@ -180,7 +180,7 @@ export function fetchHistoryRutinDonation(token, id) {
                 // toast.error("Unauthorized")
                 dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
-                history.push('/transaction')
+                history.push('/login')
             }
             dispatch(getHistoryPaketDonationFailure(err));
         });
