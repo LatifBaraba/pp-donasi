@@ -58,7 +58,7 @@ export function fetchConfirmList(token) {
         axios(ORDERLISTURL, {
             method: 'POST',
             data : {
-                limit: "10",
+                limit: "50",
                 offset: "1",
                 filters: [
                     {

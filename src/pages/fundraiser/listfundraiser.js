@@ -54,8 +54,17 @@ const Listfundraiser = () => {
             <Col md={12}>
             <Card>
                 <Card.Body>
-                  <b>
-                    <a style={{ color: "#48c78e" }}>{data.title}</a>
+                <b>
+                    <a style={{ color: "#48c78e" }}>
+                      <Link
+                        to={{
+                          pathname: "/" + data.seo_url,
+                          // state: window.location.pathname,
+                        }}
+                      >
+                        {data.title}
+                      </Link>
+                    </a>
                   </b>
                   <br />
                   <a>{data.nama_lengkap}</a>

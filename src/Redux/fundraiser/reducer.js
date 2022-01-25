@@ -5,6 +5,9 @@ import {
   GET_FUNDRAISER_BY_DONASI,
   GET_FUNDRAISER_BY_DONASI_SUCCESS,
   GET_FUNDRAISER_BY_DONASI_FAILURE,
+  GET_FUNDRAISER_BY_TRANSACTION,
+  GET_FUNDRAISER_BY_TRANSACTION_SUCCESS,
+  GET_FUNDRAISER_BY_TRANSACTION_FAILURE,
   GET_FUNDRAISER_BY_SEO,
   GET_FUNDRAISER_BY_SEO_SUCCESS,
   GET_FUNDRAISER_BY_SEO_FAILURE,
@@ -14,6 +17,7 @@ const initialState = {
   loading: false,
   fundraiser: [],
   fundraiserbydonate: [],
+  fundraiserbytransaction: [],
   fundraiserbyseo: [],
   error: null,
 };
@@ -51,6 +55,23 @@ export default function fundraiserReducer(state = initialState, action) {
         fundraiserbydonate: action.payload,
       };
     case GET_FUNDRAISER_BY_DONASI_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
+    case GET_FUNDRAISER_BY_TRANSACTION:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_FUNDRAISER_BY_TRANSACTION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        fundraiserbytransaction: action.payload,
+      };
+    case GET_FUNDRAISER_BY_TRANSACTION_FAILURE:
       return {
         ...state,
         loading: false,

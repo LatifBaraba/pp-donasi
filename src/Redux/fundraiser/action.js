@@ -8,6 +8,9 @@ import {
   GET_FUNDRAISER_BY_DONASI,
   GET_FUNDRAISER_BY_DONASI_SUCCESS,
   GET_FUNDRAISER_BY_DONASI_FAILURE,
+  GET_FUNDRAISER_BY_TRANSACTION,
+  GET_FUNDRAISER_BY_TRANSACTION_SUCCESS,
+  GET_FUNDRAISER_BY_TRANSACTION_FAILURE,
   GET_FUNDRAISER_BY_SEO,
   GET_FUNDRAISER_BY_SEO_SUCCESS,
   GET_FUNDRAISER_BY_SEO_FAILURE,
@@ -18,10 +21,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchRefreshToken } from "../token/action";
 
-// const URL = `${process.env.REACT_APP_BASE_URL}/transaction/my-list`;
 const URL = `${process.env.REACT_APP_BASE_URL}/fundraiser/list`;
 const URL_SEO = `${process.env.REACT_APP_BASE_URL}/fundraiser/seo/`;
 const URL_ADD = `${process.env.REACT_APP_BASE_URL}/fundraiser/create/`;
+const URL_TRANSACTION_FUNDRAISER = `${process.env.REACT_APP_BASE_URL}/transaction/list`;
 
 export function fetchFundraiser(token, email) {
   return (dispatch) => {
@@ -64,6 +67,7 @@ export function fetchFundraiser(token, email) {
 
 export function fetchFundraiserByDonasi(token, id) {
   return (dispatch) => {
+    console.log(id)
     axios(URL, {
       method: "POST",
       data: {
@@ -146,6 +150,8 @@ export function fetchFundraiserBySeo(token, url) {
     })
       .then((res) => {
         dispatch(getFundraiserBySeoSuccess(res.data.data));
+        dispatch(fetchFundraiserByDonasi(token, res.data.data.id_pp_cp_program_donasi));
+        dispatch(fetchFundraiserByTransaction(token, res.data.data.id));
       })
       .catch((err) => {
         console.log(err);
@@ -153,6 +159,48 @@ export function fetchFundraiserBySeo(token, url) {
       });
   };
 }
+
+
+export function fetchFundraiserByTransaction(token, id) {
+  return (dispatch) => {
+    console.log(id)
+    axios(URL_TRANSACTION_FUNDRAISER, {
+      method: "POST",
+      data: {
+        limit: "10",
+        offset: "1",
+        filters: [
+          {
+            field: "id_pp_cp_program_donasi",
+            keyword: `${id}`,
+          },
+          {
+            field: "status",
+            keyword: "Paid",
+          },
+        ],
+        order: "created_at",
+        sort: "DESC",
+        created_at_from: "",
+        created_at_to: "",
+        publish_at_from: "",
+        publish_at_to: "",
+      },
+      headers: {
+        "pp-token": `${token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        dispatch(getFundraiserByTransactionSuccess(res.data.data));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(getFundraiserByTransactionFailure(err));
+      });
+  };
+}
+
 // Get Fundraiser
 const getFundraiserSuccess = (payload) => ({
   type: GET_FUNDRAISER_SUCCESS,
@@ -207,4 +255,18 @@ const getAddFundraiserFailure = () => ({
 
 const getAddFundraiser = () => ({
   type: GET_ADD_FUNDRAISER,
+});
+
+// Get Fundraiser By Transaction
+const getFundraiserByTransactionSuccess = (payload) => ({
+  type: GET_FUNDRAISER_BY_TRANSACTION_SUCCESS,
+  payload,
+});
+
+const getFundraiserByTransactionFailure = () => ({
+  type: GET_FUNDRAISER_BY_TRANSACTION_FAILURE,
+});
+
+const getFundraiserByTransaction = () => ({
+  type: GET_FUNDRAISER_BY_TRANSACTION,
 });

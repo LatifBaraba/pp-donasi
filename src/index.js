@@ -133,7 +133,7 @@ function Root() {
                     url !== "/fundraiser" ?
                     url !== "/myfundraiser" ?
                     url !== "/confirm" ? 
-                   
+                    
                     <Switch>
                       <Route exact path="/:id" component={SeoUrl} />
                     </Switch>

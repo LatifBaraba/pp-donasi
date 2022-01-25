@@ -6,6 +6,7 @@ import Bowser from "bowser";
 import { fetchDonasilist } from "../../Redux/donasilist/actions";
 import { fetchDonasilist2 } from "../../Redux/donasilist2/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchFundraiserBySeo } from '../fundraiser/action';
 
 const URL = `${process.env.REACT_APP_BASE_URL}/token`;
 const URLREF = `${process.env.REACT_APP_BASE_URL}/refresh-token`;
@@ -40,6 +41,7 @@ export function fetchToken() {
             // const dispatch = useDispatch()
             dispatch(fetchDonasilist(res.data.data.token));
             dispatch(fetchDonasilist2(res.data.data.token));  
+            dispatch(fetchFundraiserBySeo(res.data.data.token, localStorage.getItem("url")));
         })
         .catch(err => {
             console.log(err)

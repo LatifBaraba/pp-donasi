@@ -15,71 +15,64 @@ import "react-multi-carousel/lib/styles.css";
 import "./detaildonasi2.css";
 import { CheckCircle } from "react-feather";
 import { fetchDonasiOneTimeBySeo } from "../../Redux/donasilist/actions";
-import { fetchFundraiserByDonasi, fetchFundraiserBySeo } from "../../Redux/fundraiser/action";
+import {
+  fetchFundraiserByDonasi,
+  fetchFundraiserBySeo,
+} from "../../Redux/fundraiser/action";
 import { fetchToken, fetchRefreshToken } from "../../Redux/token/action";
 
 const DetailFundraiser = (props) => {
-//   console.log();
-//   const [now, setNow] = useState(0);
+  const { id } = useParams();
+
   const username = localStorage.getItem("username");
   const refresh = () => {
     setInterval(() => {
       window.location.reload();
     }, 100);
   };
-//   const { donasi } = props.location.state;
-  const { id } = useParams();
+
+  // const { donasi } = props.location.state;
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.tokenReducer.token.token);
   let tokens = localStorage.getItem("token");
-  console.log(tokens)
+  // console.log(tokens)
   useEffect(() => {
-   
-
-    if (tokens === undefined) {
-      console.log(tokens)
-      dispatch(fetchToken());
+    localStorage.setItem("url", id);
+    if (tokens === undefined || tokens === null) {
       setTimeout(() => {
-        // let tokens = localStorage.getItem("token");
-        // console.log(" detail donasi ", tokens);
-        // dispatch(fetchDonasiRutinBySeo(tokens, id));
-        // dispatch(fetchDonasiOneTimeBySeo(tokens, id));
-        // dispatch(fetchFundraiserByDonasi(tokens, donasi.id));
-        // dispatch(fetchAllHistoryDonation(tokens));
-        // dispatch(fetchPageDonasi(tokens));
-        dispatch(fetchFundraiserBySeo(tokens, id));
+        dispatch(fetchToken());
       }, 2000);
     } else {
-      // console.log("detail ", token);
-      // dispatch(fetchDonasiOneTimeBySeo(token, id));
-      // dispatch(fetchFundraiserByDonasi(token, donasi.id));
-      // dispatch(fetchAllHistoryDonation(token));
       dispatch(fetchFundraiserBySeo(tokens, id));
     }
-  }, []);
+  }, [tokens]);
 
-    const databyseo = useSelector((state) => state.fundraiserReducer.fundraiserbyseo);
+  const databyseo = useSelector(
+    (state) => state.fundraiserReducer.fundraiserbyseo
+  );
 
-//   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
+  //   const data = useSelector((state) => state.donasiDetailReducer.donasiDetail);
   const kabarterbaru = useSelector(
     (state) => state.kabarTerbaruReducer.kabarterbaruot
   );
 
-//   const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
+  //   const datas = useSelector((state) => state.pagedonasiReducer.pagedonasi);
   const historydata = useSelector(
     (state) => state.donasiDetailReducer.historydata
   );
-//   console.log(historydata.length);
-//   const allhistorydata = useSelector(
-//     (state) => state.donasiDetailReducer.allhistorydata
-//   );
+  //   console.log(historydata.length);
+  //   const allhistorydata = useSelector(
+  //     (state) => state.donasiDetailReducer.allhistorydata
+  //   );
 
-//   const datafundraiser = useSelector(
-//     (state) => state.fundraiserReducer.fundraiserbydonate
-//   );
+  const datafundraisertransaction = useSelector(
+    (state) => state.fundraiserReducer.fundraiserbytransaction
+  );
 
-//   console.log(datafundraiser);
+  const datafundraiser = useSelector(
+    (state) => state.fundraiserReducer.fundraiserbydonate
+  );
 
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
@@ -90,32 +83,12 @@ const DetailFundraiser = (props) => {
 
   let from = new Date();
   let to = new Date(databyseo.valid_to);
-//   // let Difference_In_Days = to.getUTCDate() - from.getUTCDate;
+  //   // let Difference_In_Days = to.getUTCDate() - from.getUTCDate;
 
-//   const responsive = {
-//     superLargeDesktop: {
-//       breakpoint: { max: 4000, min: 3000 },
-//       items: 5,
-//     },
-//     desktop: {
-//       breakpoint: { max: 3000, min: 1024 },
-//       items: 4,
-//     },
-//     tablet: {
-//       breakpoint: { max: 1024, min: 464 },
-//       items: 2,
-//     },
-//     mobile: {
-//       breakpoint: { max: 464, min: 0 },
-//       items: 1,
-//     },
-//   };
-
-  
   return (
     <div className="container detail-program">
-        {/* Halaman seo */}
-        {/* {props.data} */}
+      {/* Halaman seo */}
+      {/* {props.data} */}
       <div className="row row-mb-5" style={{ display: "flex" }}>
         <div className="col-md-6" style={{ width: "50%" }}>
           <div className="article-content">
@@ -145,11 +118,11 @@ const DetailFundraiser = (props) => {
                 ""
               ) : (
                 <span onClick={toggleReadMore} className="read-or-hide">
-                  {isReadMore ? "...read more" : " show less"}
+                  {isReadMore ? "...read more" ? !databyseo.description : "" : " show less"}
                 </span>
               )}
             </div>
-           
+
             <div className="article-status">
               <span className="os-13 txt-600 text-terkumpul">Target </span>
               <div className="article-number campaign-donate">
@@ -188,7 +161,6 @@ const DetailFundraiser = (props) => {
                   className="donasi-progressbar"
                 />
               </div>
-
             </div>
             <div className="article-button my-4" style={{ display: "flex" }}>
               <Col md={4}>
@@ -206,7 +178,10 @@ const DetailFundraiser = (props) => {
                   <Link
                     to={{
                       pathname: "/login",
-                      state: { data: databyseo, uripath: window.location.pathname },
+                      state: {
+                        data: databyseo,
+                        uripath: window.location.pathname,
+                      },
                     }}
                     className="mr-2"
                   >
@@ -286,7 +261,7 @@ const DetailFundraiser = (props) => {
         <Col md={6} className="mt-5">
           <h3 style={{ fontSize: "font-size: 1.75rem" }}>Ucapan dan Doa </h3>
           <div></div>
-          {historydata.slice(0, 3).map((data, idx) => (
+          {datafundraisertransaction.slice(0, 3).map((data, idx) => (
             <div>
               {data.ucapan_dan_doa ? (
                 <Card>
@@ -312,15 +287,14 @@ const DetailFundraiser = (props) => {
               <br />
             </div>
           ))}
-     
         </Col>
         <Col md={6} className="mt-5">
           <h3 style={{ fontSize: "font-size: 1.75rem" }}>
-            Donasi ({historydata.length})
+            Donasi ({datafundraisertransaction.length})
           </h3>
 
           <div></div>
-          {historydata.slice(0, 3).map((data, idx) => (
+          {datafundraisertransaction.slice(0, 3).map((data, idx) => (
             <div>
               <Card>
                 <Card.Header>{data.username}</Card.Header>
@@ -380,7 +354,6 @@ const DetailFundraiser = (props) => {
                 style={{ width: "30rem", alignContent: "center" }}
                 className="mb-2"
               >
-             
                 <Card.Body>
                   <blockquote className="blockquote mb-0">
                     <h4>
@@ -443,6 +416,56 @@ const DetailFundraiser = (props) => {
               <Button>Lihat lainnya</Button>
             </Link>
           </Row>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={3} className="mt-5"></Col>
+        <Col md={6} className="mt-5">
+          <h3 style={{ fontSize: "font-size: 1.75rem" }}>Info Penggalang Dana</h3>
+          <div></div>
+          {datafundraiser.slice(0, 1).map((data, idx) => (
+            <div>
+              <Card>
+                <Card.Body>
+                   
+                  <a>{data.nama_lengkap}</a>
+                  <br />
+                  {/* <a style={{ color: "#b3b5b4" }}>Mengajak 125 Orang</a>
+                  <br />
+                  <NumberFormat
+                    className="mr-2"
+                    value={data.donation_collect}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"Donasi Terkumpul Rp. "}
+                  /> */}
+                  {/* <b>
+                    <a style={{ color: "#696969" }}>{data.donation_collect}</a>
+                  </b> */}
+                  {/* <hr /> */}
+                  {/* <Row className="text-justify justify-content-center">
+                    <Link
+                      to={{
+                        pathname: "/fundraiser/" + data.id_pp_cp_program_donasi,
+                        state: window.location.pathname,
+                      }}
+                    >
+                      <Button>Lihat lainnya</Button>
+                    </Link> */}
+                    {/* <Col md={3} className="mt-5"></Col>
+                <Link
+                  to={{
+                    pathname: "/fundraiser",
+                    state: window.location.pathname,
+                  }}
+                >
+                  <Button>Jadi Fundraiser</Button>
+                </Link> */}
+                  {/* </Row> */}
+                </Card.Body>
+              </Card>
+            </div>
+          ))}
         </Col>
       </Row>
       {/* <Row>
