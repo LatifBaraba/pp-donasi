@@ -5,12 +5,16 @@ import {
     GET_DONASIONETIMESEO,
     GET_DONASIONETIMESEO_SUCCESS,
     GET_DONASIONETIMESEO_FAILURE,
+    GET_DONASIONETIME_SEARCH,
+GET_DONASIONETIME_SEARCH_SUCCESS,
+GET_DONASIONETIME_SEARCH_FAILURE
 } from '../actionTypes';
 
 const initialState = {
     loading: false,
     donasilist: [],
     donasiseo: [],
+    donasisearch: [],
     error: null
 };
 
@@ -46,6 +50,24 @@ export default function donasilistReducer(state = initialState, action) {
                     donasiseo: action.payload
                 };
             case GET_DONASIONETIMESEO_FAILURE:
+                return {
+                    ...state,
+                    loading: false,
+                };
+                
+            case GET_DONASIONETIME_SEARCH:
+                return {
+                    ...state,
+                    loading: true
+                };
+            case GET_DONASIONETIME_SEARCH_SUCCESS:
+                return {
+                    ...state,
+                    loading: false,
+                    error: null,
+                    donasisearch: action.payload
+                };
+            case GET_DONASIONETIME_SEARCH_FAILURE:
                 return {
                     ...state,
                     loading: false,

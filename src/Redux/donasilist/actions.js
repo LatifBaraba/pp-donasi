@@ -5,6 +5,9 @@ import {
   GET_DONASIONETIMESEO,
   GET_DONASIONETIMESEO_SUCCESS,
   GET_DONASIONETIMESEO_FAILURE,
+  GET_DONASIONETIME_SEARCH,
+  GET_DONASIONETIME_SEARCH_SUCCESS,
+  GET_DONASIONETIME_SEARCH_FAILURE,
 } from "../actionTypes";
 import axios from "axios";
 import history from "../../history";
@@ -12,12 +15,12 @@ import {
   fetchDetailDonasi,
   fetchHistoryDonation,
 } from "../detaildonasi/action";
-import { fetchKabarTerbaruOt } from "../kabarterbaru/action"
+import { fetchKabarTerbaruOt } from "../kabarterbaru/action";
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi/list`;
 
 export function fetchDonasilist(token) {
-  return (dispatch) => {        
+  return (dispatch) => {
     axios(URL, {
       method: "POST",
       data: {
@@ -32,7 +35,6 @@ export function fetchDonasilist(token) {
             field: "is_deleted",
             keyword: "false",
           },
-          
         ],
         order: "created_at",
         sort: "ASC",
@@ -53,7 +55,7 @@ export function fetchDonasilist(token) {
             parseInt((element.donation_collect / element.target) * 100) > 100
               ? 100
               : parseInt((element.donation_collect / element.target) * 100);
-          localStorage.setItem("percent" + element.id, percent);          
+          localStorage.setItem("percent" + element.id, percent);
         });
         dispatch(getDonasilistSuccess(res.data.data));
       })
@@ -68,9 +70,8 @@ export function fetchDonasilist(token) {
   };
 }
 
-
 export function fetchDonasiOneTimeBySeo(token, url) {
-  return (dispatch) => {        
+  return (dispatch) => {
     axios(URL, {
       method: "POST",
       data: {
@@ -87,8 +88,8 @@ export function fetchDonasiOneTimeBySeo(token, url) {
           },
           {
             field: "seo_url",
-            keyword: `${url}`
-        }
+            keyword: `${url}`,
+          },
         ],
         order: "created_at",
         sort: "ASC",
@@ -109,15 +110,60 @@ export function fetchDonasiOneTimeBySeo(token, url) {
             parseInt((element.donation_collect / element.target) * 100) > 100
               ? 100
               : parseInt((element.donation_collect / element.target) * 100);
-          localStorage.setItem("percent" + element.id, percent);          
+          localStorage.setItem("percent" + element.id, percent);
         });
         dispatch(getDonasionetimeseoSuccess(res.data.data));
         dispatch(fetchDetailDonasi(token, res.data.data[0].id));
-        dispatch(fetchHistoryDonation(token, res.data.data[0].id))
-        dispatch(fetchKabarTerbaruOt(token, res.data.data[0].id))
+        dispatch(fetchHistoryDonation(token, res.data.data[0].id));
+        dispatch(fetchKabarTerbaruOt(token, res.data.data[0].id));
       })
       .catch((err) => {
         dispatch(getDonasionetimeseoFailure(err));
+        console.log(err);
+        if (err.response.status === 401) {
+          localStorage.removeItem("token");
+          history.push("/dashboard");
+        }
+      });
+  };
+}
+
+export function fetchDonasiSearch(token, keywordSearch) {
+  return (dispatch) => {
+    // console.log(token)
+    // console.log(keywordSearch)
+    axios(URL, {
+      method: "POST",
+      data: {
+        limit: "10",
+        offset: "1",
+        filters: [
+          {
+            field: "title",
+            keyword: `${keywordSearch}`,
+          },
+          {
+            field: "is_deleted",
+            keyword: "false",
+          },
+        ],
+        order: "created_at",
+        sort: "ASC",
+        created_at_from: "",
+        created_at_to: "",
+        publish_at_from: "",
+        publish_at_to: "",
+      },
+      headers: {
+        "pp-token": `${token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        dispatch(getDonasionetimesearchSuccess(res.data.data));
+      })
+      .catch((err) => {
+        dispatch(getDonasionetimesearchFailure(err));
         console.log(err);
         if (err.response.status === 401) {
           localStorage.removeItem("token");
@@ -141,7 +187,6 @@ const getDonasilist = () => ({
   type: GET_DONASI,
 });
 
-
 // Get Donasi List
 const getDonasionetimeseoSuccess = (payload) => ({
   type: GET_DONASIONETIMESEO_SUCCESS,
@@ -154,4 +199,18 @@ const getDonasionetimeseoFailure = () => ({
 
 const getDonasionetimeseo = () => ({
   type: GET_DONASIONETIMESEO,
+});
+
+// Get Donasi List
+const getDonasionetimesearchSuccess = (payload) => ({
+  type: GET_DONASIONETIME_SEARCH_SUCCESS,
+  payload,
+});
+
+const getDonasionetimesearchFailure = () => ({
+  type: GET_DONASIONETIME_SEARCH_FAILURE,
+});
+
+const getDonasionetimesearch = () => ({
+  type: GET_DONASIONETIME_SEARCH,
 });
