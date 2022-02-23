@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Button, Card, Row, Container, Form, Col } from "react-bootstrap";
+import { Button, Card, Row, Container, Form, Col, Dropdown, FormControl } from "react-bootstrap";
 
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -11,8 +11,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { uploadImage } from "../helper/index";
 
 import NumberFormat from "react-number-format";
+import Select from 'react-select'
 
 const Confirm = () => {
+  
   const { register, handleSubmit, errors, watch } = useForm();
   const dispatch = useDispatch();
   const passwords = useRef({});
@@ -25,6 +27,8 @@ const Confirm = () => {
   const [nominal, setNominal] = useState("");
   const [bukti, setBukti] = useState("");
   const [idtransaction, setIdtransaction] = useState("");
+
+  const [listSelect, setlistSelect] = useState()
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -49,6 +53,22 @@ const Confirm = () => {
       errors.showMessages();
     }
   };
+
+  useEffect(() => {
+    const list = []
+    confirmlist.map((e) => {
+      list.push({
+        value: e.id, 
+        label: "Rp. " + e.amount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".")  + " -- " + e.donasi_title
+      })
+    })
+
+    setlistSelect(list)    
+  }, [confirmlist])
+  
+  const handleChange = (e) => {
+    setIdtransaction(e.value)
+  }
   return (
     <div className="checkout container">
       <Row className="mt-3">
@@ -61,7 +81,7 @@ const Confirm = () => {
       <hr />
       <Row className="justify-content-md-center">
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Form.Group controlId="formIdtransaction">
+          {/* <Form.Group controlId="formIdtransaction">
             <Form.Label>Pilih Donasi</Form.Label>
             <Form.Control
               required
@@ -76,8 +96,10 @@ const Confirm = () => {
                 </option>
               ))}
             </Form.Control>
-          </Form.Group>
+          </Form.Group> */}
 
+          <Select options={listSelect} onChange={handleChange} placeholder="Pilih Donasi" isSearchable={true}/>
+         
           <Form.Label>Upload Bukti Bayar</Form.Label>
           <input
             className="form-control"
