@@ -32,7 +32,7 @@ const DetailDonasi = () => {
   const token = useSelector((state) => state.tokenReducer.token.token);
   useEffect(() => {
     if (token == undefined) {
-      dispatch(fetchToken());
+      // dispatch(fetchToken());
       setTimeout(() => {
         let tokens = localStorage.getItem("token");
         dispatch(fetchDonasiRutinBySeo(tokens, id));

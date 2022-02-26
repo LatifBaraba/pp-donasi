@@ -12,6 +12,7 @@ import { fetchHistory } from '../Redux/history/action'
 
 const Order = (props) => {
   const username = localStorage.getItem("username");
+  const userprofile = localStorage.getItem('userprofile')
   const { register, handleSubmit, errors } = useForm();
   const refresh = () => {
     setInterval(() => {
@@ -72,16 +73,16 @@ const Order = (props) => {
 
   return (
     <div className="container order">
-       {datauser.slice(0,1).map((datax, id) => 
+       {/* {datauser.slice(0,1).map((datax, id) =>  */}
       <div>
         <Row className="mt-5 justify-content-center">
           <Col md={8}>
-            <h2>Halo Kak, {datax.username} </h2>            
+            <h2>Halo Kak, {userprofile} </h2>            
           </Col>
         </Row>
         <hr/>
         </div>        
-      )}
+      {/* // )} */}
       <Form onSubmit={handleSubmit(onSubmit)}>
         {/* <Row className="mt-3 justify-content-center">
           <Col md={8}>

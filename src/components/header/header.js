@@ -3,18 +3,24 @@ import { Nav, Navbar, Dropdown, DropdownButton } from 'react-bootstrap'
 import { LogOutOutline, PencilOutline, AiOutlineHistory, TimeOutline, HeartOutline } from 'react-ionicons'
 import { Link } from 'react-router-dom';
 import { fetchLogout } from "../../Redux/auth/login/actions";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LogoAyoKitaPeduli from "../../assets/images/logo.png"
+import { ToastContainer } from 'react-toastify';
+import { useEffect, useState } from 'react';
 
 const Header = () => {
     const dispatch = useDispatch();
     const token = localStorage.getItem('token')
     const username = localStorage.getItem('username')
+    const userprofile = localStorage.getItem('userprofile')
+
+    
     const logout = () => {
         // history.push(`${process.env.PUBLIC_URL}/dashboard`);
         dispatch(fetchLogout(token))
     }
-
+    
+    
     return (
         <Navbar sticky="top" expand="lg">
             <Navbar.Brand href="/dashboard"><img src={LogoAyoKitaPeduli} style={{ width: '25%' }} /></Navbar.Brand>
@@ -28,7 +34,7 @@ const Header = () => {
                         <Nav.Link>
                             <DropdownButton
                                 menuAlign="right"
-                                title="Profile"
+                                title={userprofile}
                                 id="dropdown-menu-align-right"
                                 className="btn-profile"
                             >
@@ -75,6 +81,7 @@ const Header = () => {
                         // </Link>
                     }
                 </Nav>
+                <ToastContainer autoClose={2000} />
             </Navbar.Collapse>
         </Navbar>
     )

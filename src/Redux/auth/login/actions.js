@@ -5,6 +5,9 @@ import {
   LOGOUT,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
+  PROFILE,
+  PROFILE_SUCCESS,
+  PROFILE_FAILURE,
 } from "../../actionTypes";
 import axios from "axios";
 import history from "../../../history";
@@ -13,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const LOGINURL = `${process.env.REACT_APP_BASE_URL}/auth/user/login`;
 const LOGOUTURL = `${process.env.REACT_APP_BASE_URL}/auth/user/logout`;
+const PROFILEURL = `${process.env.REACT_APP_BASE_URL}/user`;
 
 export function fetchLogin(token, payload) {
   return (dispatch) => {
@@ -28,10 +32,13 @@ export function fetchLogin(token, payload) {
       },
     })
       .then((res) => {
-        dispatch(loginSuccess(res));
+        dispatch(loginSuccess(res));        
         toast.success("Login Success !");
         // localStorage.setItem("token", token)
         localStorage.setItem("username", payload.username);
+        setTimeout(() => {          
+          dispatch(fetchProfile(token))
+        }, 1500);
         history.push("/dashboard");
       })
       .catch((err) => {
@@ -64,10 +71,10 @@ export function fetchLoginSession(token, payload, donasi, uripath) {
       .then((res) => {
         dispatch(loginSuccess(res));
         toast.success("Login Success !");
-        // localStorage.setItem("token", token)
         localStorage.setItem("username", payload.username);
-        // history.push("/otime/"+donasi.seo_url)
-
+        setTimeout(() => {          
+          dispatch(fetchProfile(token))
+        }, 1500);
         const uri = uripath.split("/");
 
         if (uri[1] == "rutin") {
@@ -112,18 +119,49 @@ export function fetchLogout(token) {
       .then((res) => {
         dispatch(logoutSuccess(res));
         // localStorage.removeItem("token");
-        localStorage.removeItem("username");
-        history.push("/dashboard");
+        setTimeout(() => {
+          localStorage.removeItem("username");
+          localStorage.removeItem("userprofile");
+          localStorage.removeItem("nama_lengkap");
+          history.push("/dashboard");          
+        }, 1500);
+        toast.success("Logout Success !");
       })
       .catch((err) => {
         console.log(err);
         // localStorage.removeItem("token");
         localStorage.removeItem("username");
+        localStorage.removeItem("userprofile");
+        localStorage.removeItem("nama_lengkap");
         history.push("/dashboard");
         dispatch(logoutFailure(err));
       });
   };
 }
+
+export function fetchProfile(token) {
+  return (dispatch) => {
+    axios(PROFILEURL, {
+      method: "GET",
+      headers: {
+        "pp-token": `${token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        // console.log(res.data.data)
+        localStorage.setItem("userprofile", res.data.data.username);
+        localStorage.setItem("nama_lengkap", res.data.data.nama_lengkap);
+        window.location.reload()
+        dispatch(profileSuccess(res.data.data));        
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(profileFailure(err));
+      });
+  };
+}
+
 
 // Login
 const login = () => ({
@@ -151,4 +189,19 @@ const logoutSuccess = (payload) => ({
 
 const logoutFailure = () => ({
   type: LOGOUT_FAILURE,
+});
+
+
+// Profile
+const profile = () => ({
+  type: PROFILE,
+});
+
+const profileSuccess = (payload) => ({
+  type: PROFILE_SUCCESS,
+  payload,
+});
+
+const profileFailure = () => ({
+  type: PROFILE_FAILURE,
 });

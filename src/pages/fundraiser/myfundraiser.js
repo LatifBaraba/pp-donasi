@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fetchFundraiser } from "../../Redux/fundraiser/action";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Card, Button } from "react-bootstrap";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
 import Moment from "react-moment";
 
@@ -48,9 +48,8 @@ const Myfundraiser = () => {
                             <div> */}
                               <Link
                                 to={{
-                                  pathname:
-                                    "/myfundraiser/" + data.seo_url,
-                                  state: { data: data} ,
+                                  pathname: "/myfundraiser/" + data.seo_url,
+                                  state: { data: data },
                                 }}
                                 className="mr-2"
                               >
@@ -65,7 +64,17 @@ const Myfundraiser = () => {
                             </div>
                             <Card.Body>
                               <b>
-                                <a style={{ color: "#48c78e" }}>{data.title}</a>
+                                <a style={{ color: "#48c78e" }}>
+                                  <Link
+                                    to={{
+                                      pathname: "/" + data.seo_url,
+                                      // state: window.location.pathname,
+                                    }}
+                                    target="_blank"
+                                  >
+                                    {data.title}
+                                  </Link>
+                                </a>
                               </b>
                               <hr />
                               <Card.Text>

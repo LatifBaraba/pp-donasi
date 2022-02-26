@@ -8,6 +8,11 @@ export const LOGOUT = "LOGOUT";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 
+// PROFILE
+export const PROFILE = "PROFILE";
+export const PROFILE_SUCCESS = "PROFILE_SUCCESS";
+export const PROFILE_FAILURE = "PROFILE_FAILURE";
+
 // REGISTER
 export const ADD_USER = "ADD_USER"
 export const ADD_USER_SUCCESS = "ADD_USER_SUCCESS"
