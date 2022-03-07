@@ -31,6 +31,7 @@ const Order = (props) => {
   let token = localStorage.getItem("token");    
   const dispatch = useDispatch();
   useEffect(() => {
+    window.scrollTo(0, 0)
     dispatch(fetchDetailDonasi(token, donasi.id));
     dispatch(fetchHistory(token, username))
   }, []);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -16,6 +16,10 @@ const Order = (props) => {
   const [nominal, setNominal] = useState(donasi[1]);
   const [ucapan, setUcapan] = useState("");
   const [tipebayar, setTipeBayar] = useState(donasi[2]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   let token = localStorage.getItem("token");
   const dispatch = useDispatch();

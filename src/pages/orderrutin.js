@@ -27,6 +27,7 @@ const Order = (props) => {
   let token = localStorage.getItem("token");
   const dispatch = useDispatch();
   useEffect(() => {
+    window.scrollTo(0, 0)
     dispatch(fetchDetailDonasiRutin(token, donasi.id));
     dispatch(fetchDetailDonasiRutinPaket(token, donasi.id));
     dispatch(fetchHistory(token, username))

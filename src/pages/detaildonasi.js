@@ -18,11 +18,15 @@ import "react-multi-carousel/lib/styles.css";
 import { fetchDonasiRutinBySeo } from "../Redux/donasilist2/actions";
 import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
 
+import ContentLoader from "react-content-loader";
+
 const DetailDonasi = () => {
   const username = localStorage.getItem("username");
+  const [loadingSkeleton, setLoadingSkeleton] = useState(false);
   const refresh = () => {
     setInterval(() => {
       window.location.reload();
+      window.scrollTo(0, 0)
     }, 100);
   };
 
@@ -31,15 +35,19 @@ const DetailDonasi = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.tokenReducer.token.token);
   useEffect(() => {
+    window.scrollTo(0, 0)
+    setLoadingSkeleton(true);
     if (token == undefined) {
       // dispatch(fetchToken());
       setTimeout(() => {
+        setLoadingSkeleton(false);
         let tokens = localStorage.getItem("token");
         dispatch(fetchDonasiRutinBySeo(tokens, id));
         dispatch(fetchPagedonasi2(tokens));
         dispatch(fetchAllHistoryRutinDonation(tokens));
       }, 2000);
     } else {
+      setLoadingSkeleton(false);
       dispatch(fetchDonasiRutinBySeo(token, id));
       dispatch(fetchPagedonasi2(token));
       dispatch(fetchAllHistoryRutinDonation(token));
@@ -88,7 +96,28 @@ const DetailDonasi = () => {
   // const toggle = () => {
   //   setIsOpen(!isOpen);
   // }
+
+  const Loading = () => {
+    return (
+      <div className="container detail-program">
+        <ContentLoader
+          width={1050}
+          height={400}
+          viewBox="0 0 1050 400"
+          backgroundColor="#f0f0f0"
+          foregroundColor="#dedede"
+        >
+          <rect x="42" y="77" rx="10" ry="10" width="1050" height="217" />
+        </ContentLoader>
+      </div>
+    );
+  };
+
   return (
+    <>
+      {loadingSkeleton === true ? (
+        <Loading />
+      ) : (
     <div className="container detail-program">
       <div className="row row-mb-5" style={{ display: "flex" }}>
         <div className="col-md-6" style={{ width: "50%" }}>
@@ -456,6 +485,8 @@ const DetailDonasi = () => {
         ))}
       </CarouselCard>
     </div>
+     )}
+     </>
   );
 };
 

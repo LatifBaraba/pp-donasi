@@ -53,6 +53,12 @@ const Content2 = (props) => {
     (state) => state.donasilistReducer.donasisearch
   );
 
+
+  function refreshPage() {
+    setTimeout(()=>{
+        window.location.reload(false);
+    }, 100);
+  }
   
 
   return (
@@ -168,6 +174,7 @@ const Content2 = (props) => {
                     pathname: "/otime/" + data.seo_url,
                     state: { donasi: data },
                   }}
+                  // onClick={refreshPage}
                 >
                   <Button>Donasi Sekarang</Button>
                 </Link>
@@ -235,6 +242,7 @@ const Content2 = (props) => {
                     pathname: "/otime/" + data.seo_url,
                     state: { donasi: data },
                   }}
+                  // onClick={refreshPage}
                 >
                   <Button>Donasi Sekarang</Button>
                 </Link>
