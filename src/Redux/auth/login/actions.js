@@ -76,20 +76,29 @@ export function fetchLoginSession(token, payload, donasi, uripath) {
           dispatch(fetchProfile(token))
         }, 1500);
         const uri = uripath.split("/");
-
-        if (uri[1] == "rutin") {
+        console.log(typeof uri[1])
+        console.log(uri[1])
+        
+        if (uri[1] === "rutin") {
           history.push({
             pathname: "/rutin/" + uri[2],
             // state: { donasi: donasi }
           });
-        } else if (uri[1] != "rutin" || uri[1] != "otime") {
+        } else if (uri[1] === "otime"){
+          console.log("masuk else");
+          history.push({
+            pathname: "/otime/" + uri[2],
+            state: { donasi: donasi }
+          });
+        } else if (uri[1] !== "rutin" || uri[1] !== "otime") {
+          console.log("masuk if 2")
           history.push({
             pathname: "/" + uri[1],
             // state: { data: donasi }
           });
-        } else {
+        }  else {
           history.push({
-            pathname: "/otime/" + uri[2],
+            pathname: "/dashboard",
             // state: { donasi: donasi }
           });
         }
@@ -122,6 +131,7 @@ export function fetchLogout(token) {
         setTimeout(() => {
           localStorage.removeItem("username");
           localStorage.removeItem("userprofile");
+          localStorage.removeItem("useremail");
           localStorage.removeItem("nama_lengkap");
           history.push("/dashboard");          
         }, 1500);
@@ -132,6 +142,7 @@ export function fetchLogout(token) {
         // localStorage.removeItem("token");
         localStorage.removeItem("username");
         localStorage.removeItem("userprofile");
+        localStorage.removeItem("useremail");
         localStorage.removeItem("nama_lengkap");
         history.push("/dashboard");
         dispatch(logoutFailure(err));
@@ -151,6 +162,7 @@ export function fetchProfile(token) {
       .then((res) => {
         // console.log(res.data.data)
         localStorage.setItem("userprofile", res.data.data.username);
+        localStorage.setItem("useremail", res.data.data.email);
         localStorage.setItem("nama_lengkap", res.data.data.nama_lengkap);
         window.location.reload()
         dispatch(profileSuccess(res.data.data));        

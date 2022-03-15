@@ -10,9 +10,10 @@ const Myfundraiser = () => {
   const dispatch = useDispatch();
   let token = localStorage.getItem("token");
   const username = localStorage.getItem("username");
+  const useremail = localStorage.getItem("useremail");
   useEffect(() => {
-    dispatch(fetchFundraiser(token, username));
-  }, [token, username]);
+    dispatch(fetchFundraiser(token, useremail));
+  }, [token, useremail]);
 
   const datafund = useSelector((state) => state.fundraiserReducer.fundraiser);
 

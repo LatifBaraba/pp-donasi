@@ -38,6 +38,7 @@ const DetailFundraiser = (props) => {
   let tokens = localStorage.getItem("token");
   // console.log(tokens)
   useEffect(() => {
+    window.scrollTo(0, 0)
     localStorage.setItem("url", id);
     if (tokens === undefined || tokens === null) {
       setTimeout(() => {

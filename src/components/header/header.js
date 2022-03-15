@@ -48,7 +48,7 @@ const Header = () => {
                                          <HeartOutline height="15px" width="15px" />
                                        &nbsp; Galang Dana Saya                           
                             </NavDropdown.Item>
-                            <NavDropdown.Item href="/history"><TimeOutline color={'#00000'} height="15px" width="15px" /> &nbsp; History</NavDropdown.Item>
+                            <NavDropdown.Item href="/history"><TimeOutline color={'#00000'} height="15px" width="15px" /> &nbsp; History Donasi</NavDropdown.Item>
                             <Dropdown.Divider />
                             <NavDropdown.Item onClick={() => { logout() }}><LogOutOutline color={'#00000'} height="15px" width="15px" /> &nbsp; Logout</NavDropdown.Item>
                              </NavDropdown>
