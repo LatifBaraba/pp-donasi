@@ -41,7 +41,7 @@ const Dashboard = () => {
       } else {
         let token = await getToken();
 
-        dispatch(fetchDonasilist(token));
+        dispatch(fetchDonasilist(token, ''));
         dispatch(fetchDonasilist2(token));
       }
     }

@@ -39,7 +39,7 @@ export function fetchToken() {
             dispatch(getTokenSuccess(res.data.data));
             localStorage.setItem("token", res.data.data.token);
             // const dispatch = useDispatch()
-            dispatch(fetchDonasilist(res.data.data.token));
+            dispatch(fetchDonasilist(res.data.data.token, ''));
             dispatch(fetchDonasilist2(res.data.data.token));  
             dispatch(fetchFundraiserBySeo(res.data.data.token, localStorage.getItem("url")));
         })

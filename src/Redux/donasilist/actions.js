@@ -19,7 +19,7 @@ import { fetchKabarTerbaruOt } from "../kabarterbaru/action";
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi/list`;
 
-export function fetchDonasilist(token) {
+export function fetchDonasilist(token, kategori_name) {
   return (dispatch) => {
     axios(URL, {
       method: "POST",
@@ -34,6 +34,10 @@ export function fetchDonasilist(token) {
           {
             field: "is_deleted",
             keyword: "false",
+          },
+          {
+            field: "kategori_name",
+            keyword: `${kategori_name}`,
           },
         ],
         order: "created_at",
