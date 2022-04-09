@@ -8,6 +8,9 @@ import {
   GET_DONASIONETIME_SEARCH,
   GET_DONASIONETIME_SEARCH_SUCCESS,
   GET_DONASIONETIME_SEARCH_FAILURE,
+  GET_KATEGORI_PROGRAM_DONASI,
+  GET_KATEGORI_PROGRAM_DONASI_SUCCESS,
+  GET_KATEGORI_PROGRAM_DONASI_FAILURE
 } from "../actionTypes";
 import axios from "axios";
 import history from "../../history";
@@ -18,6 +21,7 @@ import {
 import { fetchKabarTerbaruOt } from "../kabarterbaru/action";
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi/list`;
+const URL_KATEGORI = `${process.env.REACT_APP_BASE_URL}/kategori-program-donasi/list`;
 
 export function fetchDonasilist(token, kategori_name) {
   return (dispatch) => {
@@ -73,6 +77,8 @@ export function fetchDonasilist(token, kategori_name) {
       });
   };
 }
+
+
 
 export function fetchDonasiOneTimeBySeo(token, url) {
   return (dispatch) => {
@@ -177,6 +183,44 @@ export function fetchDonasiSearch(token, keywordSearch) {
   };
 }
 
+
+export function fetchKategoriProgramDonasi(token) {
+  return (dispatch) => {
+    // console.log(token)
+    // console.log(keywordSearch)
+    axios(URL_KATEGORI, {
+      method: "POST",
+      data: {
+        limit: "10",
+        offset: "1",
+        filters: [
+            {
+                field: "id",
+                keyword: ""
+            }
+        ],
+        order: "created_at",
+        sort: "ASC",
+      },
+      headers: {
+        "pp-token": `${token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        dispatch(getKategoriProgramDonasiSuccess(res.data.data));
+      })
+      .catch((err) => {
+        dispatch(getKategoriProgramDonasiFailure(err));
+        console.log(err);
+        if (err.response.status === 401) {
+          localStorage.removeItem("token");
+          history.push("/dashboard");
+        }
+      });
+  };
+}
+
 // Get Donasi List
 const getDonasilistSuccess = (payload) => ({
   type: GET_DONASI_SUCCESS,
@@ -217,4 +261,18 @@ const getDonasionetimesearchFailure = () => ({
 
 const getDonasionetimesearch = () => ({
   type: GET_DONASIONETIME_SEARCH,
+});
+
+// Get Program Donasi List
+const getKategoriProgramDonasiSuccess = (payload) => ({
+  type: GET_KATEGORI_PROGRAM_DONASI_SUCCESS,
+  payload,
+});
+
+const getKategoriProgramDonasiFailure = () => ({
+  type: GET_KATEGORI_PROGRAM_DONASI_FAILURE,
+});
+
+const getKategoriProgramDonasi = () => ({
+  type: GET_KATEGORI_PROGRAM_DONASI,
 });
