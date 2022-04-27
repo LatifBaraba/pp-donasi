@@ -7,6 +7,10 @@ import {
     GET_KABAR_TERBARU_RUTIN_FAILURE,
 } from '../actionTypes';
 import axios from 'axios';
+import { fetchRefreshToken } from '../token/action';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import history from '../../history'
 
 // const URL = `${process.env.REACT_APP_BASE_URL}/transaction/my-list`;
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi/kabar-terbaru/list`;
@@ -45,6 +49,15 @@ export function fetchKabarTerbaruOt(token, id) {
             .catch(err => {
                 console.log(err)
                 dispatch(getKabarTerbaruOtFailure(err));
+                if(err.response.status === 401){
+                    toast.error("Harap Login Terlebih Dahulu")
+                    dispatch(fetchRefreshToken(token))
+                    localStorage.removeItem("token");
+                    history.push({
+                        pathname: "/login",
+                        state: { data: "kosong" },
+                      });
+                }
             });
     };
 };
@@ -83,6 +96,15 @@ export function fetchKabarTerbaruRutin(token, id) {
             .catch(err => {
                 console.log(err)
                 dispatch(getKabarTerbaruRutinFailure(err));
+                if(err.response.status === 401){
+                    toast.error("Harap Login Terlebih Dahulu")
+                    dispatch(fetchRefreshToken(token))
+                    localStorage.removeItem("token");
+                    history.push({
+                        pathname: "/login",
+                        state: { data: "kosong" },
+                      });
+                }
             });
     };
 };

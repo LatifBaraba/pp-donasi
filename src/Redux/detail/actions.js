@@ -6,6 +6,10 @@ import {
     GET_DONATION_DETAIL_FAILURE,
 } from '../actionTypes';
 import axios from 'axios';
+import { fetchRefreshToken } from '../token/action';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import history from '../../history'
 
 const URL = `${process.env.REACT_APP_BASE_URL}/transaction/`;
 const URL_DONASI = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/`;
@@ -29,6 +33,15 @@ export function fetchDetail(token, id) {
             .catch(err => {
                 console.log(err)
                 dispatch(getDetailFailure(err));
+                if(err.response.status === 401){
+                    toast.error("Harap Login Terlebih Dahulu")
+                    dispatch(fetchRefreshToken(token))
+                    localStorage.removeItem("token");
+                    history.push({
+                        pathname: "/login",
+                        state: { data: "kosong" },
+                      });
+                }
             });
     };
 };

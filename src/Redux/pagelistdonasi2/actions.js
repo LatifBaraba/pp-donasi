@@ -6,7 +6,10 @@ import { GET_PAGEDONASI2,
     GET_PAKET_PAGEDONASI2_FAILURE,
         } from '../actionTypes';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import history from '../../history'
+import { fetchRefreshToken } from '../token/action';
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/list`;
 const ListPaketURL = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/paket/list`;
@@ -47,8 +50,13 @@ export function fetchPagedonasi2(token) {
             dispatch(getPagedonasi2Failure(err));
             console.log(err)
             if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
+                dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
-                history.push('/login')
+                history.push({
+                    pathname: "/login",
+                    state: { data: "kosong" },
+                  });
             }
         });
     };
@@ -92,8 +100,13 @@ export function fetchPaketPagedonasi2(token, id) {
             dispatch(getPaketPagedonasi2Failure(err));
             console.log(err)
             if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
+                dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
-                history.push('/login')
+                history.push({
+                    pathname: "/login",
+                    state: { data: "kosong" },
+                  });
             }
         });
     };

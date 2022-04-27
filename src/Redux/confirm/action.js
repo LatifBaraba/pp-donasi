@@ -43,7 +43,7 @@ export function fetchAddConfirm(token, transaction_id, bukti) {
         .catch(err => {
             console.log(err)
             if(err.response.status == 401){
-                toast.error("Unauthorized")
+                toast.error("Harap Login Terlebih Dahulu")
                 dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
                 history.push('/confirm')
@@ -85,8 +85,13 @@ export function fetchConfirmList(token) {
             dispatch(getConfirmListFailure(err));
             console.log(err)
             if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
+                dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
-                history.push('/login')
+                history.push({
+                    pathname: "/login",
+                    state: { data: "kosong" },
+                  });
             }
         });
     };

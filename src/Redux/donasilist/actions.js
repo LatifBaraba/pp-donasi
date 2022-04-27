@@ -13,12 +13,15 @@ import {
   GET_KATEGORI_PROGRAM_DONASI_FAILURE
 } from "../actionTypes";
 import axios from "axios";
-import history from "../../history";
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import history from '../../history'
 import {
   fetchDetailDonasi,
   fetchHistoryDonation,
 } from "../detaildonasi/action";
 import { fetchKabarTerbaruOt } from "../kabarterbaru/action";
+import { fetchRefreshToken } from "../token/action";
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi/list`;
 const URL_KATEGORI = `${process.env.REACT_APP_BASE_URL}/kategori-program-donasi/list`;
@@ -70,10 +73,12 @@ export function fetchDonasilist(token, kategori_name) {
       .catch((err) => {
         dispatch(getDonasilistFailure(err));
         console.log(err);
-        if (err.response.status === 401) {
+        if(err.response.status === 401){
+          toast.error("Harap Login Terlebih Dahulu")
+          dispatch(fetchRefreshToken(token))
           localStorage.removeItem("token");
-          history.push("/dashboard");
-        }
+          history.push('/dashboard')
+      }
       });
   };
 }
@@ -130,10 +135,12 @@ export function fetchDonasiOneTimeBySeo(token, url) {
       .catch((err) => {
         dispatch(getDonasionetimeseoFailure(err));
         console.log(err);
-        if (err.response.status === 401) {
+        if(err.response.status === 401){
+          toast.error("Harap Login Terlebih Dahulu")
+          dispatch(fetchRefreshToken(token))
           localStorage.removeItem("token");
-          history.push("/dashboard");
-        }
+          history.push('/dashboard')
+      }
       });
   };
 }
@@ -175,10 +182,12 @@ export function fetchDonasiSearch(token, keywordSearch) {
       .catch((err) => {
         dispatch(getDonasionetimesearchFailure(err));
         console.log(err);
-        if (err.response.status === 401) {
+        if(err.response.status === 401){
+          toast.error("Harap Login Terlebih Dahulu")
+          dispatch(fetchRefreshToken(token))
           localStorage.removeItem("token");
-          history.push("/dashboard");
-        }
+          history.push('/dashboard')
+      }
       });
   };
 }
@@ -213,10 +222,12 @@ export function fetchKategoriProgramDonasi(token) {
       .catch((err) => {
         dispatch(getKategoriProgramDonasiFailure(err));
         console.log(err);
-        if (err.response.status === 401) {
+        if(err.response.status === 401){
+          toast.error("Harap Login Terlebih Dahulu")
+          dispatch(fetchRefreshToken(token))
           localStorage.removeItem("token");
-          history.push("/dashboard");
-        }
+          history.push('/dashboard')
+      }
       });
   };
 }

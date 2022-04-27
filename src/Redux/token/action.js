@@ -55,7 +55,7 @@ export function fetchRefreshToken(token) {
         axios(URLREF, {
             method: 'POST',
             headers: {
-                "pp-token": `${token}`,
+                "pp-refresh-token": `${token}`,
                 "Content-type": "application/json"
             }
         })

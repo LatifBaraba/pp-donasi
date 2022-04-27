@@ -22,6 +22,8 @@ import {
     GET_ALL_PAKET_RUTIN_HISTORY_DONATION_FAILURE,  
     } from '../actionTypes';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import history from '../../history'
 import {fetchRefreshToken } from "../../Redux/token/action";
 
@@ -45,6 +47,15 @@ export function fetchDetailDonasi(token, id) {
         .catch(err => {
             dispatch(getDonasiDetailFailure(err));
             console.log(err)
+            if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
+                dispatch(fetchRefreshToken(token))
+                localStorage.removeItem("token");
+                history.push({
+                    pathname: "/login",
+                    state: { data: "kosong" },
+                });
+            }
         });
     };
 };
@@ -65,8 +76,13 @@ export function fetchDetailDonasiRutin(token, id) {
             dispatch(getDetailDonasiRutinFailure(err));
             console.log(err)
             if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
+                dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
-                history.push('/login')
+                history.push({
+                    pathname: "/login",
+                    state: { data: "kosong" },
+                });
             }
         });
     };
@@ -89,6 +105,8 @@ export function fetchDetailDonasiRutinPaket(token, id) {
             dispatch(getDetailDonasiRutinPaketFailure(err));
             console.log(err)
             if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
+                dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
                 history.push('/dashboard')
             }
@@ -130,13 +148,13 @@ export function fetchHistoryDonation(token, id) {
             dispatch(getHistoryDonationSuccess(res.data.data));
         })
         .catch(err => {
-            if(err.response.status == 401){
-                // toast.error("Unauthorized")
+            dispatch(getHistoryDonationFailure(err));
+            if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
                 dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
                 history.push('/dashboard')
             }
-            dispatch(getHistoryDonationFailure(err));
         });
     };
 };
@@ -176,13 +194,16 @@ export function fetchHistoryRutinDonation(token, id) {
             dispatch(getHistoryPaketDonationSuccess(res.data.data));
         })
         .catch(err => {
-            if(err.response.status == 401){
-                // toast.error("Unauthorized")
+            dispatch(getHistoryPaketDonationFailure(err));
+            if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
                 dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
-                history.push('/login')
+                history.push({
+                    pathname: "/login",
+                    state: { data: "kosong" },
+                  });
             }
-            dispatch(getHistoryPaketDonationFailure(err));
         });
     };
 };
@@ -220,13 +241,13 @@ export function fetchAllHistoryDonation(token) {
             dispatch(getAllHistoryDonationSuccess(res.data.data));
         })
         .catch(err => {
-            if(err.response.status == 401){
-                // toast.error("Unauthorized")
+            dispatch(getAllHistoryDonationFailure(err));
+            if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
                 dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
                 history.push('/dashboard')
             }
-            dispatch(getAllHistoryDonationFailure(err));
         });
     };
 };
@@ -265,13 +286,13 @@ export function fetchAllHistoryRutinDonation(token) {
             dispatch(getAllRutinPaketHistoryDonationSuccess(res.data.data));
         })
         .catch(err => {
-            if(err.response.status == 401){
-                // toast.error("Unauthorized")
+            dispatch(getAllRutinPaketHistoryDonationFailure(err));
+            if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
                 dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
                 history.push('/dashboard')
             }
-            dispatch(getAllRutinPaketHistoryDonationFailure(err));
         });
     };
 };

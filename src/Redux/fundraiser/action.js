@@ -61,6 +61,15 @@ export function fetchFundraiser(token, email) {
       .catch((err) => {
         console.log(err);
         dispatch(getFundraiserFailure(err));
+        if(err.response.status === 401){
+          toast.error("Harap Login Terlebih Dahulu")
+          dispatch(fetchRefreshToken(token))
+          localStorage.removeItem("token");
+          history.push({
+            pathname: "/login",
+            state: { data: "kosong" },
+          });
+      }
       });
   };
 }
@@ -101,6 +110,15 @@ export function fetchFundraiserByDonasi(token, id) {
       .catch((err) => {
         console.log(err);
         dispatch(getFundraiserByDonasiFailure(err));
+        if(err.response.status === 401){
+          toast.error("Harap Login Terlebih Dahulu")
+          dispatch(fetchRefreshToken(token))
+          localStorage.removeItem("token");
+          history.push({
+            pathname: "/login",
+            state: { data: "kosong" },
+          });
+      }
       });
   };
 }
@@ -131,10 +149,15 @@ export function fetchAddFundraiser(token, payload) {
       .catch((err) => {
         // console.log(err);
         dispatch(getAddFundraiserFailure(err));
-        if (err.response.status == 401) {
-          toast.error("Silahkan Login terlebih dahulu");
-          dispatch(fetchRefreshToken(token));
-        }
+        if(err.response.status === 401){
+          toast.error("Harap Login Terlebih Dahulu")
+          dispatch(fetchRefreshToken(token))
+          localStorage.removeItem("token");
+          history.push({
+            pathname: "/login",
+            state: { data: "kosong" },
+          });
+      }
       });
   };
 }
@@ -156,6 +179,15 @@ export function fetchFundraiserBySeo(token, url) {
       .catch((err) => {
         console.log(err);
         dispatch(getFundraiserBySeoFailure(err));
+        if(err.response.status === 401){
+          toast.error("Harap Login Terlebih Dahulu")
+          dispatch(fetchRefreshToken(token))
+          localStorage.removeItem("token");
+          history.push({
+            pathname: "/login",
+            state: { data: "kosong" },
+          });
+      }
       });
   };
 }
@@ -197,6 +229,15 @@ export function fetchFundraiserByTransaction(token, id) {
       .catch((err) => {
         console.log(err);
         dispatch(getFundraiserByTransactionFailure(err));
+        if(err.response.status === 401){
+          toast.error("Harap Login Terlebih Dahulu")
+          dispatch(fetchRefreshToken(token))
+          localStorage.removeItem("token");
+          history.push({
+            pathname: "/login",
+            state: { data: "kosong" },
+          });
+      }
       });
   };
 }

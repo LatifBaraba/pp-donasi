@@ -6,11 +6,14 @@ import { GET_DONASI2,
     GET_DONASISEO_FAILURE,
         } from '../actionTypes';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import history from '../../history'
 
 import { fetchDetailDonasiRutin, fetchHistoryRutinDonation } from "../detaildonasi/action";
 import { fetchPaketPagedonasi2 } from "../pagelistdonasi2/actions";
 import { fetchKabarTerbaruRutin } from "../kabarterbaru/action"
+import { fetchRefreshToken } from '../token/action';
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/list`;
 
@@ -50,6 +53,8 @@ export function fetchDonasilist2(token) {
             dispatch(getDonasilist2Failure(err));
             console.log(err)
             if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
+                dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
                 history.push('/dashboard')
             }
@@ -104,6 +109,8 @@ export function fetchDonasiRutinBySeo(token, url) {
             dispatch(getDonasiseoFailure(err));
             console.log(err)
             if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
+                dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
                 history.push('/dashboard')
             }

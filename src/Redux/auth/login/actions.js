@@ -13,6 +13,7 @@ import axios from "axios";
 import history from "../../../history";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { fetchRefreshToken } from "../../token/action";
 
 const LOGINURL = `${process.env.REACT_APP_BASE_URL}/auth/user/login`;
 const LOGOUTURL = `${process.env.REACT_APP_BASE_URL}/auth/user/logout`;
@@ -44,8 +45,14 @@ export function fetchLogin(token, payload) {
       .catch((err) => {
         if (err.response.status === 400) {
           toast.error("Usernama atau password tidak sesuai");
-        } else if (err.response.status === 401) {
-          toast.error("Password tidak sesuai");
+        } else if(err.response.status === 401){
+            toast.error("Harap Login Terlebih Dahulu")
+            dispatch(fetchRefreshToken(token))
+            localStorage.removeItem("token");
+            history.push({
+              pathname: "/login",
+              state: { data: "kosong" },
+            });
         } else if (err.response.status === 422) {
           toast.error("Username tidak sesuai");
         }
@@ -106,8 +113,15 @@ export function fetchLoginSession(token, payload, donasi, uripath) {
       .catch((err) => {
         if (err.response.status === 400) {
           toast.error("Usernama atau password tidak sesuai");
-        } else if (err.response.status === 401) {
-          toast.error("Password tidak sesuai");
+        } else if(err.response.status === 401){
+            toast.error("Harap Login Terlebih Dahulu")
+            dispatch(fetchRefreshToken(token))
+            localStorage.removeItem("token");
+            history.push({
+              pathname: "/login",
+              state: { data: "kosong" },
+            });
+            
         } else if (err.response.status === 422) {
           toast.error("Username tidak sesuai");
         }
@@ -170,6 +184,15 @@ export function fetchProfile(token) {
       .catch((err) => {
         console.log(err);
         dispatch(profileFailure(err));
+        if(err.response.status === 401){
+          toast.error("Harap Login Terlebih Dahulu")
+          dispatch(fetchRefreshToken(token))
+          localStorage.removeItem("token");
+          history.push({
+            pathname: "/login",
+            state: { data: "kosong" },
+          });
+      }
       });
   };
 }

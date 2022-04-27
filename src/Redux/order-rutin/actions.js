@@ -7,6 +7,7 @@ import axios from "axios";
 import history from "../../history";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { fetchRefreshToken } from "../token/action";
 
 const ORDERURL = `${process.env.REACT_APP_BASE_URL}/transaction/create`;
 // const LOGOUTURL = `${process.env.REACT_APP_BASE_URL}/auth/user/logout`;
@@ -39,8 +40,14 @@ export function fetchOrderRutin(token, payload) {
     .catch(err => {
         if (err.response.status === 400) {
             toast.error("Harap Login Terlebih Dahulu")
-        } else if (err.response.status === 401) {
+        } else if(err.response.status === 401){
             toast.error("Harap Login Terlebih Dahulu")
+            dispatch(fetchRefreshToken(token))
+            localStorage.removeItem("token");
+            history.push({
+              pathname: "/login",
+              state: { data: "kosong" },
+            });
         }
         dispatch(orderRutinFailure(err));
     });

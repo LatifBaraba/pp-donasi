@@ -4,6 +4,7 @@ import { GET_BANNER,
         } from '../actionTypes';
 import axios from 'axios';
 import history from '../../history'
+import { fetchRefreshToken } from '../token/action';
 const URL = `${process.env.REACT_APP_BASE_URL}/banner/list`;
 
 export function fetchBanner(token) {
@@ -38,8 +39,13 @@ export function fetchBanner(token) {
             dispatch(getBannerFailure(err));
             console.log(err)
             if(err.response.status === 401){
+                toast.error("Harap Login Terlebih Dahulu")
+                dispatch(fetchRefreshToken(token))
                 localStorage.removeItem("token");
-                history.push('/login')
+                history.push({
+                    pathname: "/login",
+                    state: { data: "kosong" },
+                  });
             }
         });
     };
