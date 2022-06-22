@@ -5,22 +5,22 @@ import {
   fetchDetailDonasiRutin,
   fetchHistoryRutinDonation,
   fetchAllHistoryRutinDonation,
-} from "../Redux/detaildonasi/action";
+} from "../Controller/detaildonasi/action";
 import {
   fetchPagedonasi2,
   fetchPaketPagedonasi2,
-} from "../Redux/pagelistdonasi2/actions";
+} from "../../../Redux/pagelistdonasi2/actions";
 import { Link, useParams } from "react-router-dom";
 import Moment from "react-moment";
 import NumberFormat from "react-number-format";
 import CarouselCard from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { fetchDonasiRutinBySeo } from "../Redux/donasilist2/actions";
-import { fetchToken, fetchRefreshToken } from "../Redux/token/action";
+import { fetchDonasiRutinBySeo } from "../../../Redux/donasilist2/actions";
+// import { fetchToken, fetchRefreshToken } from "../../../Redux/token/action";
 
 import ContentLoader from "react-content-loader";
 
-const DetailDonasi = () => {
+const RutinCampaign = () => {
   const username = localStorage.getItem("username");
   const [loadingSkeleton, setLoadingSkeleton] = useState(false);
   const refresh = () => {
@@ -490,4 +490,4 @@ const DetailDonasi = () => {
   );
 };
 
-export default DetailDonasi;
+export default RutinCampaign;

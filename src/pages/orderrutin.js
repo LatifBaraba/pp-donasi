@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Button, Dropdown, MenuItem } from "react-bootstrap";
 import NumberFormat from "react-number-format";
-import { fetchDetailDonasiRutin, fetchDetailDonasiRutinPaket } from "../Redux/detaildonasi/action";
+import { fetchDetailDonasiRutin, fetchDetailDonasiRutinPaket } from "./DonasiRutin/Controller/detaildonasi/action";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 

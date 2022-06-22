@@ -2,10 +2,7 @@ import { React, useEffect, useState } from "react";
 import { Row, Col, Button, Card, ProgressBar } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { fetchPagedonasi2 } from "../../Redux/pagelistdonasi2/actions";
-import {
-  fetchAllHistoryRutinDonation,
-  fetchHistoryRutinDonation,
-} from "../../Redux/detaildonasi/action";
+
 import { fetchKabarTerbaruOt } from "../../Redux/kabarterbaru/action";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";

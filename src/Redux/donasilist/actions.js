@@ -19,7 +19,7 @@ import history from '../../history'
 import {
   fetchDetailDonasi,
   fetchHistoryDonation,
-} from "../detaildonasi/action";
+} from "../../pages/DonasiRutin/Controller/detaildonasi/action";
 import { fetchKabarTerbaruOt } from "../kabarterbaru/action";
 import { fetchRefreshToken } from "../token/action";
 

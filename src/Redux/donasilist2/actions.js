@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import history from '../../history'
 
-import { fetchDetailDonasiRutin, fetchHistoryRutinDonation } from "../detaildonasi/action";
+import { fetchDetailDonasiRutin, fetchHistoryRutinDonation } from "../../pages/DonasiRutin/Controller/detaildonasi/action";
 import { fetchPaketPagedonasi2 } from "../pagelistdonasi2/actions";
 import { fetchKabarTerbaruRutin } from "../kabarterbaru/action"
 import { fetchRefreshToken } from '../token/action';

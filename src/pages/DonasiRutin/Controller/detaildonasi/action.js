@@ -20,12 +20,12 @@ import {
     GET_ALL_PAKET_RUTIN_HISTORY_DONATION,
     GET_ALL_PAKET_RUTIN_HISTORY_DONATION_SUCCESS,
     GET_ALL_PAKET_RUTIN_HISTORY_DONATION_FAILURE,  
-    } from '../actionTypes';
+    } from '../../../../Redux/actionTypes';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import history from '../../history'
-import {fetchRefreshToken } from "../../Redux/token/action";
+import history from '../../../../history'
+import {fetchRefreshToken } from "../../../../Redux/token/action";
 
 const URL = `${process.env.REACT_APP_BASE_URL}/program-donasi/`;
 const URL_RUTIN = `${process.env.REACT_APP_BASE_URL}/program-donasi-rutin/`;

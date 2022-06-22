@@ -2,11 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Carousel, ProgressBar, Card, Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchDetailDonasi,
-  fetchHistoryDonation,
-  fetchAllHistoryDonation,
-} from "../../Redux/detaildonasi/action";
 import { fetchPageDonasi } from "../../Redux/pagelistdonasi/actions";
 import NumberFormat from "react-number-format";
 import CarouselCard from "react-multi-carousel";

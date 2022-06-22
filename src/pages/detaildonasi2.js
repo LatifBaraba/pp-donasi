@@ -6,7 +6,7 @@ import {
   fetchDetailDonasi,
   fetchHistoryDonation,
   fetchAllHistoryDonation,
-} from "../Redux/detaildonasi/action";
+} from "./DonasiRutin/Controller/detaildonasi/action";
 import { fetchPageDonasi } from "../Redux/pagelistdonasi/actions";
 import NumberFormat from "react-number-format";
 import CarouselCard from "react-multi-carousel";

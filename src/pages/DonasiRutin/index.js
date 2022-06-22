@@ -3,9 +3,9 @@ import {useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Col, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import '../../assets/css/dashboard.css'
+import "../../assets/css/dashboard.css"
 
-const Content = (props) => {
+const Rutin = (props) => {
 
   const datas = props.data
   const [isReadMore, setIsReadMore] = useState(true);
@@ -63,4 +63,4 @@ const Content = (props) => {
   );
 };
 
-export default Content;
+export default Rutin;

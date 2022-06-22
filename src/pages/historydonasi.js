@@ -3,7 +3,7 @@ import { Row, Col, Button, Card, ProgressBar } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 // import { fetchPageDonasi } from '../Redux/pagelistdonasi/actions'
 import { fetchPagedonasi2 } from "../Redux/pagelistdonasi2/actions";
-import { fetchAllHistoryDonation, fetchHistoryDonation } from "../Redux/detaildonasi/action";
+import { fetchAllHistoryDonation, fetchHistoryDonation } from "./DonasiRutin/Controller/detaildonasi/action";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
 import NumberFormat from "react-number-format";

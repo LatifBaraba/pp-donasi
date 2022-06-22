@@ -20,7 +20,7 @@ import {
     GET_ALL_PAKET_RUTIN_HISTORY_DONATION,
     GET_ALL_PAKET_RUTIN_HISTORY_DONATION_SUCCESS,
     GET_ALL_PAKET_RUTIN_HISTORY_DONATION_FAILURE,  
-} from '../actionTypes';
+} from '../../../../Redux/actionTypes';
 
 const initialState = {
     loading: false,

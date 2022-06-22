@@ -3,10 +3,6 @@ import { Row, Col, Button, Card, ProgressBar } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 // import { fetchPageDonasi } from '../Redux/pagelistdonasi/actions'
 import { fetchPagedonasi2 } from "../Redux/pagelistdonasi2/actions";
-import {
-  fetchAllHistoryRutinDonation,
-  fetchHistoryRutinDonation,
-} from "../Redux/detaildonasi/action";
 import { fetchKabarTerbaruRutin } from "../Redux/kabarterbaru/action";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
